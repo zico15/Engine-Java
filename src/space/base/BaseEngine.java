@@ -6,7 +6,9 @@
 package space.base;
 
 import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JTree;
+import space.view.table.jTabbedPaneView;
 
 /**
  *
@@ -14,20 +16,61 @@ import javax.swing.JTree;
  */
 public class BaseEngine {
     
-    private static JMenu menu;
+    private static JMenuBar menu;
     private static JTree project;
     private static JTree resource;
+    private static jTabbedPaneView paneMain;
     
-    
-    public static JMenu getMenu(){ return menu; }
+    public static JMenuBar getMenu(){ return menu; }
         
-    public String getIconDefault(String fileName){
+    public static String getIconDefault(String fileName){
      return null;
     }
     
-    public JTree getProjects(){ return project;}
+    public static JTree getProjects(){ return project;}
     
-    public JTree getResource(){ return resource;}
+    public static JTree getResource(){ return resource;}
+
+    /**
+     * @param aMenu the menu to set
+     */
+    public static void setMenu(JMenuBar aMenu) {
+        menu = aMenu;
+    }
+
+    /**
+     * @param aProject the project to set
+     */
+    public static void setProject(JTree aProject) {
+        project = aProject;
+    }
+
+    /**
+     * @param aResource the resource to set
+     */
+    public static void setResource(JTree aResource) {
+        resource = aResource;
+    }
+
+    /**
+     * @return the paneMain
+     */
+    public static jTabbedPaneView getPaneMain() {
+        return paneMain;
+    }
+
+    /**
+     * @param aPaneMain the paneMain to set
+     */
+    public static void setPaneMain(jTabbedPaneView aPaneMain) {
+        paneMain = aPaneMain;
+    }
     
+    public static void reloadView(){
     
+        if(menu!=null) menu.validate();
+        if(paneMain!=null) paneMain.validate();
+        if(resource!=null) resource.validate();
+        if(project!=null) project.validate();
+    }
 }

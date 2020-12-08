@@ -1,0 +1,5 @@
+Lib:Base.Instance
+name: ExpoLib
+version: 0.1
+data: 12/08/2020
+author: Ezequiel
