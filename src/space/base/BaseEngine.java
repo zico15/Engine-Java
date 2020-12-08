@@ -5,7 +5,6 @@
  */
 package space.base;
 
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JTree;
 import space.view.table.jTabbedPaneView;
