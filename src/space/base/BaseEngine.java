@@ -14,24 +14,20 @@ import javax.swing.JTree;
  */
 public class BaseEngine {
     
-    public static JMenu menuMain;
-    public static JTree project;
-    public static JTree resource;
-    //public static JMenu project;
+    private static JMenu menu;
+    private static JTree project;
+    private static JTree resource;
     
-    public BaseEngine(){
     
-    }
-    
-    public static JMenu getMenu(){ return menuMain; }
+    public static JMenu getMenu(){ return menu; }
         
     public String getIconDefault(String fileName){
      return null;
     }
     
-    public JTree getProjects(){ return new JTree();}
+    public JTree getProjects(){ return project;}
     
-    public JTree getResource(){ return new JTree();}
+    public JTree getResource(){ return resource;}
     
     
 }
