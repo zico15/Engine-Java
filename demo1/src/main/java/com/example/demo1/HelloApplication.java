@@ -17,6 +17,10 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
+    @Tes(name = "teste")
+    public void tes8(){
+
+    }
     public static void main(String[] args) {
         launch();
     }
