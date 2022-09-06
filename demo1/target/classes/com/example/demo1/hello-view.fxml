@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -29,15 +30,24 @@
          <children>
             <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="30.0" prefHeight="568.0" prefWidth="139.0" style="-fx-background-color: #CD5C5C;">
+                <AnchorPane minHeight="0.0" minWidth="30.0" prefHeight="568.0" prefWidth="139.0">
                      <children>
-                        <TabPane prefHeight="200.0" prefWidth="200.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TabPane focusTraversable="false" prefHeight="200.0" prefWidth="200.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMinWidth="80.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <tabs>
-                            <Tab text="Untitled Tab 1">
+                            <Tab text="Project">
                                  <content>
-                                    <TreeView fx:id="treeView" prefHeight="200.0" prefWidth="200.0" />
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <TreeView fx:id="treeView" focusTraversable="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0" />
+                                          <MenuBar layoutX="-12.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <menus>
+                                              <Menu mnemonicParsing="false" text="Project" />
+                                            </menus>
+                                          </MenuBar>
+                                       </children>
+                                    </AnchorPane>
                                  </content></Tab>
-                            <Tab text="Untitled Tab 2" />
+                            <Tab text="Resouces" />
                           </tabs>
                         </TabPane>
                      </children>
