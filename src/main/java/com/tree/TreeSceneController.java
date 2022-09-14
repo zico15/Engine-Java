@@ -11,12 +11,12 @@ import java.util.Optional;
 
 public class TreeSceneController extends TreeView<String> {
 
-    private final Image imgFolder = ImageBase.getIcons(getClass().getResource("/com/icons/object.png").toExternalForm());
+    private final Image imgFolder = ImageBase.getIcons(ImageBase.ICON_OBJECT);
 
     private TreeItem rootItem;
 
     public TreeSceneController() {
-        Image imgScene = ImageBase.getIcons(getClass().getResource("/com/icons/scene.png").toExternalForm());
+        Image imgScene = ImageBase.getIcons(ImageBase.ICON_SCENE);
         rootItem = new TreeItem("Scene", new ImageView(imgScene));
         setContextMenu(creadMenu());
         setRoot(rootItem);

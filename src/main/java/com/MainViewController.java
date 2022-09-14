@@ -50,7 +50,7 @@ public class MainViewController extends Control {
         if (!file.exists())
             file.mkdir();
         treeResource.clear();
-        treeResource.setName(file.getName());
+        treeResource.setRootFile(file);
         project = new Project(file);
 
         System.out.println("newProject: " + file);
@@ -63,7 +63,7 @@ public class MainViewController extends Control {
             return;
         project = new Project(file);
         treeResource.clear();
-        treeResource.setName(file.getName());
+        treeResource.setRootFile(file);
         treeResource.load(file, treeResource.getRootItem());
         System.out.println(file);
     }

@@ -1,38 +1,32 @@
 package com.tree;
 
-import com.system.ImageBase;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Optional;
 
 public class TreeResourceController extends TreeView<String> {
 
-    private final Image imgFolder = ImageBase.getIcons(getClass().getResource("/com/icons/folder.png").toExternalForm());
-
-    private TreeItem rootItem = null;
+    private TreeItemResource rootItem = null;
 
     public TreeResourceController() {
-        //rootItem = new TreeItem("Scene", new ImageView(imgFolder));
-        setContextMenu(creadMenu());
-        //setRoot(getRootItem());
         setFocused(false);
     }
 
-    public void setName(String name) {
+    public void setRootFile(File file) {
         if (getRootItem() == null)
         {
-            rootItem = new TreeItem(name, new ImageView(imgFolder));
+            rootItem = new TreeItemResource(file);
             setRoot(getRootItem());
+            setContextMenu(creadMenu());
         }
         else
-            getRootItem().setValue(name);
+            getRootItem().setFile(file);
     }
 
-    public TreeItem addItem(TreeItem item, String name, String type) {
-        TreeItem i = new TreeItem(name, new ImageView(imgFolder));
+    public TreeItem addItem(TreeItem item, File file) {
+        TreeItemResource i = new TreeItemResource(file);
         item.getChildren().add(i);
         return i;
     }
@@ -43,6 +37,7 @@ public class TreeResourceController extends TreeView<String> {
             getRootItem().getChildren().clear();
     }
 
+
     public void load(File file, TreeItem item)
     {
         if (!file.exists() || getRootItem() == null)
@@ -50,7 +45,7 @@ public class TreeResourceController extends TreeView<String> {
         File files[] = file.listFiles();
         for (File f : files)
         {
-            TreeItem i = addItem(item, f.getName(), "Folder");
+            TreeItem i = addItem(item, f);
             if (f.isDirectory())
                 load(f, i);
         }
@@ -59,31 +54,55 @@ public class TreeResourceController extends TreeView<String> {
     private ContextMenu creadMenu() {
         MenuItem addobject = new MenuItem("new folder");
         addobject.setOnAction(e -> {
-            TreeItem item = getSelectionModel().getSelectedItem();
+            TreeItemResource item = (TreeItemResource) getSelectionModel().getSelectedItem();
             TextInputDialog dialog = new TextInputDialog("");
-            dialog.setTitle("Object");
+            dialog.setTitle("Folder");
+            dialog.setHeaderText("Name");
+            Optional<String> result = dialog.showAndWait();
+            String entered = null;
+            if (result.isPresent())
+                entered = result.get();
+            if (entered != null)    {
+                File f = new File(item.file, entered);
+                f.mkdir();
+                addItem(item, f);
+            }
+            System.out.println(entered);
+        });
+        MenuItem addscript= new MenuItem("new script");
+        addscript.setOnAction(e -> {
+            TreeItemResource item = (TreeItemResource) getSelectionModel().getSelectedItem();
+            TextInputDialog dialog = new TextInputDialog("");
+            dialog.setTitle("Script");
             dialog.setHeaderText("Name");
             Optional<String> result = dialog.showAndWait();
             String entered = null;
             if (result.isPresent())
                 entered = result.get();
 
-            if (entered != null)
-                addItem(item, entered, "Folder");
+            if (entered != null){
+                try {
+                    File f = new File(item.file, entered + ".java");
+                    f.createNewFile();
+                    addItem(item, f);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+             }
             System.out.println(entered);
         });
-        MenuItem addscript= new MenuItem("new script");
         MenuItem delete = new MenuItem("delete");
         delete.setOnAction(e -> {
-            TreeItem item = getSelectionModel().getSelectedItem();
-            if (item != getRoot())
+            TreeItemResource item = (TreeItemResource) getSelectionModel().getSelectedItem();
+            if (item != getRoot() && item.delete())
                 item.getParent().getChildren().remove(item);
+
             System.out.println("delete");
         });
         return new ContextMenu(addobject, addscript, delete);
     }
 
-    public TreeItem getRootItem() {
+    public TreeItemResource getRootItem() {
         return rootItem;
     }
 }
