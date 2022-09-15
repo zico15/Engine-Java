@@ -1,5 +1,6 @@
 package com.tree;
 
+import com.system.FileSistem;
 import javafx.scene.control.*;
 
 import java.io.File;
@@ -12,6 +13,7 @@ public class TreeResourceController extends TreeView<String> {
 
     public TreeResourceController() {
         setFocused(false);
+        getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> ((TreeItemResource) newValue).preview());
     }
 
     public void setRootFile(File file) {
@@ -27,6 +29,7 @@ public class TreeResourceController extends TreeView<String> {
 
     public TreeItem addItem(TreeItem item, File file) {
         TreeItemResource i = new TreeItemResource(file);
+        item.setExpanded(true);
         item.getChildren().add(i);
         return i;
     }
@@ -62,7 +65,7 @@ public class TreeResourceController extends TreeView<String> {
             String entered = null;
             if (result.isPresent())
                 entered = result.get();
-            if (entered != null)    {
+            if (entered != null && item.file.isDirectory())    {
                 File f = new File(item.file, entered);
                 f.mkdir();
                 addItem(item, f);
@@ -80,14 +83,10 @@ public class TreeResourceController extends TreeView<String> {
             if (result.isPresent())
                 entered = result.get();
 
-            if (entered != null){
-                try {
+            if (entered != null && item.file.isDirectory()){
                     File f = new File(item.file, entered + ".java");
-                    f.createNewFile();
+                    FileSistem.createFileJava(f);
                     addItem(item, f);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
              }
             System.out.println(entered);
         });

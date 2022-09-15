@@ -9,6 +9,14 @@ public class Project {
     public Project(){}
 
     public Project(File directory){
-       this.directory = directory;
+       this.setDirectory(directory);
+    }
+
+    public File getDirectory() {
+        return directory;
+    }
+
+    public void setDirectory(File directory) {
+        this.directory = directory;
     }
 }

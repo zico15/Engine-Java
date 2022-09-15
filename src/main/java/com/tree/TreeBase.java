@@ -15,6 +15,8 @@ public class TreeBase {
         AnchorPane.setRightAnchor(node, 0.0);
         panel.getChildren().add(node);
         node.setFocusTraversable(false);
-        return (new Tab(name, panel));
+        Tab tab = new Tab(name, panel);
+        tab.setClosable(true);
+        return (tab);
     }
 }

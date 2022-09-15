@@ -7,6 +7,9 @@
 .tab {
 -fx-background-color:  -fx-base;
 }
+.tab .headers-region .tab .tab-container .tab-close-button > .jfx-svg-glyph {
+     -fx-background-color: red;
+}
 
 .menu-bar {
 -fx-background-color: -fx-base;

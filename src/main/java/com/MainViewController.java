@@ -30,11 +30,14 @@ public class MainViewController extends Control {
     @FXML
     private TabPane tabPaneMain;
     private GraphicsContext gc;
-    private TreeSceneController treeScene;
-    private TreeResourceController treeResource;
-    private Project project;
+    public static TreeSceneController treeScene;
+    public static TreeResourceController treeResource;
+    public static Project PROJECT;
+
+    public static TabPane tab;
     @FXML
     private void initialize() {
+        tab = tabPaneMain;
         System.out.println("initialize");
         treeScene = new TreeSceneController();
         treeResource = new TreeResourceController();
@@ -47,11 +50,12 @@ public class MainViewController extends Control {
     protected void newProject()
     {
         File file = FileSistem.saveFile();
-        if (!file.exists())
-            file.mkdir();
+        if (file == null)
+            return;
+        file.mkdir();
         treeResource.clear();
         treeResource.setRootFile(file);
-        project = new Project(file);
+        PROJECT = new Project(file);
 
         System.out.println("newProject: " + file);
     }
@@ -59,9 +63,9 @@ public class MainViewController extends Control {
     protected void openProject()
     {
         File file = FileSistem.openFolder();
-        if (!file.isDirectory())
+        if (file == null || !file.isDirectory())
             return;
-        project = new Project(file);
+        PROJECT = new Project(file);
         treeResource.clear();
         treeResource.setRootFile(file);
         treeResource.load(file, treeResource.getRootItem());

@@ -1,6 +1,11 @@
 package com.tree;
 
+import com.MainViewController;
+import com.system.FileSistem;
 import com.system.ImageBase;
+import javafx.scene.Node;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TreeItem;
 import javafx.scene.image.ImageView;
 
@@ -8,14 +13,33 @@ import java.io.File;
 
 public class TreeItemResource extends TreeItem   {
 
-    public String   type;
-    public File     file;
+    public String       type;
+    public File         file;
+    private Tab         tabPreview;
+    private TextArea    textArea;
     public TreeItemResource(File file){
         setFile(file);
     }
-    public void select()
+    public void preview()
     {
+        System.out.println("FILE: " + file);
+        if("java".equals(type))
+            previewCode();
+        MainViewController.tab.getSelectionModel().select(tabPreview);
+    }
 
+    private void previewCode()
+    {
+        if (tabPreview != null)
+        {
+            if(!MainViewController.tab.getTabs().contains(tabPreview))
+                MainViewController.tab.getTabs().add(tabPreview);
+            return ;
+        }
+        textArea = new TextArea();
+        textArea.setText(FileSistem.readFile(file));
+        tabPreview = TreeBase.newTab(file.getName(), textArea);
+        MainViewController.tab.getTabs().add(tabPreview);
     }
 
     public boolean delete(){
