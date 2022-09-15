@@ -7,16 +7,12 @@ import com.tree.TreeBase;
 import com.tree.TreeResourceController;
 import com.tree.TreeSceneController;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Control;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.File;
-import java.io.IOException;
 
 public class MainViewController extends Control {
 
@@ -32,6 +28,8 @@ public class MainViewController extends Control {
     private GraphicsContext gc;
     public static TreeSceneController treeScene;
     public static TreeResourceController treeResource;
+
+    public static AnchorPane  listProperties;
     public static Project PROJECT;
 
     public static TabPane tab;
@@ -41,8 +39,10 @@ public class MainViewController extends Control {
         System.out.println("initialize");
         treeScene = new TreeSceneController();
         treeResource = new TreeResourceController();
+        listProperties = new AnchorPane();
         tabProperties.getTabs().add(TreeBase.newTab("Scene", treeScene));
         tabProperties.getTabs().add(TreeBase.newTab("Resource", treeResource));
+        tabProperties.getTabs().add(TreeBase.newTab("Properties", listProperties));
         tabPaneMain.getTabs().add(TreeBase.newTab("Scene", canva));
     }
 

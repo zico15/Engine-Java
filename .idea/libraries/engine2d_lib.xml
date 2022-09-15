@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="engine2d-lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../Engine Lib Java/out/artifacts/engine2d-lib.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

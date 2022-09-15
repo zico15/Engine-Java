@@ -10,18 +10,18 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:18.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:linux:18.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:18.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:linux:18.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:18.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:linux:18.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:18.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:linux:18.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-web:18.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-web:linux:18.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:18.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:linux:18.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:18.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:linux:18.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:18.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:linux:18.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:18.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:linux:18.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:18.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:linux:18.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-web:18.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-web:linux:18.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:18.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:linux:18.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.controlsfx:controlsfx:11.1.1" level="project" />
     <orderEntry type="library" name="Maven: com.dlsc.formsfx:formsfx-core:11.5.0" level="project" />
     <orderEntry type="library" name="Maven: net.synedra:validatorfx:0.3.1" level="project" />
@@ -44,11 +44,12 @@
     <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:modular:1.5.32" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains:annotations:13.0" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-common:1.5.32" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.8.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.9.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-commons:1.8.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-commons:1.9.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.8.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.8.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.9.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.9.0" level="project" />
+    <orderEntry type="library" exported="" name="engine2d-lib" level="project" />
   </component>
 </module>

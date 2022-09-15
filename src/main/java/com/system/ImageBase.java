@@ -14,15 +14,17 @@ public class ImageBase {
     public static final String ICON_JAVA = "/com/icons/java.png";
 
     public static final String ICON_FILE = "/com/icons/file.png";
+
+    public static final String ICON_TILEMAP = "/com/icons/tilemap.png";
+
     private static final HashMap<String, Image> ICONS = new HashMap<>();
 
-    public static Image getIcons(String fileName){
-        String name  = fileName.toUpperCase();
+    public static Image getIcons(String fileName) {
+        String name = fileName.toUpperCase();
         if (ICONS.containsKey(name))
             return ICONS.get(name);
         File file = new File(fileName);
-        if (!file.exists() || !file.isFile())
-        {
+        if (!file.exists() || !file.isFile()) {
             URL url = ImageBase.class.getResource(fileName);
             if (url == null)
                 return null;

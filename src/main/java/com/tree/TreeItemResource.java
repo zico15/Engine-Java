@@ -3,45 +3,43 @@ package com.tree;
 import com.MainViewController;
 import com.system.FileSistem;
 import com.system.ImageBase;
-import javafx.scene.Node;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TreeItem;
 import javafx.scene.image.ImageView;
 
 import java.io.File;
 
-public class TreeItemResource extends TreeItem   {
+public class TreeItemResource extends TreeItemBase   {
 
-    public String       type;
     public File         file;
-    private Tab         tabPreview;
     private TextArea    textArea;
     public TreeItemResource(File file){
         setFile(file);
     }
+
+    @Override
     public void preview()
     {
         System.out.println("FILE: " + file);
         if("java".equals(type))
             previewCode();
-        MainViewController.tab.getSelectionModel().select(tabPreview);
+        MainViewController.tab.getSelectionModel().select(tab);
     }
 
     private void previewCode()
     {
-        if (tabPreview != null)
+        if (tab != null)
         {
-            if(!MainViewController.tab.getTabs().contains(tabPreview))
-                MainViewController.tab.getTabs().add(tabPreview);
+            if(!MainViewController.tab.getTabs().contains(tab))
+                MainViewController.tab.getTabs().add(tab);
             return ;
         }
         textArea = new TextArea();
         textArea.setText(FileSistem.readFile(file));
-        tabPreview = TreeBase.newTab(file.getName(), textArea);
-        MainViewController.tab.getTabs().add(tabPreview);
+        tab = TreeBase.newTab(file.getName(), textArea);
+        MainViewController.tab.getTabs().add(tab);
     }
 
+    @Override
     public boolean delete(){
         if (file.exists())
             file.delete();
@@ -51,22 +49,17 @@ public class TreeItemResource extends TreeItem   {
     public void setFile(File file){
         this.file = file;
         type = file.getName();
+
         if (type.contains("."))
         {
             type = type.substring(type.lastIndexOf(".") + 1, type.length());
             System.out.println("type: "+type);
-        }else
+        }else if (file.exists() && file.isDirectory())
+            type = "folder";
+        else
             type = "file";
         super.setValue(file.getName());
-        setGraphic(new ImageView(ImageBase.getIcons(getExtension(file))));
+        setGraphic(new ImageView(ImageBase.getIcons(getExtension(type))));
     }
-    private String getExtension(File file){
-        if (file.exists() && file.isDirectory())
-            return (ImageBase.ICON_FOLDER);
-        if ("java".equals(type))
-            return (ImageBase.ICON_JAVA);
-        if ("scene".equals(type))
-            return (ImageBase.ICON_SCENE);
-        return (ImageBase.ICON_FILE);
-    }
+
 }
