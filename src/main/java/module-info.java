@@ -9,6 +9,7 @@ module com {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
+    requires java.desktop;
 
     opens com to javafx.fxml;
     exports com;

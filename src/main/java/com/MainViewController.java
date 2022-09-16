@@ -30,7 +30,7 @@ public class MainViewController extends Control {
     public static TreeResourceController treeResource;
 
     public static AnchorPane  listProperties;
-    public static Project PROJECT;
+    public static Project PROJECT = new Project();
 
     public static TabPane tab;
     @FXML
@@ -81,6 +81,7 @@ public class MainViewController extends Control {
     @FXML
     protected void onHelloButtonClick() {
 
+        canva.scene = PROJECT.scene;
         canva.drawLines();
     }
 }

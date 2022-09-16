@@ -1,5 +1,6 @@
 package com.tree;
 
+import com.MainViewController;
 import com.system.ImageBase;
 import engine2d.objects.GameObject;
 import engine2d.objects.Scene;
@@ -15,17 +16,19 @@ public class TreeSceneController extends TreeView<String> {
     public TreeSceneController() {
         Image imgScene = ImageBase.getIcons(ImageBase.ICON_SCENE);
         rootItem = new TreeItemObject(new Scene("Scene"));
+        MainViewController.PROJECT.scene = (Scene) rootItem.ob;
         setContextMenu(creadMenu());
         setRoot(rootItem);
         setFocused(false);
         getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> ((TreeItemObject) newValue).preview());
     }
 
-    public void addItem(TreeItem item, GameObject ob) {
+    public void addItem(TreeItemObject item, GameObject ob) {
         if (ob == null)
             return;
         TreeItemObject i = new TreeItemObject(ob);
         item.setExpanded(true);
+        item.ob.addObject(ob);
         item.getChildren().add(i);
     }
 
@@ -64,7 +67,11 @@ public class TreeSceneController extends TreeView<String> {
         delete.setOnAction(e -> {
             TreeItemObject item = (TreeItemObject) getSelectionModel().getSelectedItem();
             if (item != getRoot() && item.delete())
-                item.getParent().getChildren().remove(item);
+            {
+                TreeItemObject parent = (TreeItemObject) item.getParent();
+                parent.ob.removeObject(item.ob);
+                parent.getChildren().remove(item);
+            }
             System.out.println("delete");
         });
         return new ContextMenu(addobject, addTileMap,  delete);

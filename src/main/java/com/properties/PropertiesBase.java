@@ -42,13 +42,13 @@ public class PropertiesBase {
     {
         var l = new Label(name);
         l.setFocusTraversable(false);
-        l.setAlignment(Pos.CENTER_LEFT);
-       // l.setPadding(new Insets(5,5,0,0));
-        parent.setPadding(new Insets(5,5,0,0));
-        l.setMinHeight(height);
+        l.setAlignment(Pos.CENTER);
+        l.setPadding(new Insets(5,5,5,10));
+        parent.setPadding(new Insets(5,5,0,10));
         parent.setMinHeight(height);
         parent.setPrefWidth(0);
         parent.setMinWidth(0);
+        alignmentAll(l);
         BorderPane h = new BorderPane();
         h.setPadding(new Insets(5,5,5,0));
         alignmentAll(h);

@@ -1,10 +1,14 @@
 package com.project;
 
+import engine2d.objects.Scene;
+
 import java.io.File;
 
 public class Project {
 
     public static Project project;
+
+    public Scene scene;
     private File directory;
     public Project(){}
 

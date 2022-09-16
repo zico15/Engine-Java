@@ -3,7 +3,10 @@ package com.canva;
 import engine2d.render.Canva;
 import engine2d.transforme.Vector2D;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
+
+import java.awt.image.BufferedImage;
 
 
 public class CanvaGame extends Canva {
@@ -15,7 +18,23 @@ public class CanvaGame extends Canva {
         this.gc = gc;
     }
 
+    @Override
+    public void image(BufferedImage img, Vector2D v) {
+        System.out.println("image");
+        WritableImage wr = null;
+        if (img != null) {
+            wr = new WritableImage(img.getWidth(), img.getHeight());
+            PixelWriter pw = wr.getPixelWriter();
+            for (int x = 0; x < img.getWidth(); x++) {
+                for (int y = 0; y < img.getHeight(); y++) {
+                    pw.setArgb(x, y, img.getRGB(x, y));
+                }
+            }
+        }
+        gc.drawImage(wr, v.x, v.y, v.width, v.height);
+    }
 
+    /*
     public void image(Image img, Vector2D v) {
       /*  BufferedImage bf = new BufferedImage(v.width,v.height,BufferedImage.TYPE_INT_RGB);
         bf.getGraphics().drawImage(img, v.x, v.y, v.width, v.height, null);
@@ -29,6 +48,6 @@ public class CanvaGame extends Canva {
                 }
             }
         }
-        gc.drawImage(wr, v.x, v.y, v.width, v.height);*/
-    }
+        gc.drawImage(wr, v.x, v.y, v.width, v.height);
+    }*/
 }
