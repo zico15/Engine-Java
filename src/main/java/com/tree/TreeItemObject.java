@@ -24,14 +24,14 @@ public class TreeItemObject extends TreeItemBase {
     @Override
     public void preview() {
         MainViewController.listProperties.getChildren().clear();
+        if (panel != null){
+            MainViewController.listProperties.getChildren().add(panel);
+            return;
+        }
         if ("tilemap".equals(type))
-            previewTilemap();
-    }
-
-    private void previewTilemap() {
-
-        if (panel == null)
             panel = PropertiesBase.tileMap(this);
+        else
+            panel = PropertiesBase.object(this);
         MainViewController.listProperties.getChildren().add(panel);
     }
 

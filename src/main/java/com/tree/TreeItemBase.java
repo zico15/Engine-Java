@@ -9,7 +9,7 @@ public class TreeItemBase extends TreeItem {
 
     public String     type;
     public Tab       tab;
-    public Parent    panel;
+    public Parent    panel = null;
 
     public void preview() {
     }

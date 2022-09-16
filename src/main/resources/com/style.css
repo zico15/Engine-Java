@@ -57,3 +57,4 @@ linear-gradient(to bottom, derive(-fx-base,+50%), derive(-fx-base,-40%), derive(
 .separator-label {
 -fx-text-fill: orange;
 }
+
