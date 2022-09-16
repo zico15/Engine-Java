@@ -6,10 +6,7 @@ import javafx.scene.image.Image;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -80,6 +77,12 @@ public class FileSistem {
     }
 
     public static Image getImage(File file){
-        return null;
+        Image img = null;
+        try {
+            img = new Image(new FileInputStream(file));
+        } catch (FileNotFoundException e) {
+            return null;
+        }
+        return img;
     }
 }

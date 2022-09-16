@@ -112,7 +112,8 @@ public class PropertiesBase {
         Label position = new Label("Position");
         position.setAlignment(Pos.CENTER);
         position.setFocusTraversable(false);
-        v.getChildren().add(position);
+        alignment(position, NONE, NONE, 0, 0);
+        v.getChildren().add(newItem(position, height));
         TextFieldNumber x = new TextFieldNumber(item.ob.vector.x, Pos.CENTER);
         x.setOnAction(e -> { item.ob.vector.x = Integer.parseInt(x.getText()); });
         TextFieldNumber y = new TextFieldNumber(item.ob.vector.y, Pos.CENTER);
