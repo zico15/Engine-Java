@@ -42,16 +42,17 @@ public class PropertiesBase {
     {
         var l = new Label(name);
         l.setFocusTraversable(false);
-        l.setAlignment(Pos.CENTER_RIGHT);
-        l.setPadding(new Insets(0,5,0,0));
-        parent.setPadding(new Insets(0,5,0,0));
+        l.setAlignment(Pos.CENTER_LEFT);
+       // l.setPadding(new Insets(5,5,0,0));
+        parent.setPadding(new Insets(5,5,0,0));
         l.setMinHeight(height);
         parent.setMinHeight(height);
         parent.setPrefWidth(0);
         parent.setMinWidth(0);
         BorderPane h = new BorderPane();
+        h.setPadding(new Insets(5,5,5,0));
         alignmentAll(h);
-        alignmentAll(parent);
+        alignment(parent, NONE, NONE, 0, 0);
         h.setLeft(l);
         h.setCenter(parent);
         return h;
@@ -103,6 +104,7 @@ public class PropertiesBase {
             item.setValue(n);
         });
         name.setFocusTraversable(false);
+        alignment(name, NONE, NONE, 0, 0);
         return newItem("name", name, height);
     }
 
@@ -124,7 +126,7 @@ public class PropertiesBase {
         h.setOnAction(e -> { item.ob.vector.height = Integer.parseInt(h.getText()); });
         v.getChildren().add(newItem("X: ", x , 20));
         v.getChildren().add(newItem("Y: ", y , 20));
-        v.getChildren().add(newItem("W: ", w , 20));
+        v.getChildren().add(newItem("W:", w , 20));
         v.getChildren().add(newItem("H: ", h , 20));
         return v;
     }

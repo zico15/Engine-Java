@@ -29,7 +29,7 @@ public class TreeItemObject extends TreeItemBase {
             MainViewController.listProperties.getChildren().add(properties.getProperties());
             return;
         }
-        if ("tilemap".equals(type))
+        if ("TileMaps".equals(type))
             properties = new PropertiesTileMaps(this);
         else
             properties = new PropertiesGameObject(this);
