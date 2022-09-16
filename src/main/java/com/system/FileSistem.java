@@ -2,13 +2,16 @@ package com.system;
 
 import com.Main;
 import com.MainViewController;
+import javafx.scene.image.Image;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 public class FileSistem {
 
@@ -74,5 +77,9 @@ public class FileSistem {
             throw new RuntimeException(e);
         }
         return  data;
+    }
+
+    public static Image getImage(File file){
+        return null;
     }
 }

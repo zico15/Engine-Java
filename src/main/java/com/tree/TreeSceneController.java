@@ -1,8 +1,9 @@
 package com.tree;
 
 import com.system.ImageBase;
-import engine2d.objects.ObjectBase;
+import engine2d.objects.GameObject;
 import engine2d.objects.Scene;
+import engine2d.objects.TileMaps;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 
@@ -20,7 +21,7 @@ public class TreeSceneController extends TreeView<String> {
         getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> ((TreeItemObject) newValue).preview());
     }
 
-    public void addItem(TreeItem item, ObjectBase ob) {
+    public void addItem(TreeItem item, GameObject ob) {
         if (ob == null)
             return;
         TreeItemObject i = new TreeItemObject(ob);
@@ -41,7 +42,7 @@ public class TreeSceneController extends TreeView<String> {
                 entered = result.get();
 
             if (entered != null)
-                addItem(item, new ObjectBase(entered, "object"));
+                addItem(item, new GameObject(entered));
             System.out.println(entered);
         });
         MenuItem addTileMap = new MenuItem("create tileMap");
@@ -56,7 +57,7 @@ public class TreeSceneController extends TreeView<String> {
                 entered = result.get();
 
             if (entered != null)
-                addItem(item, new ObjectBase(entered, "tilemap"));
+                addItem(item, new TileMaps(entered));
             System.out.println(entered);
         });
         MenuItem delete = new MenuItem("delete");

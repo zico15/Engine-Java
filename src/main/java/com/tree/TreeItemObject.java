@@ -1,20 +1,21 @@
 package com.tree;
 
 import com.MainViewController;
-import com.list.PropertiesBase;
+import com.properties.PropertiesGameObject;
+import com.properties.PropertiesTileMaps;
 import com.system.ImageBase;
-import engine2d.objects.ObjectBase;
+import engine2d.objects.GameObject;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 
 public class TreeItemObject extends TreeItemBase {
 
 
-    public ObjectBase ob;
+    public GameObject ob;
 
     private TextArea textArea;
 
-    public TreeItemObject(ObjectBase ob) {
+    public TreeItemObject(GameObject ob) {
         this.ob = ob;
         this.type = ob.type;
         super.setValue(ob.name);
@@ -24,15 +25,15 @@ public class TreeItemObject extends TreeItemBase {
     @Override
     public void preview() {
         MainViewController.listProperties.getChildren().clear();
-        if (panel != null){
-            MainViewController.listProperties.getChildren().add(panel);
+        if (properties != null){
+            MainViewController.listProperties.getChildren().add(properties.getProperties());
             return;
         }
         if ("tilemap".equals(type))
-            panel = PropertiesBase.tileMap(this);
+            properties = new PropertiesTileMaps(this);
         else
-            panel = PropertiesBase.object(this);
-        MainViewController.listProperties.getChildren().add(panel);
+            properties = new PropertiesGameObject(this);
+        MainViewController.listProperties.getChildren().add(properties.getProperties());
     }
 
     @Override
