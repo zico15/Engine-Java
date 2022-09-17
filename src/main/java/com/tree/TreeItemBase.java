@@ -4,6 +4,7 @@ import com.properties.PropertiesBase;
 import com.system.ImageBase;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TreeItem;
+import javafx.scene.input.MouseEvent;
 
 public class TreeItemBase extends TreeItem {
 
@@ -12,6 +13,18 @@ public class TreeItemBase extends TreeItem {
     public PropertiesBase properties = null;
 
     public void preview() {
+    }
+
+    public void onMouseMove(MouseEvent e){
+        if (properties == null)
+            return;
+        properties.onMouseMove(e);
+    }
+
+    public void onMouseClick(MouseEvent e){
+        if (properties == null)
+            return;
+        properties.onMouseClick(e);
     }
 
     public boolean delete() {

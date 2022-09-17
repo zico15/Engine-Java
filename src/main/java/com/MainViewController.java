@@ -2,6 +2,7 @@ package com;
 
 import com.canva.CanvaView;
 import com.project.Project;
+import com.properties.PropertiesBase;
 import com.system.FileSistem;
 import com.tree.TreeBase;
 import com.tree.TreeResourceController;
@@ -16,7 +17,7 @@ import java.io.File;
 
 public class MainViewController extends Control {
 
-    CanvaView canva = new CanvaView();
+    public static CanvaView canva = new CanvaView();
     @FXML
     private AnchorPane panelProject;
 
@@ -43,6 +44,7 @@ public class MainViewController extends Control {
         tabProperties.getTabs().add(TreeBase.newTab("Scene", treeScene));
         tabProperties.getTabs().add(TreeBase.newTab("Resource", treeResource));
         tabProperties.getTabs().add(TreeBase.newTab("Properties", listProperties));
+        PropertiesBase.alignment(canva, 0,0,0,0);
         tabPaneMain.getTabs().add(TreeBase.newTab("Scene", canva));
     }
 
@@ -80,8 +82,7 @@ public class MainViewController extends Control {
     }
     @FXML
     protected void onHelloButtonClick() {
-
         canva.scene = PROJECT.scene;
-        canva.drawLines();
+        canva.render();
     }
 }

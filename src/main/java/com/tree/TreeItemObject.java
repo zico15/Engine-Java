@@ -27,6 +27,8 @@ public class TreeItemObject extends TreeItemBase {
         MainViewController.listProperties.getChildren().clear();
         if (properties != null){
             MainViewController.listProperties.getChildren().add(properties.getProperties());
+            MainViewController.canva.setOnMouseMoved(e -> onMouseMove(e));
+            MainViewController.canva.setOnMouseClicked(e -> onMouseClick(e));
             return;
         }
         if ("TileMaps".equals(type))
@@ -34,6 +36,8 @@ public class TreeItemObject extends TreeItemBase {
         else
             properties = new PropertiesGameObject(this);
         MainViewController.listProperties.getChildren().add(properties.getProperties());
+        MainViewController.canva.setOnMouseMoved(e -> onMouseMove(e));
+        MainViewController.canva.setOnMouseClicked(e -> onMouseClick(e));
     }
 
     @Override

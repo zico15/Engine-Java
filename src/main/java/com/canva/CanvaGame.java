@@ -7,11 +7,12 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 
 public class CanvaGame extends Canva {
 
-
+    private static final HashMap<BufferedImage, WritableImage> IMAGES = new HashMap<>();
     private final GraphicsContext gc;
 
     public CanvaGame(GraphicsContext gc) {
@@ -20,6 +21,12 @@ public class CanvaGame extends Canva {
 
     @Override
     public void image(BufferedImage img, Vector2D v) {
+
+        if (IMAGES.containsKey(img))
+        {
+            gc.drawImage(IMAGES.get(img), v.x, v.y, v.width, v.height);
+            return;
+        }
         System.out.println("image");
         WritableImage wr = null;
         if (img != null) {
@@ -31,6 +38,7 @@ public class CanvaGame extends Canva {
                 }
             }
         }
+        IMAGES.put(img, wr);
         gc.drawImage(wr, v.x, v.y, v.width, v.height);
     }
 

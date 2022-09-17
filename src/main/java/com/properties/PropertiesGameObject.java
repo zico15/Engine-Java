@@ -12,14 +12,13 @@ public class PropertiesGameObject extends PropertiesBase{
         super(item);
     }
 
-
     private VBox gameObject(){
         VBox v = new VBox();
         v.setFocusTraversable(false);
         alignment(v ,NONE, NONE, 0,0);
-        v.getChildren().add(itemTitle(20));
-        v.getChildren().add(itemName(20));
-        v.getChildren().add(itemPosition(20));
+        v.getChildren().add(itemTitle(item,20));
+        v.getChildren().add(itemName(item,20));
+        v.getChildren().add(itemPosition(item,20));
         return v;
     }
 
