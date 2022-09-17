@@ -53,13 +53,13 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../Engine Lib Java/out/artifacts/engine2d-lib.jar!/" />
+          <root url="jar:///sgoinfre/edos-san/Engine Lib Java/out/artifacts/engine2d-lib.jar!/" />
         </CLASSES>
         <JAVADOC>
-          <root url="jar://$MODULE_DIR$/../Engine Lib Java/out/artifacts/engine2d-lib.jar!/" />
+          <root url="jar:///sgoinfre/edos-san/Engine Lib Java/out/artifacts/engine2d-lib.jar!/" />
         </JAVADOC>
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/../Engine Lib Java/out/artifacts/engine2d-lib.jar!/" />
+          <root url="jar:///sgoinfre/edos-san/Engine Lib Java/out/artifacts/engine2d-lib.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>

@@ -30,12 +30,12 @@ public class ImagePropertides extends CompomentProperties{
             if (file == null || file.isDirectory())
                 return;
             fileImage = file;
-            if (component != null)
-                return;
+            if (sprite == null) {
+                sprite = new Sprite();
+                sprite.load(file);
+                component = sprite;
+            }
             img.setText(file.getName());
-            sprite = new Sprite();
-            sprite.load(file);
-            component = sprite;
             item.ob.addComponent(sprite);
         });
         return (newItem("Image", img, 20));

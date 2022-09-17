@@ -119,13 +119,13 @@ public class PropertiesBase {
         alignment(position, NONE, NONE, 0, 0);
         v.getChildren().add(newItem(position, height));
         TextFieldNumber x = new TextFieldNumber(item.ob.vector.x, Pos.CENTER);
-        x.setOnAction(e -> { item.ob.vector.x = Integer.parseInt(x.getText()); });
+        x.setOnKeyReleased(e -> { item.ob.vector.x = Integer.parseInt(x.getText()); });
         TextFieldNumber y = new TextFieldNumber(item.ob.vector.y, Pos.CENTER);
-        y.setOnAction(e -> { item.ob.vector.y = Integer.parseInt(y.getText()); });
+        y.setOnKeyReleased(e -> { item.ob.vector.y = Integer.parseInt(y.getText()); });
         TextFieldNumber w = new TextFieldNumber(item.ob.vector.width, Pos.CENTER);
-        w.setOnAction(e -> { item.ob.vector.width = Integer.parseInt(w.getText()); });
+        w.setOnKeyReleased(e -> { item.ob.vector.width = Integer.parseInt(w.getText()); });
         TextFieldNumber h = new TextFieldNumber(item.ob.vector.height, Pos.CENTER);
-        h.setOnAction(e -> { item.ob.vector.height = Integer.parseInt(h.getText()); });
+        h.setOnKeyReleased(e -> { item.ob.vector.height = Integer.parseInt(h.getText()); });
         v.getChildren().add(newItem("X: ", x , 20));
         v.getChildren().add(newItem("Y: ", y , 20));
         v.getChildren().add(newItem("W:", w , 20));
