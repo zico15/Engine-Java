@@ -15,4 +15,6 @@ module com {
     exports com;
     exports com.tree;
     opens com.tree to javafx.fxml;
+    exports com.properties;
+    opens com.properties to javafx.fxml;
 }

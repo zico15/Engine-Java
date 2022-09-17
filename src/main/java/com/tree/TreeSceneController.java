@@ -74,6 +74,6 @@ public class TreeSceneController extends TreeView<String> {
             }
             System.out.println("delete");
         });
-        return new ContextMenu(addobject, addTileMap,  delete);
+        return new ContextMenu(addobject, addTileMap, delete);
     }
 }

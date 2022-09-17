@@ -16,8 +16,8 @@ import javafx.scene.layout.VBox;
 
 public class PropertiesBase {
 
-    protected   AnchorPane properties;
-    protected  TreeItemObject item;
+    public   AnchorPane properties;
+    public  TreeItemObject item;
 
     public static double NONE = -1;
 
