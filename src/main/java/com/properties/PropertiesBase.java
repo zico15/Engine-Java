@@ -130,7 +130,6 @@ public class PropertiesBase {
         v.getChildren().add(newItem("Y: ", y , 20));
         v.getChildren().add(newItem("W:", w , 20));
         v.getChildren().add(newItem("H: ", h , 20));
-
         return v;
     }
 
