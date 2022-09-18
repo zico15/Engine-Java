@@ -13,10 +13,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import org.jetbrains.annotations.NotNull;
 
-public class PropertiesBase {
+public abstract class PropertiesBase {
 
-    public   AnchorPane properties;
+    public   VBox properties = null;
     public  TreeItemObject item;
 
     public static double NONE = -1;
@@ -39,7 +40,8 @@ public class PropertiesBase {
         if (right >= 0)
             AnchorPane.setRightAnchor(parent, right);
     }
-    public static BorderPane newItem(String name, Control parent, double height)
+    @NotNull
+    public static final BorderPane newItem(String name, @NotNull Control parent, double height)
     {
         var l = new Label(name);
         l.setFocusTraversable(false);
@@ -59,7 +61,8 @@ public class PropertiesBase {
         return h;
     }
 
-    public static Pane newItem(Control parent_a, Control parent_b, double height)
+    @NotNull
+    public static final Pane newItem(@NotNull Control parent_a, @NotNull Control parent_b, double height)
     {
         parent_a.setMinHeight(height);
         parent_a.setPrefWidth(0);
@@ -76,7 +79,8 @@ public class PropertiesBase {
         return h;
     }
 
-    public  static Node newItem(Control parent, double height)
+    @NotNull
+    public  static final Node newItem(@NotNull Control parent, double height)
     {
         AnchorPane panel = new AnchorPane();
         panel.setStyle("-fx-background-color: #0093ff;");
@@ -91,13 +95,15 @@ public class PropertiesBase {
         return panel;
     }
 
-    public static Node itemTitle(TreeItemObject item, double height)  {
+    @NotNull
+    public static final Node itemTitle(@NotNull TreeItemObject item, double height)  {
         Label title = new Label(item.ob.type.toUpperCase());
         title.setAlignment(Pos.CENTER);
         return newItem(title, height);
     }
 
-    public static Node itemName(TreeItemObject item, double height){
+    @NotNull
+    public static final Node itemName(@NotNull TreeItemObject item, double height){
         TextField name = new TextField(item.ob.name);
         name.setOnKeyReleased(e -> {
             String n = name.getText().trim();
@@ -110,7 +116,8 @@ public class PropertiesBase {
         return newItem("name", name, height);
     }
 
-    public static Node itemPosition(TreeItemObject item, double height){
+    @NotNull
+    public static Node itemPosition(@NotNull TreeItemObject item, double height){
         VBox v = new VBox();
         alignment(v, NONE, NONE, 0, 0);
         Label position = new Label("Position");
@@ -133,7 +140,27 @@ public class PropertiesBase {
         return v;
     }
 
-    public Node getProperties() {
+    public abstract void createProperties();
+
+    public final void addItemProperties(Node node)  {
+        if (node != null)
+            getProperties().getChildren().add(node);
+    }
+
+    public final void addItemProperties(int index, Node node) {
+        if (node != null)
+            getProperties().getChildren().add(index, node);
+    }
+
+    public final int getSize()   {
+        return getProperties().getChildren().size();
+    }
+    public final VBox getProperties() {
+        if (properties != null)
+            return properties;
+        properties = new VBox();
+        alignmentAll(properties);
+        createProperties();
         return properties;
     }
 

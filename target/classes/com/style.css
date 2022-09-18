@@ -50,6 +50,13 @@ linear-gradient(to bottom, derive(-fx-base,+50%), derive(-fx-base,-40%), derive(
 -fx-background-insets: 0, 0 1 0 1;
 }
 
+.my-menuButton
+{
+    -fx-background-color: #0093ff;
+    -fx-background-radius: 0;
+}
+
+
 .my-gridpane {
 -fx-background-color: radial-gradient(radius 100%, derive(-fx-base,20%), derive(-fx-base,-20%));
 }

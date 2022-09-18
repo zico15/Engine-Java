@@ -2,6 +2,7 @@ package com.tree;
 
 import com.MainViewController;
 import com.properties.PropertiesGameObject;
+import com.properties.PropertiesScene;
 import com.properties.PropertiesTileMaps;
 import com.system.ImageBase;
 import engine2d.objects.GameObject;
@@ -31,6 +32,9 @@ public class TreeItemObject extends TreeItemBase {
             MainViewController.canva.setOnMouseClicked(e -> onMouseClick(e));
             return;
         }
+        System.out.println("type: " + type);
+        if ("Scene".equals(type))
+            properties = new PropertiesScene(this);
         if ("TileMaps".equals(type))
             properties = new PropertiesTileMaps(this);
         else

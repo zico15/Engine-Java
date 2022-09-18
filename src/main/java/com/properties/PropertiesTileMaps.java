@@ -1,6 +1,7 @@
 package com.properties;
 
 import com.MainViewController;
+import com.properties.components.MenuComponents;
 import com.system.FileSistem;
 import com.tree.TreeItemObject;
 import engine2d.objects.TileMaps;
@@ -30,6 +31,12 @@ public class PropertiesTileMaps extends PropertiesBase{
     public PropertiesTileMaps(TreeItemObject item){
         super(item);
     }
+
+    @Override
+    public void createProperties() {
+        addItemProperties(tileMap());
+    }
+
     private BorderPane tileMap(){
         TileMaps tileMaps = (TileMaps) item.ob;
         BorderPane list = new BorderPane();
@@ -80,17 +87,6 @@ public class PropertiesTileMaps extends PropertiesBase{
         gc.get().setStroke(Color.GREEN);
         gc.get().strokeRoundRect(x, y, 32, 32, 5, 5);
         gc.get().stroke();
-    }
-
-
-    @Override
-    public Node getProperties() {
-        if (properties != null)
-            return properties;
-        properties = new AnchorPane();
-        alignmentAll(properties);
-        properties.getChildren().add(tileMap());
-        return properties;
     }
 
     @Override

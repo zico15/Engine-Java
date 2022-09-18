@@ -10,6 +10,7 @@ module com {
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
     requires java.desktop;
+    requires annotations;
 
     opens com to javafx.fxml;
     exports com;
