@@ -44,7 +44,7 @@ public class MainViewController extends Control {
         tabProperties.getTabs().add(TreeBase.newTab("Scene", treeScene));
         tabProperties.getTabs().add(TreeBase.newTab("Resource", treeResource));
         tabProperties.getTabs().add(TreeBase.newTab("Properties", listProperties));
-        PropertiesBase.alignment(canva, 0,0,0,0);
+        //PropertiesBase.alignment(canva, 0,0,0,0);
         tabPaneMain.getTabs().add(TreeBase.newTab("Scene", canva));
     }
 
@@ -83,6 +83,11 @@ public class MainViewController extends Control {
     @FXML
     protected void onHelloButtonClick() {
         canva.scene = PROJECT.scene;
+        if (canva.isRun)
+            canva.loop.stop();
+        else
+            canva.loop.start();
+        canva.isRun = !canva.isRun;
         canva.render();
     }
 }

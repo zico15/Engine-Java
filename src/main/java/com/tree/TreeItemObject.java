@@ -35,7 +35,7 @@ public class TreeItemObject extends TreeItemBase {
         System.out.println("type: " + type);
         if ("Scene".equals(type))
             properties = new PropertiesScene(this);
-        if ("TileMaps".equals(type))
+        else if ("TileMaps".equals(type))
             properties = new PropertiesTileMaps(this);
         else
             properties = new PropertiesGameObject(this);

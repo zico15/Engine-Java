@@ -102,6 +102,12 @@ public abstract class PropertiesBase {
         return newItem(title, height);
     }
 
+    public static final Node itemLabel(String text, double height)  {
+        Label title = new Label(text);
+        title.setAlignment(Pos.CENTER);
+        return newItem(title, height);
+    }
+
     @NotNull
     public static final Node itemName(@NotNull TreeItemObject item, double height){
         TextField name = new TextField(item.ob.name);
@@ -116,6 +122,22 @@ public abstract class PropertiesBase {
         return newItem("name", name, height);
     }
 
+    public static Node itemSize(@NotNull TreeItemObject item, double height){
+        VBox v = new VBox();
+        alignment(v, NONE, NONE, 0, 0);
+        Label position = new Label("Size");
+        position.setAlignment(Pos.CENTER);
+        position.setFocusTraversable(false);
+        alignment(position, NONE, NONE, 0, 0);
+        v.getChildren().add(newItem(position, height));
+        TextFieldNumber w = new TextFieldNumber(item.ob.vector.getWidth(), Pos.CENTER);
+        w.setOnKeyReleased(e -> { item.ob.vector.setWidth(Integer.parseInt(w.getText())); });
+        TextFieldNumber h = new TextFieldNumber(item.ob.vector.getHeight(), Pos.CENTER);
+        h.setOnKeyReleased(e -> { item.ob.vector.setHeight(Integer.parseInt(h.getText())); });
+        v.getChildren().add(newItem("W:", w , 20));
+        v.getChildren().add(newItem("H: ", h , 20));
+        return (v);
+    }
     @NotNull
     public static Node itemPosition(@NotNull TreeItemObject item, double height){
         VBox v = new VBox();
@@ -125,14 +147,14 @@ public abstract class PropertiesBase {
         position.setFocusTraversable(false);
         alignment(position, NONE, NONE, 0, 0);
         v.getChildren().add(newItem(position, height));
-        TextFieldNumber x = new TextFieldNumber(item.ob.vector.x, Pos.CENTER);
-        x.setOnKeyReleased(e -> { item.ob.vector.x = Integer.parseInt(x.getText()); });
-        TextFieldNumber y = new TextFieldNumber(item.ob.vector.y, Pos.CENTER);
-        y.setOnKeyReleased(e -> { item.ob.vector.y = Integer.parseInt(y.getText()); });
-        TextFieldNumber w = new TextFieldNumber(item.ob.vector.width, Pos.CENTER);
-        w.setOnKeyReleased(e -> { item.ob.vector.width = Integer.parseInt(w.getText()); });
-        TextFieldNumber h = new TextFieldNumber(item.ob.vector.height, Pos.CENTER);
-        h.setOnKeyReleased(e -> { item.ob.vector.height = Integer.parseInt(h.getText()); });
+        TextFieldNumber x = new TextFieldNumber(item.ob.vector.getX(), Pos.CENTER);
+        x.setOnKeyReleased(e -> { item.ob.vector.setX(Integer.parseInt(x.getText())); });
+        TextFieldNumber y = new TextFieldNumber(item.ob.vector.getY(), Pos.CENTER);
+        y.setOnKeyReleased(e -> { item.ob.vector.setY(Integer.parseInt(y.getText())); });
+        TextFieldNumber w = new TextFieldNumber(item.ob.vector.getWidth(), Pos.CENTER);
+        w.setOnKeyReleased(e -> { item.ob.vector.setWidth(Integer.parseInt(w.getText())); });
+        TextFieldNumber h = new TextFieldNumber(item.ob.vector.getHeight(), Pos.CENTER);
+        h.setOnKeyReleased(e -> { item.ob.vector.setHeight(Integer.parseInt(h.getText())); });
         v.getChildren().add(newItem("X: ", x , 20));
         v.getChildren().add(newItem("Y: ", y , 20));
         v.getChildren().add(newItem("W:", w , 20));

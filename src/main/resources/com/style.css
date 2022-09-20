@@ -29,14 +29,16 @@ linear-gradient(to bottom, derive(-fx-base,+50%), derive(-fx-base,-40%), derive(
 }
 
 .button-run {
+    -fx-background-color: transparent;
     -fx-background-image: url("run.png");
     -fx-background-repeat: stretch;
     -fx-background-size: 20 20;
     -fx-background-position: center center;
 }
 
-.button-run:hover
+.button-run:selected
 {
+    -fx-background-color: orange;
     -fx-background-size: 15 15;
 }
 .table-view {

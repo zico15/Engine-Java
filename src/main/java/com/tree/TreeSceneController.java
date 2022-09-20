@@ -17,6 +17,8 @@ public class TreeSceneController extends TreeView<String> {
         Image imgScene = ImageBase.getIcons(ImageBase.ICON_SCENE);
         rootItem = new TreeItemObject(new Scene("Scene"));
         MainViewController.PROJECT.scene = (Scene) rootItem.ob;
+        MainViewController.PROJECT.scene.vector.setWidth(800);
+        MainViewController.PROJECT.scene.vector.setHeight(600);
         setContextMenu(creadMenu());
         setRoot(rootItem);
         setFocused(false);

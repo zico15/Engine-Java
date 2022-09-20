@@ -22,12 +22,11 @@ public class CanvaGame extends Canva {
     @Override
     public void image(BufferedImage img, Vector2D v) {
 
-        if (IMAGES.containsKey(img))
+        if (false && IMAGES.containsKey(img))
         {
-            gc.drawImage(IMAGES.get(img), v.x, v.y, v.width, v.height);
+            gc.drawImage(IMAGES.get(img), v.getX(), v.getY(), v.getWidth(), v.getHeight());
             return;
         }
-        System.out.println("image");
         WritableImage wr = null;
         if (img != null) {
             wr = new WritableImage(img.getWidth(), img.getHeight());
@@ -38,8 +37,8 @@ public class CanvaGame extends Canva {
                 }
             }
         }
-        IMAGES.put(img, wr);
-        gc.drawImage(wr, v.x, v.y, v.width, v.height);
+        //IMAGES.put(img, wr);
+        gc.drawImage(wr, v.getX(), v.getY(), v.getWidth(), v.getHeight());
     }
 
     /*

@@ -16,10 +16,12 @@ public class PropertiesGameObject extends PropertiesBase{
 
     @Override
     public void createProperties() {
+        System.out.println("PropertiesGameObject");
         properties.setFocusTraversable(false);
         addItemProperties(itemTitle(item,20));
         addItemProperties(itemName(item,25));
         addItemProperties(itemPosition(item,20));
+        //addItemProperties(PropertiesBase.itemLabel("Components", 20));
         addItemProperties(new MenuComponents(this).getProperties());
     }
 

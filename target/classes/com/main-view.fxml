@@ -6,7 +6,7 @@
 
 <AnchorPane minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.MainViewController">
     <children>
-        <MenuBar layoutY="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <MenuBar focusTraversable="false" layoutY="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
@@ -47,9 +47,9 @@
             </children>
         </AnchorPane>
         <BorderPane layoutX="-6.0" layoutY="-50.0" maxHeight="21.0" minHeight="21.0" prefHeight="21.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
-            <center>
-                <Button focusTraversable="false" mnemonicParsing="false" onAction="#onHelloButtonClick" styleClass="button-run" BorderPane.alignment="CENTER" />
-            </center>
+         <center>
+            <ToggleButton mnemonicParsing="false" onAction="#onHelloButtonClick" styleClass="button-run" BorderPane.alignment="CENTER" />
+         </center>
         </BorderPane>
     </children>
 </AnchorPane>

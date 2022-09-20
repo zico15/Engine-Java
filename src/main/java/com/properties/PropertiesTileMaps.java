@@ -3,6 +3,7 @@ package com.properties;
 import com.MainViewController;
 import com.properties.components.MenuComponents;
 import com.system.FileSistem;
+import com.system.ImageBase;
 import com.tree.TreeItemObject;
 import engine2d.objects.TileMaps;
 import engine2d.transforme.Vector2D;
@@ -12,12 +13,16 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -26,6 +31,7 @@ public class PropertiesTileMaps extends PropertiesBase{
     private Image image;
     private Vector2D vector2D = new Vector2D();
     private AtomicReference<GraphicsContext> gc;
+    private TileMaps tileMaps;
 
     private AtomicReference<GraphicsContext> canva;
     public PropertiesTileMaps(TreeItemObject item){
@@ -34,11 +40,12 @@ public class PropertiesTileMaps extends PropertiesBase{
 
     @Override
     public void createProperties() {
+        System.out.println("PropertiesTileMaps");
         addItemProperties(tileMap());
     }
 
     private BorderPane tileMap(){
-        TileMaps tileMaps = (TileMaps) item.ob;
+        tileMaps = (TileMaps) item.ob;
         BorderPane list = new BorderPane();
         alignmentAll(list);
         list.setFocusTraversable(false);
@@ -70,7 +77,7 @@ public class PropertiesTileMaps extends PropertiesBase{
         VBox v = new VBox();
         v.setPrefWidth(0);
         v.setMinWidth(0);
-        v.getChildren().addAll(itemTitle(item,20), itemName(item,20), newItem("Image", img, 20));
+        v.getChildren().addAll(itemTitle(item,20), itemName(item,20), PropertiesBase.itemSize(item, 20), newItem("Image", img, 20));
         list.setTop(v);
         return list;
     }
@@ -78,10 +85,10 @@ public class PropertiesTileMaps extends PropertiesBase{
     private void selectImage(MouseEvent e){
         int x = (int)(e.getX() / 32) * 32;
         int y = (int)(e.getY() / 32) * 32;
-        vector2D.x = x;
-        vector2D.y = y;
-        vector2D.width = 32;
-        vector2D.height = 32;
+        vector2D.setX(x);
+        vector2D.setY(y);
+        vector2D.setWidth(32);
+        vector2D.setHeight(32);
         gc.get().clearRect(0,0,image.getWidth(), image.getHeight());
         gc.get().drawImage(image, 0,1);
         gc.get().setStroke(Color.GREEN);
@@ -93,18 +100,24 @@ public class PropertiesTileMaps extends PropertiesBase{
     public void onMouseMove(MouseEvent e) {
         int x = (int)(e.getX() / 32) * 32;
         int y = (int)(e.getY() / 32) * 32;
-        //GraphicsContext o = canva.get().getCanvas().getGraphicsContext2D();
-        //canva.get().clearRect(0,0,MainViewController.canva.getWidth(), MainViewController.canva.getHeight());
-      //  canva.get().setStroke(Color.GREEN);
-      //  canva.get().strokeRoundRect(x, y, 32, 32, 5, 5);
-      //  canva.get().stroke();
+        canva.get().clearRect(0,0,MainViewController.canva.getWidth(), MainViewController.canva.getHeight());
+        canva.get().setStroke(Color.GREEN);
+        canva.get().strokeRoundRect(x, y, 32, 32, 5, 5);
     }
 
     @Override
     public void onMouseClick(MouseEvent e) {
         int x = (int)(e.getX() / 32) * 32;
         int y = (int)(e.getY() / 32) * 32;
-        if (image != null)
-            canva.get().drawImage(image, vector2D.x,vector2D.y, vector2D.width, vector2D.height, x, y,32, 32);
+        if (image != null && tileMaps.getBuffer() != null && tileMaps.getBuffer().getWidth() > x && tileMaps.getBuffer().getHeight() > y)
+        {
+            System.out.println("x: " + x + " y: "+ y);
+            BufferedImage out = tileMaps.getImage().getSubimage(vector2D.getX(), vector2D.getY(), 32, 32);
+            tileMaps.getBuffer().getGraphics().drawImage(out, x, y, null);
+            tileMaps.getBuffer().getGraphics().dispose();
+            tileMaps.getBuffer().getGraphics().create();
+        }
     }
+
+
 }
