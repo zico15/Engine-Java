@@ -1,5 +1,6 @@
 package com;
 
+import com.almasb.fxgl.core.math.PerlinNoiseGenerator;
 import com.canva.CanvasView;
 import com.project.Project;
 import com.system.FileSistem;
@@ -8,6 +9,7 @@ import com.tree.TreeResourceController;
 import com.tree.TreeSceneController;
 import engine2d.system.FileController;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Control;
 import javafx.scene.control.TabPane;
@@ -81,6 +83,14 @@ public class MainViewController extends Control {
         File file = FileSistem.saveFile();
         FileController.save(file, PROJECT.scene);
         System.out.println(file);
+    }
+
+    @FXML
+    protected void laodtester() {
+        System.out.println("laod");
+        File file = FileSistem.openFile();
+        engine2d.objects.Scene scene = (engine2d.objects.Scene) FileController.read(file);
+        System.out.println("size: "+scene.getChildren().size());
     }
     @FXML
     protected void onHelloButtonClick() {
