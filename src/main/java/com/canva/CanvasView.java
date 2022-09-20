@@ -11,20 +11,14 @@ import javafx.scene.paint.Color;
 import java.awt.*;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class CanvasView extends Canvas {
+public class CanvasView extends Graphics2D {
 
-    private AtomicReference<GraphicsContext> gc;
-    private final Graphics2D graphics2D;
     public Scene  scene;
     public AnimationTimer loop;
     public boolean         isRun = false;
 
     public CanvasView() {
-
-        setWidth(800);
-        setHeight(800);
-        gc = new AtomicReference<>(getGraphicsContext2D());
-        graphics2D = new Graphics2D((int) getWidth(), (int) getHeight());
+        super(800,600);
         loop = new AnimationTimer() {
             @Override
             public void handle(long timestamp) {
@@ -35,28 +29,20 @@ public class CanvasView extends Canvas {
         //heightProperty().addListener(evt -> draw());
     }
 
-    public GraphicsContext get()
-    {
-        return gc.get();
-    }
-
     private void draw() {
         double width = getWidth();
         double height = getHeight();
 
-        gc.get().clearRect(0, 0, width, height);
-        gc.get().setFill(Color.GRAY);
-        gc.get().fillRect(0,0,width, height);
+        getGraphics().clearRect(0, 0, width, height);
+        getGraphics().setFill(Color.GRAY);
+        getGraphics().fillRect(0,0,width, height);
     }
     public void render() {
 
         if (scene == null)
             return;
-        System.out.println("clearRect");
-        gc.get().clearRect(0,0,getWidth(), getHeight());
-        scene.render(graphics2D);
-        //gc.get().drawImage(ImageBase.convert(graphics2D.getBuffer()),0,0);
-       // graphics2D.dispose();
+        getGraphics().clearRect(0,0,getWidth(), getHeight());
+        scene.render(this);
 
     }
 

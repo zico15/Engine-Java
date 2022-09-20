@@ -6,6 +6,7 @@ import com.system.FileSistem;
 import com.tree.TreeBase;
 import com.tree.TreeResourceController;
 import com.tree.TreeSceneController;
+import engine2d.system.FileController;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Control;
@@ -78,6 +79,7 @@ public class MainViewController extends Control {
     protected void saveProject()
     {
         File file = FileSistem.saveFile();
+        FileController.save(file, PROJECT.scene);
         System.out.println(file);
     }
     @FXML
