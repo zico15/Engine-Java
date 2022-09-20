@@ -1,23 +1,17 @@
 package com.properties;
 
 import com.MainViewController;
-import com.properties.components.MenuComponents;
+import com.canva.CanvasView;
 import com.system.FileSistem;
-import com.system.ImageBase;
 import com.tree.TreeItemObject;
 import engine2d.objects.TileMaps;
 import engine2d.transforme.Vector2D;
-import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -31,9 +25,10 @@ public class PropertiesTileMaps extends PropertiesBase{
     private Image image;
     private Vector2D vector2D = new Vector2D();
     private AtomicReference<GraphicsContext> gc;
+
+    private CanvasView canva;
     private TileMaps tileMaps;
 
-    private AtomicReference<GraphicsContext> canva;
     public PropertiesTileMaps(TreeItemObject item){
         super(item);
     }
@@ -52,7 +47,7 @@ public class PropertiesTileMaps extends PropertiesBase{
         Canvas canvas = new Canvas();
         canvas.setOnMouseClicked(e -> selectImage(e));
         gc = new AtomicReference<>(canvas.getGraphicsContext2D());
-        canva = new AtomicReference<>(MainViewController.canva.getGraphicsContext2D());
+        canva = MainViewController.canvas;
         ScrollPane scrollPane = new ScrollPane(canvas);
         alignmentAll(scrollPane);
         list.setCenter(scrollPane);
@@ -62,6 +57,7 @@ public class PropertiesTileMaps extends PropertiesBase{
             File file = FileSistem.openFile();
             if (file == null || file.isDirectory())
                 return;
+            System.out.println("file: "+ file);
             tileMaps.setImage(file);
             img.setText(tileMaps.getFile());
             if (tileMaps.getImage() == null)
@@ -100,7 +96,7 @@ public class PropertiesTileMaps extends PropertiesBase{
     public void onMouseMove(MouseEvent e) {
         int x = (int)(e.getX() / 32) * 32;
         int y = (int)(e.getY() / 32) * 32;
-        canva.get().clearRect(0,0,MainViewController.canva.getWidth(), MainViewController.canva.getHeight());
+        canva.render();
         canva.get().setStroke(Color.GREEN);
         canva.get().strokeRoundRect(x, y, 32, 32, 5, 5);
     }
@@ -115,7 +111,7 @@ public class PropertiesTileMaps extends PropertiesBase{
             BufferedImage out = tileMaps.getImage().getSubimage(vector2D.getX(), vector2D.getY(), 32, 32);
             tileMaps.getBuffer().getGraphics().drawImage(out, x, y, null);
             tileMaps.getBuffer().getGraphics().dispose();
-            tileMaps.getBuffer().getGraphics().create();
+            canva.render();
         }
     }
 

@@ -1,9 +1,7 @@
 package com.system;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.PixelFormat;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.WritablePixelFormat;
+import engine2d.transforme.Vector2D;
+import javafx.scene.image.*;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -55,5 +53,20 @@ public class ImageBase {
             image.getRaster().setDataElements(0, y, width, 1, buffer);
         }
         return image;
+    }
+
+    public static  WritableImage convert(BufferedImage img) {
+
+        WritableImage wr = null;
+        if (img != null) {
+            wr = new WritableImage(img.getWidth(), img.getHeight());
+            PixelWriter pw = wr.getPixelWriter();
+            for (int x = 0; x < img.getWidth(); x++) {
+                for (int y = 0; y < img.getHeight(); y++) {
+                    pw.setArgb(x, y, img.getRGB(x, y));
+                }
+            }
+        }
+        return (wr);
     }
 }
