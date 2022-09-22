@@ -1,5 +1,6 @@
 package com.canva;
 
+import com.project.Project;
 import com.system.ImageBase;
 import engine2d.objects.Scene;
 import engine2d.render.Graphics2D;
@@ -13,7 +14,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class CanvasView extends Graphics2D {
 
-    public Scene  scene;
     public AnimationTimer loop;
     public boolean         isRun = false;
 
@@ -39,11 +39,10 @@ public class CanvasView extends Graphics2D {
     }
     public void render() {
 
-        if (scene == null)
-            return;
         getGraphics().clearRect(0,0,getWidth(), getHeight());
-        scene.render(this);
-
+        if (Project.getScene() == null)
+            return;
+        Project.getScene().render(this);
     }
 
 

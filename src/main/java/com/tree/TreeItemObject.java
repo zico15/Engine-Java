@@ -18,7 +18,7 @@ public class TreeItemObject extends TreeItemBase {
 
     public TreeItemObject(GameObject ob) {
         this.ob = ob;
-        this.type = ob.type;
+        this.type = ob.getType();
         super.setValue(ob.name);
         setGraphic(new ImageView(ImageBase.getIcons(getExtension(type))));
     }

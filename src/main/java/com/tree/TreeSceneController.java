@@ -5,26 +5,30 @@ import com.system.ImageBase;
 import engine2d.objects.GameObject;
 import engine2d.objects.Scene;
 import engine2d.objects.TileMaps;
-import javafx.scene.control.*;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 
 import java.util.Optional;
 
 public class TreeSceneController extends TreeView<String> {
     private TreeItemObject rootItem;
+    private static final Image imgScene = ImageBase.getIcons(ImageBase.ICON_SCENE);
 
     public TreeSceneController() {
-        Image imgScene = ImageBase.getIcons(ImageBase.ICON_SCENE);
-        rootItem = new TreeItemObject(new Scene("Scene"));
-        MainViewController.PROJECT.scene = (Scene) rootItem.ob;
-        MainViewController.PROJECT.scene.vector.setWidth(800);
-        MainViewController.PROJECT.scene.vector.setHeight(600);
-        setContextMenu(creadMenu());
-        setRoot(rootItem);
         setFocused(false);
         getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> ((TreeItemObject) newValue).preview());
     }
 
+    public void load(Scene scene){
+        if (rootItem != null)
+            rootItem.getChildren().clear();
+        rootItem = new TreeItemObject(scene);
+        setContextMenu(creadMenu());
+        setRoot(rootItem);
+    }
     public void addItem(TreeItemObject item, GameObject ob) {
         if (ob == null)
             return;

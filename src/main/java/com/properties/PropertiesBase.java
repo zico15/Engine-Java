@@ -97,7 +97,7 @@ public abstract class PropertiesBase {
 
     @NotNull
     public static final Node itemTitle(@NotNull TreeItemObject item, double height)  {
-        Label title = new Label(item.ob.type.toUpperCase());
+        Label title = new Label(item.ob.getType().toUpperCase());
         title.setAlignment(Pos.CENTER);
         return newItem(title, height);
     }

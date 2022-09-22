@@ -2,6 +2,7 @@ package com.system;
 
 import com.Main;
 import com.MainViewController;
+import com.project.Project;
 import javafx.scene.image.Image;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -35,7 +36,7 @@ public class FileSistem {
 
     public static void createFileJava(File file)
     {
-        File project = MainViewController.PROJECT.getDirectory();
+        File project = Project.getProject().getDirectory();
         String pack = project.toString().replace(project.getName(), "");
         pack = file.toString().replace(pack, "");
         pack = pack.toString().replace(file.getName(), "");

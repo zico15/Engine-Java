@@ -1,15 +1,16 @@
 package com;
 
-import com.almasb.fxgl.core.math.PerlinNoiseGenerator;
 import com.canva.CanvasView;
 import com.project.Project;
 import com.system.FileSistem;
 import com.tree.TreeBase;
 import com.tree.TreeResourceController;
 import com.tree.TreeSceneController;
+import engine2d.components.ComponentBase;
+import engine2d.components.Sprite;
+import engine2d.objects.Scene;
 import engine2d.system.FileController;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Control;
 import javafx.scene.control.TabPane;
@@ -33,22 +34,17 @@ public class MainViewController extends Control {
     public static TreeResourceController treeResource;
 
     public static AnchorPane  listProperties;
-    public static Project PROJECT = new Project();
 
     public static TabPane tab;
     @FXML
     private void initialize() {
-        tab = tabPaneMain;
-        System.out.println("initialize");
         treeScene = new TreeSceneController();
         treeResource = new TreeResourceController();
         listProperties = new AnchorPane();
         tabProperties.getTabs().add(TreeBase.newTab("Scene", treeScene));
         tabProperties.getTabs().add(TreeBase.newTab("Resource", treeResource));
         tabProperties.getTabs().add(TreeBase.newTab("Properties", listProperties));
-        //PropertiesBase.alignment(canva, 0,0,0,0);
         tabPaneMain.getTabs().add(TreeBase.newTab("Scene", canvas));
-        canvas.scene = PROJECT.scene;
     }
 
     @FXML
@@ -58,10 +54,14 @@ public class MainViewController extends Control {
         if (file == null)
             return;
         file.mkdir();
+        tab = tabPaneMain;
         treeResource.clear();
         treeResource.setRootFile(file);
-        PROJECT = new Project(file);
-
+        Project.setProject(new Project(file));
+        Scene scene = new Scene();
+        Project.getProject().gameProject.getScenes().add(scene);
+        Project.getProject().gameProject.setScene(scene);
+        treeScene.load(scene);
         System.out.println("newProject: " + file);
     }
     @FXML
@@ -70,7 +70,7 @@ public class MainViewController extends Control {
         File file = FileSistem.openFolder();
         if (file == null || !file.isDirectory())
             return;
-        PROJECT = new Project(file);
+       // PROJECT = new Project(file);
         treeResource.clear();
         treeResource.setRootFile(file);
         treeResource.load(file, treeResource.getRootItem());
@@ -81,7 +81,7 @@ public class MainViewController extends Control {
     protected void saveProject()
     {
         File file = FileSistem.saveFile();
-        FileController.save(file, PROJECT.scene);
+       // FileController.save(file, PROJECT.gameProject);
         System.out.println(file);
     }
 
@@ -90,7 +90,17 @@ public class MainViewController extends Control {
         System.out.println("laod");
         File file = FileSistem.openFile();
         engine2d.objects.Scene scene = (engine2d.objects.Scene) FileController.read(file);
-        System.out.println("size: "+scene.getChildren().size());
+        if (scene == null)
+            return;
+        scene.getChildren().forEach(children -> {
+            System.out.println("type: " + children.getType() + " components: " + children.getComponents().size());
+            ComponentBase componentBase = children.getComponent("Sprite");
+            if (componentBase != null) {
+                Sprite sprite = (Sprite) componentBase;
+                System.out.println("type: " + sprite.getType() + " image: " + (sprite.getImg() != null));
+            }
+        });
+
     }
     @FXML
     protected void onHelloButtonClick() {
