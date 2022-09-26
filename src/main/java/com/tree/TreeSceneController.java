@@ -2,6 +2,7 @@ package com.tree;
 
 import com.MainViewController;
 import com.system.ImageBase;
+import engine2d.objects.GameNode;
 import engine2d.objects.GameObject;
 import engine2d.objects.Scene;
 import engine2d.objects.TileMaps;
@@ -29,12 +30,12 @@ public class TreeSceneController extends TreeView<String> {
         setContextMenu(creadMenu());
         setRoot(rootItem);
     }
-    public void addItem(TreeItemObject item, GameObject ob) {
+    public void addItem(TreeItemObject item, GameNode ob) {
         if (ob == null)
             return;
         TreeItemObject i = new TreeItemObject(ob);
         item.setExpanded(true);
-        item.ob.addObject(ob);
+        item.ob.addGameObject(ob);
         item.getChildren().add(i);
     }
 
@@ -51,7 +52,7 @@ public class TreeSceneController extends TreeView<String> {
                 entered = result.get();
 
             if (entered != null)
-                addItem(item, new GameObject(entered));
+                addItem(item, new GameNode(entered));
             System.out.println(entered);
         });
         MenuItem addTileMap = new MenuItem("create tileMap");

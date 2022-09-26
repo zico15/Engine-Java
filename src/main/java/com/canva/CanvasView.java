@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
 import java.awt.*;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class CanvasView extends Graphics2D {
+public class CanvasView extends Canvas {
 
     public AnimationTimer loop;
     public boolean         isRun = false;
@@ -25,24 +25,16 @@ public class CanvasView extends Graphics2D {
                 render();
             }
         };
-        //widthProperty().addListener(evt -> draw());
-        //heightProperty().addListener(evt -> draw());
+        widthProperty().addListener(evt -> render());
+        heightProperty().addListener(evt -> render());
     }
 
-    private void draw() {
-        double width = getWidth();
-        double height = getHeight();
-
-        getGraphics().clearRect(0, 0, width, height);
-        getGraphics().setFill(Color.GRAY);
-        getGraphics().fillRect(0,0,width, height);
-    }
     public void render() {
 
-        getGraphics().clearRect(0,0,getWidth(), getHeight());
+        getGraphicsContext2D().clearRect(0,0,getWidth(), getHeight());
         if (Project.getScene() == null)
             return;
-        Project.getScene().render(this);
+        Project.getScene().render(null);
     }
 
 

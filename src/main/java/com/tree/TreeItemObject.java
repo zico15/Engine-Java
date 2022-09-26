@@ -5,6 +5,7 @@ import com.properties.PropertiesGameObject;
 import com.properties.PropertiesScene;
 import com.properties.PropertiesTileMaps;
 import com.system.ImageBase;
+import engine2d.objects.GameNode;
 import engine2d.objects.GameObject;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
@@ -12,11 +13,11 @@ import javafx.scene.image.ImageView;
 public class TreeItemObject extends TreeItemBase {
 
 
-    public GameObject ob;
+    public GameNode ob;
 
     private TextArea textArea;
 
-    public TreeItemObject(GameObject ob) {
+    public TreeItemObject(GameNode ob) {
         this.ob = ob;
         this.type = ob.getType();
         super.setValue(ob.name);

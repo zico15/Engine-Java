@@ -97,7 +97,7 @@ public class MainViewController extends Control {
             ComponentBase componentBase = children.getComponent("Sprite");
             if (componentBase != null) {
                 Sprite sprite = (Sprite) componentBase;
-                System.out.println("type: " + sprite.getType() + " image: " + (sprite.getImg() != null));
+                System.out.println("type: " + sprite.getType() + " image: " + (sprite != null));
             }
         });
 

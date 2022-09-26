@@ -40,7 +40,6 @@ public class ImageProperties extends ComponentProperties {
                 component = sprite;
             }
             fileImage = file;
-            sprite.load(file);
             img.setText(file.getName());
             item.ob.addComponent(sprite);
         });

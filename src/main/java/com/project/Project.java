@@ -1,7 +1,7 @@
 package com.project;
 
+import engine2d.objects.GameProject;
 import engine2d.objects.Scene;
-import engine2d.system.GameProject;
 
 import java.io.File;
 

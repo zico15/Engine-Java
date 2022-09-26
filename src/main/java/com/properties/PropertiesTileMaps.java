@@ -51,7 +51,7 @@ public class PropertiesTileMaps extends PropertiesBase{
         TextField img = new TextField(tileMaps.getFile());
         img.setEditable(false);
         img.setOnMouseClicked(e -> {
-            File file = FileSistem.openFile();
+            /*File file = FileSistem.openFile();
             if (file == null || file.isDirectory())
                 return;
             tileMaps.setImage(file);
@@ -64,7 +64,7 @@ public class PropertiesTileMaps extends PropertiesBase{
             tileMaps.setImage(FileSistem.getImage(tileMaps.fileImage));
             gc.get().clearRect(0,0,canvas.getWidth(), canvas.getHeight());
             gc.get().drawImage(tileMaps.getImage(), 0,1);
-            System.out.println(tileMaps.fileImage.getAbsolutePath());
+            System.out.println(tileMaps.fileImage.getAbsolutePath());*/
         });
         VBox v = new VBox();
         v.setPrefWidth(0);
@@ -81,11 +81,11 @@ public class PropertiesTileMaps extends PropertiesBase{
         int y = (int)(e.getY() / 32) * 32;
         vector2D.setX(x);
         vector2D.setY(y);
-        gc.get().clearRect(0,0, tileMaps.getImage().getWidth(), tileMaps.getImage().getHeight());
+        /*gc.get().clearRect(0,0, tileMaps.getImage().getWidth(), tileMaps.getImage().getHeight());
         gc.get().drawImage(tileMaps.getImage(), 0,1);
         gc.get().setStroke(Color.GREEN);
         gc.get().strokeRoundRect(x, y, 32, 32, 5, 5);
-        gc.get().stroke();
+        gc.get().stroke();*/
     }
 
     @Override
@@ -97,20 +97,20 @@ public class PropertiesTileMaps extends PropertiesBase{
         if (x + 32 > tileMaps.getBuffer().getWidth() || y + 32 > tileMaps.getBuffer().getHeight())
             return;
         canvas.render();
-        canvas.getGraphics().setStroke(Color.GREEN);
-        canvas.getGraphics().strokeRoundRect(x, y, 32, 32, 5, 5);
+      /*  canvas.getGraphics().setStroke(Color.GREEN);
+        canvas.getGraphics().strokeRoundRect(x, y, 32, 32, 5, 5);*/
     }
 
     @Override
     public void onMouseClick(MouseEvent e) {
         int x = (int)(e.getX() / 32) * 32;
         int y = (int)(e.getY() / 32) * 32;
-        if (tileMaps.getImage() != null && tileMaps.getBuffer() != null && tileMaps.getBuffer().getWidth() > x && tileMaps.getBuffer().getHeight() > y)
+       /* if (tileMaps.getImage() != null && tileMaps.getBuffer() != null && tileMaps.getBuffer().getWidth() > x && tileMaps.getBuffer().getHeight() > y)
         {
             System.out.println("onMouseClick");
             tileMaps.print(tileMaps.getImage(), vector2D, x, y);
             canvas.render();
-        }
+        }*/
     }
 
 
