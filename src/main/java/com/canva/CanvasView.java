@@ -14,16 +14,19 @@ import javafx.scene.paint.Color;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class CanvasView extends Canvas {
 
     public AnimationTimer loop;
     public boolean         isRun = false;
-    private final Graphics2DGame graphics2DGame = new Graphics2DGame();
+    private final Graphics2DGame graphics2DGame;
 
     public CanvasView() {
         super(800,600);
+        graphics2DGame = new Graphics2DGame(getGraphicsContext2D());
         loop = new AnimationTimer() {
             @Override
             public void handle(long timestamp) {
@@ -41,26 +44,28 @@ public class CanvasView extends Canvas {
             return;
         if (Project.getScene() != null)
             Project.getScene().render(graphics2DGame);
-        graphics2DGame.show(getGraphicsContext2D());
     }
 
     private class Graphics2DGame extends  engine2d.render.Graphics2D{
 
-        private WritableImage writableImage = new WritableImage(1000,1000);
-        private PixelWriter pixelWriter = writableImage.getPixelWriter();
+        private final GraphicsContext  context;
+
+        public Graphics2DGame(GraphicsContext  context){
+            this.context = context;
+        }
         @Override
         public void drawImage(ImageBuffer image, int x1, int y1) {
-            if (image == null || image.image == null)
+            if (image == null)
                 return;
+            WritableImage temp = new WritableImage(image.getWidth(), image.getHeight());
             for (int y = 0; y < image.getHeight(); y++) {
                 for (int x = 0; x < image.getWidth(); x++)
-                    pixelWriter.setArgb(x, y, image.getArgb(x, y));
+                    temp.getPixelWriter().setArgb(x, y, image.getArgb(x, y));
             }
+            context.drawImage(temp, x1, y1);
         }
 
-        public void show(GraphicsContext  context){
-            context.drawImage(writableImage, 0,0, 800,600);
-        }
+
     }
 
 

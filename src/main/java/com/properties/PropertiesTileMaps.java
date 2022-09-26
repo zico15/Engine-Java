@@ -31,6 +31,8 @@ public class PropertiesTileMaps extends PropertiesBase{
 
     public PropertiesTileMaps(TreeItemObject item){
         super(item);
+        vector2D.setWidth(32);
+        vector2D.setHeight(32);
     }
 
     @Override
@@ -74,8 +76,6 @@ public class PropertiesTileMaps extends PropertiesBase{
         v.setMinWidth(0);
         v.getChildren().addAll(itemTitle(item,20), itemName(item,20), PropertiesBase.itemSize(item, 20), newItem("Image", img, 20));
         list.setTop(v);
-        vector2D.setWidth(32);
-        vector2D.setHeight(32);
         return list;
     }
 
@@ -99,21 +99,21 @@ public class PropertiesTileMaps extends PropertiesBase{
         int y = (int)(e.getY() / 32) * 32;
         if (x + 32 > tileMaps.vector.getWidth() || y + 32 > tileMaps.vector.getHeight())
             return;
-        canvas.render();
+        canvas.getGraphicsContext2D().clearRect(0,0,canvas.getWidth(), canvas.getHeight());
         canvas.getGraphicsContext2D().setStroke(Color.GREEN);
-        canvas.getGraphicsContext2D().strokeRoundRect(x, y, 32, 32, 5, 5);
+        canvas.getGraphicsContext2D().strokeRoundRect(x, y, vector2D.getWidth(), vector2D.getHeight(), 5, 5);
     }
 
     @Override
     public void onMouseClick(MouseEvent e) {
         int x = (int)(e.getX() / 32) * 32;
         int y = (int)(e.getY() / 32) * 32;
-       /* if (tileMaps.getImage() != null && tileMaps.getBuffer() != null && tileMaps.getBuffer().getWidth() > x && tileMaps.getBuffer().getHeight() > y)
+       if (tileMaps.getBuffer() != null && tileMaps.getBuffer() != null && tileMaps.getBuffer().getWidth() > x && tileMaps.getBuffer().getHeight() > y && tileMaps.getSprite() != null)
         {
-            System.out.println("onMouseClick");
-            tileMaps.print(tileMaps.getImage(), vector2D, x, y);
+
+            tileMaps.print(tileMaps.getSprite().getBuffer(), vector2D, x, y);
             canvas.render();
-        }*/
+        }
     }
 
 
