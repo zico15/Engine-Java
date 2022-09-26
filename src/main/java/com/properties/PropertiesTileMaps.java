@@ -2,8 +2,10 @@ package com.properties;
 
 import com.MainViewController;
 import com.canva.CanvasView;
+import com.canva.ImageFX;
 import com.system.FileSistem;
 import com.tree.TreeItemObject;
+import engine2d.components.Sprite;
 import engine2d.objects.TileMaps;
 import engine2d.transforme.Vector2D;
 import javafx.scene.canvas.Canvas;
@@ -23,6 +25,7 @@ public class PropertiesTileMaps extends PropertiesBase{
     private Vector2D vector2D = new Vector2D();
     private AtomicReference<GraphicsContext> gc;
 
+    private ImageFX imageFX;
     private CanvasView canvas;
     private TileMaps tileMaps;
 
@@ -48,23 +51,23 @@ public class PropertiesTileMaps extends PropertiesBase{
         ScrollPane scrollPane = new ScrollPane(canvas);
         alignmentAll(scrollPane);
         list.setCenter(scrollPane);
-        TextField img = new TextField(tileMaps.getFile());
+        TextField img = new TextField();
         img.setEditable(false);
         img.setOnMouseClicked(e -> {
-            /*File file = FileSistem.openFile();
+            File file = FileSistem.openFile();
             if (file == null || file.isDirectory())
                 return;
-            tileMaps.setImage(file);
-            img.setText(tileMaps.getFile());
-            if (tileMaps.getImage() == null)
+            tileMaps.setSprite(file);
+            Sprite sprite = tileMaps.getSprite();
+            if (sprite == null)
                 return;
-            canvas.setWidth(tileMaps.getImage().getWidth());
-            canvas.setHeight(tileMaps.getImage().getHeight());
+            imageFX = new ImageFX(tileMaps.getSprite());
+            img.setText(sprite.file.toString());
+            canvas.setWidth(sprite.getWidth());
+            canvas.setHeight(sprite.getHeight());
             canvas.getGraphicsContext2D();
-            tileMaps.setImage(FileSistem.getImage(tileMaps.fileImage));
             gc.get().clearRect(0,0,canvas.getWidth(), canvas.getHeight());
-            gc.get().drawImage(tileMaps.getImage(), 0,1);
-            System.out.println(tileMaps.fileImage.getAbsolutePath());*/
+            gc.get().drawImage(imageFX, 0,1);
         });
         VBox v = new VBox();
         v.setPrefWidth(0);
@@ -81,11 +84,11 @@ public class PropertiesTileMaps extends PropertiesBase{
         int y = (int)(e.getY() / 32) * 32;
         vector2D.setX(x);
         vector2D.setY(y);
-        /*gc.get().clearRect(0,0, tileMaps.getImage().getWidth(), tileMaps.getImage().getHeight());
-        gc.get().drawImage(tileMaps.getImage(), 0,1);
+        gc.get().clearRect(0,0, tileMaps.getSprite().getWidth(), tileMaps.getSprite().getHeight());
+        gc.get().drawImage(imageFX, 0,1);
         gc.get().setStroke(Color.GREEN);
         gc.get().strokeRoundRect(x, y, 32, 32, 5, 5);
-        gc.get().stroke();*/
+        gc.get().stroke();
     }
 
     @Override
@@ -94,11 +97,11 @@ public class PropertiesTileMaps extends PropertiesBase{
             return;
         int x = (int)(e.getX() / 32) * 32;
         int y = (int)(e.getY() / 32) * 32;
-        if (x + 32 > tileMaps.getBuffer().getWidth() || y + 32 > tileMaps.getBuffer().getHeight())
+        if (x + 32 > tileMaps.vector.getWidth() || y + 32 > tileMaps.vector.getHeight())
             return;
         canvas.render();
-      /*  canvas.getGraphics().setStroke(Color.GREEN);
-        canvas.getGraphics().strokeRoundRect(x, y, 32, 32, 5, 5);*/
+        canvas.getGraphicsContext2D().setStroke(Color.GREEN);
+        canvas.getGraphicsContext2D().strokeRoundRect(x, y, 32, 32, 5, 5);
     }
 
     @Override

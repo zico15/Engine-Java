@@ -20,8 +20,8 @@ import static com.properties.PropertiesBase.*;
 public class ImageProperties extends ComponentProperties {
 
 
-    private Sprite sprite;
-    File fileImage;
+    private Sprite sprite = null;
+
     public ImageProperties(PropertiesBase properties) {
         super(properties);
     }
@@ -36,12 +36,15 @@ public class ImageProperties extends ComponentProperties {
             if (file == null || file.isDirectory())
                 return;
             if (sprite == null) {
-                sprite = new Sprite();
+                sprite = new Sprite(file);
                 component = sprite;
+                item.ob.addComponent(sprite);
+                System.out.println("add image");
             }
-            fileImage = file;
+            else
+                sprite.load(file);
             img.setText(file.getName());
-            item.ob.addComponent(sprite);
+
         });
         return (newItem("Image", img, 20));
     }
