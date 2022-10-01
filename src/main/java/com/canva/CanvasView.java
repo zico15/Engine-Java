@@ -55,7 +55,7 @@ public class CanvasView extends Canvas {
         }
         @Override
         public void drawImage(ImageBuffer image, int x1, int y1) {
-            if (image == null)
+            if (image == null || image.getWidth() == 0 || image.getHeight() == 0)
                 return;
             WritableImage temp = new WritableImage(image.getWidth(), image.getHeight());
             for (int y = 0; y < image.getHeight(); y++) {

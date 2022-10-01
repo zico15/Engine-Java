@@ -1,12 +1,15 @@
 package com.properties.components;
 
 
+import com.list.TextFieldNumber;
 import com.properties.PropertiesBase;
 import com.system.FileSistem;
 import engine2d.components.Sprite;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 
 import java.io.File;
 
@@ -29,6 +32,8 @@ public class ImageProperties extends ComponentProperties {
 
     @Override
     public Node getProperties() {
+        VBox v = new VBox();
+        alignmentAll(v);
         TextField img = new TextField();
         img.setEditable(false);
         img.setOnMouseClicked(e -> {
@@ -46,7 +51,21 @@ public class ImageProperties extends ComponentProperties {
             img.setText(file.getName());
 
         });
-        return (newItem("Image", img, 20));
+        v.getChildren().add(itemTitle("Image", 20));
+        v.getChildren().add(newItem("URL: ", img, 20));
+        TextFieldNumber w = new TextFieldNumber(item.ob.vector.getWidth(), Pos.CENTER);
+        w.setOnAction(e -> {
+            if (sprite != null && w.getText().trim().length() > 0)
+                sprite.setWidth(Integer.parseInt(w.getText().trim()));
+        });
+        TextFieldNumber h = new TextFieldNumber(item.ob.vector.getHeight(), Pos.CENTER);
+        h.setOnAction(e -> {
+            if (sprite != null && h.getText().trim().length() > 0)
+                sprite.setHeight(Integer.parseInt(h.getText().trim()));
+        });
+        v.getChildren().add(newItem("W:", w , 20));
+        v.getChildren().add(newItem("H: ", h , 20));
+        return (v);
     }
 
 

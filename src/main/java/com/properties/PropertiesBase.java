@@ -97,9 +97,13 @@ public abstract class PropertiesBase {
 
     @NotNull
     public static final Node itemTitle(@NotNull TreeItemObject item, double height)  {
-        Label title = new Label(item.ob.getType().toUpperCase());
-        title.setAlignment(Pos.CENTER);
-        return newItem(title, height);
+        return itemTitle(item.ob.getType().toUpperCase(), height);
+    }
+
+    public static final Node itemTitle(String title, double height)  {
+        Label label = new Label(title);
+        label.setAlignment(Pos.CENTER);
+        return newItem(label, height);
     }
 
     public static final Node itemLabel(String text, double height)  {
@@ -148,17 +152,17 @@ public abstract class PropertiesBase {
         alignment(position, NONE, NONE, 0, 0);
         v.getChildren().add(newItem(position, height));
         TextFieldNumber x = new TextFieldNumber(item.ob.vector.getX(), Pos.CENTER);
-        x.setOnKeyReleased(e -> { item.ob.vector.setX(Integer.parseInt(x.getText())); });
+        x.setOnAction(e -> { item.ob.vector.setX(Integer.parseInt(x.getText())); });
         TextFieldNumber y = new TextFieldNumber(item.ob.vector.getY(), Pos.CENTER);
-        y.setOnKeyReleased(e -> { item.ob.vector.setY(Integer.parseInt(y.getText())); });
+        y.setOnAction(e -> { item.ob.vector.setY(Integer.parseInt(y.getText())); });
         TextFieldNumber w = new TextFieldNumber(item.ob.vector.getWidth(), Pos.CENTER);
-        w.setOnKeyReleased(e -> { item.ob.vector.setWidth(Integer.parseInt(w.getText())); });
+        w.setOnAction(e -> { item.ob.vector.setWidth(Integer.parseInt(w.getText())); });
         TextFieldNumber h = new TextFieldNumber(item.ob.vector.getHeight(), Pos.CENTER);
-        h.setOnKeyReleased(e -> { item.ob.vector.setHeight(Integer.parseInt(h.getText())); });
+        h.setOnAction(e -> { item.ob.vector.setHeight(Integer.parseInt(h.getText())); });
         v.getChildren().add(newItem("X: ", x , 20));
         v.getChildren().add(newItem("Y: ", y , 20));
-        v.getChildren().add(newItem("W:", w , 20));
-        v.getChildren().add(newItem("H: ", h , 20));
+       // v.getChildren().add(newItem("W:", w , 20));
+        //v.getChildren().add(newItem("H: ", h , 20));
         return v;
     }
 
