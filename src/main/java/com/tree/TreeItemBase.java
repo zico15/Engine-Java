@@ -1,6 +1,7 @@
 package com.tree;
 
 import com.properties.PropertiesBase;
+import com.properties.PropertiesItem;
 import com.system.ImageBase;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TreeItem;

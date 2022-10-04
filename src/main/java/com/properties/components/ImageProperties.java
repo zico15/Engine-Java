@@ -3,17 +3,17 @@ package com.properties.components;
 
 import com.list.TextFieldNumber;
 import com.properties.PropertiesBase;
+import com.properties.PropertiesItem;
 import com.system.FileSistem;
 import engine2d.components.Sprite;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 import java.io.File;
 
-import static com.properties.PropertiesBase.*;
+import static com.properties.PropertiesItem.*;
 
 /***
  * ImageProperties creates a property item to be inserted in the property list
@@ -23,15 +23,20 @@ import static com.properties.PropertiesBase.*;
 public class ImageProperties extends ComponentProperties {
 
 
-    private Sprite sprite = null;
+    private Sprite sprite;
 
     public ImageProperties(PropertiesBase properties) {
         super(properties);
+        sprite = null;
     }
 
+    public ImageProperties(Sprite sprite, PropertiesBase properties) {
+        super(properties);
+        sprite = sprite;
+    }
 
     @Override
-    public Node getProperties() {
+    public void createProperties() {
         VBox v = new VBox();
         alignmentAll(v);
         TextField img = new TextField();
@@ -51,6 +56,8 @@ public class ImageProperties extends ComponentProperties {
             img.setText(file.getName());
 
         });
+        if (sprite != null && sprite.getFile() != null)
+            img.setText(sprite.getFile().getName());
         v.getChildren().add(itemTitle("Image", 20));
         v.getChildren().add(newItem("URL: ", img, 20));
         TextFieldNumber w = new TextFieldNumber(item.ob.vector.getWidth(), Pos.CENTER);
@@ -65,7 +72,7 @@ public class ImageProperties extends ComponentProperties {
         });
         v.getChildren().add(newItem("W:", w , 20));
         v.getChildren().add(newItem("H: ", h , 20));
-        return (v);
+       getChildren().add(v);
     }
 
 

@@ -20,15 +20,25 @@ public class TreeSceneController extends TreeView<String> {
 
     public TreeSceneController() {
         setFocused(false);
-        getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> ((TreeItemObject) newValue).preview());
+        getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
+            if (newValue != null)
+                ((TreeItemObject) newValue).preview();
+        });
     }
 
-    public void load(Scene scene){
-        if (rootItem != null)
-            rootItem.getChildren().clear();
-        rootItem = new TreeItemObject(scene);
-        setContextMenu(creadMenu());
-        setRoot(rootItem);
+       public void load(TreeItemObject item, GameNode ob) {
+        if (ob == null)
+            return;
+        TreeItemObject i = new TreeItemObject(ob);
+        ob.getChildren().forEach(e -> load(i, e));
+        if (item == null){
+            setContextMenu(creadMenu());
+            rootItem = i;
+            setRoot(rootItem);
+        }else{
+            item.setExpanded(true);
+            item.getChildren().add(i);
+        }
     }
     public void addItem(TreeItemObject item, GameNode ob) {
         if (ob == null)

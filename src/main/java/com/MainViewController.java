@@ -9,6 +9,7 @@ import com.tree.TreeSceneController;
 import engine2d.components.ComponentBase;
 import engine2d.components.Sprite;
 import engine2d.objects.Scene;
+import engine2d.project.Prefab;
 import engine2d.system.FileController;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.GraphicsContext;
@@ -21,6 +22,7 @@ import java.io.File;
 public class MainViewController extends Control {
 
     public static CanvasView canvas = new CanvasView();
+
     @FXML
     private AnchorPane panelProject;
 
@@ -58,10 +60,14 @@ public class MainViewController extends Control {
         treeResource.clear();
         treeResource.setRootFile(file);
         Project.setProject(new Project(file));
+
         Scene scene = new Scene();
-        Project.getProject().gameProject.getScenes().add(scene);
+        Prefab sceneMain = new Prefab("Scene", scene);
         Project.getProject().gameProject.setScene(scene);
-        treeScene.load(scene);
+        Project.getProject().gameProject.setSceneMain(sceneMain);
+        saveProject();
+        treeScene.load(null, scene);
+        treeResource.load(file, treeResource.getRootItem());
         System.out.println("newProject: " + file);
     }
     @FXML
@@ -70,8 +76,10 @@ public class MainViewController extends Control {
         File file = FileSistem.openFolder();
         if (file == null || !file.isDirectory())
             return;
-       // PROJECT = new Project(file);
+        Project.setProject(new Project(file));
+        Project.load();
         treeResource.clear();
+        treeScene.load(null, Project.getScene());
         treeResource.setRootFile(file);
         treeResource.load(file, treeResource.getRootItem());
         System.out.println(file);
@@ -80,9 +88,7 @@ public class MainViewController extends Control {
     @FXML
     protected void saveProject()
     {
-        File file = FileSistem.saveFile();
-       // FileController.save(file, PROJECT.gameProject);
-        System.out.println(file);
+       Project.save();
     }
 
     @FXML

@@ -1,46 +1,49 @@
 package com.properties.components;
 
 import com.properties.PropertiesBase;
+import com.properties.PropertiesItem;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.text.TextAlignment;
 
-import java.util.function.Consumer;
 
+import static com.properties.PropertiesItem.*;
 public class MenuComponents extends ComponentProperties {
 
-    private final MenuButton menu = new MenuButton("Components");
+
     public MenuComponents(PropertiesBase properties) {
         super(properties);
-        if (menu.getItems().size() != 0)
-            return;
+    }
+
+    @Override
+    public void createProperties() {
+        MenuButton menu = new MenuButton("Components");
         menu.setAlignment(Pos.CENTER);
         menu.setPopupSide(Side.RIGHT);
         menu.getStyleClass().add("my-menuButton");
         menu.getItems().add(newMenuItem("Image", e-> {
             System.out.println("Image");
             ImageProperties img = new ImageProperties(properties);
-            properties.addItemProperties(properties.getSize() - 1, img.getProperties());
+            properties.getChildren().add(properties.getSize() - 1, img);
         }));
         menu.getItems().add(newMenuItem("Scrips", e-> {
             System.out.println("Scrips");
         }));
+        //alignment(menu, NONE, NONE, 0, 0);
+        alignment(this, NONE, NONE, 0, 0);
+        getChildren().add(menu);
     }
-    private final MenuItem newMenuItem(String name, EventHandler<ActionEvent> event)
+
+    private MenuItem newMenuItem(String name, EventHandler<ActionEvent> event)
     {
         MenuItem item = new MenuItem(name);
         item.setOnAction(event);
         return item;
     }
 
-    @Override
-    public Node getProperties() {
-        return PropertiesBase.newItem(menu, 20);
-    }
+
 }

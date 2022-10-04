@@ -22,7 +22,10 @@ public class TreeItemResource extends TreeItemBase   {
         System.out.println("FILE: " + file);
         if("java".equals(type))
             previewCode();
-        MainViewController.tab.getSelectionModel().select(tab);
+        else
+            return;
+        if (MainViewController.tab.getSelectionModel() != null)
+            MainViewController.tab.getSelectionModel().select(tab);
     }
 
     private void previewCode()

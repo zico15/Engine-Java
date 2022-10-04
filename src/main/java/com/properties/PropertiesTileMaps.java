@@ -20,7 +20,9 @@ import javafx.scene.paint.Color;
 import java.io.File;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class PropertiesTileMaps extends PropertiesBase{
+import static com.properties.PropertiesItem.*;
+
+public class PropertiesTileMaps extends PropertiesBase {
 
     private Vector2D vector2D = new Vector2D();
     private AtomicReference<GraphicsContext> gc;
@@ -35,14 +37,15 @@ public class PropertiesTileMaps extends PropertiesBase{
         vector2D.setHeight(32);
     }
 
+
     @Override
     public void createProperties() {
         System.out.println("PropertiesTileMaps");
-        addItemProperties(tileMap());
+        getChildren().add(tileMap());
     }
 
     private BorderPane tileMap(){
-        tileMaps = (TileMaps) item.ob;
+        tileMaps = (TileMaps) getItem().ob;
         BorderPane list = new BorderPane();
         alignmentAll(list);
         list.setFocusTraversable(false);
@@ -63,20 +66,31 @@ public class PropertiesTileMaps extends PropertiesBase{
             Sprite sprite = tileMaps.getSprite();
             if (sprite == null)
                 return;
-            imageFX = new ImageFX(tileMaps.getSprite());
-            img.setText(sprite.file.toString());
-            canvas.setWidth(sprite.getWidth());
-            canvas.setHeight(sprite.getHeight());
-            canvas.getGraphicsContext2D();
-            gc.get().clearRect(0,0,canvas.getWidth(), canvas.getHeight());
-            gc.get().drawImage(imageFX, 0,1);
+            initSprite(sprite, img, canvas);
         });
+        if (tileMaps.getSprite() != null && tileMaps.getSprite().getFile() != null){
+            tileMaps.getSprite().load(tileMaps.getSprite().getFile());
+            initSprite(tileMaps.getSprite(), img, canvas);
+        }
         VBox v = new VBox();
         v.setPrefWidth(0);
         v.setMinWidth(0);
-        v.getChildren().addAll(itemTitle(item,20), itemName(item,20), PropertiesBase.itemSize(item, 20), newItem("Image", img, 20));
+        v.getChildren().addAll(itemTitle(getItem(),20), itemName(getItem(),20), PropertiesItem.itemSize(getItem(), 20), newItem("Image", img, 20));
         list.setTop(v);
         return list;
+    }
+
+    private void initSprite(Sprite sprite, TextField img, Canvas canvas){
+        imageFX = new ImageFX(sprite);
+        img.setText(sprite.getFile().toString());
+        System.out.println("w: "+sprite.getWidth() + " h: "+sprite.getHeight());
+        if (sprite.getWidth() > 0)
+            canvas.setWidth(sprite.getWidth());
+        if (sprite.getHeight() > 0)
+            canvas.setHeight(sprite.getHeight());
+        canvas.getGraphicsContext2D();
+        gc.get().clearRect(0,0,canvas.getWidth(), canvas.getHeight());
+        gc.get().drawImage(imageFX, 0,1);
     }
 
     private void selectImage(MouseEvent e){
@@ -99,7 +113,8 @@ public class PropertiesTileMaps extends PropertiesBase{
         int y = (int)(e.getY() / 32) * 32;
         if (x + 32 > tileMaps.vector.getWidth() || y + 32 > tileMaps.vector.getHeight())
             return;
-        canvas.getGraphicsContext2D().clearRect(0,0,canvas.getWidth(), canvas.getHeight());
+        //canvas.getGraphicsContext2D().clearRect(0,0,canvas.getWidth(), canvas.getHeight());
+        canvas.render();
         canvas.getGraphicsContext2D().setStroke(Color.GREEN);
         canvas.getGraphicsContext2D().strokeRoundRect(x, y, vector2D.getWidth(), vector2D.getHeight(), 5, 5);
     }
