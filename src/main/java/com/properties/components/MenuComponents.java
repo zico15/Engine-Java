@@ -33,8 +33,7 @@ public class MenuComponents extends ComponentProperties {
         menu.getItems().add(newMenuItem("Scrips", e-> {
             System.out.println("Scrips");
         }));
-        //alignment(menu, NONE, NONE, 0, 0);
-        alignment(this, NONE, NONE, 0, 0);
+        alignment(menu, NONE, NONE, 0, 0);
         getChildren().add(menu);
     }
 

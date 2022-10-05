@@ -24,6 +24,8 @@ public class ImageProperties extends ComponentProperties {
 
 
     private Sprite sprite;
+    private TextField img;
+    private TextFieldNumber w,h;
 
     public ImageProperties(PropertiesBase properties) {
         super(properties);
@@ -32,40 +34,33 @@ public class ImageProperties extends ComponentProperties {
 
     public ImageProperties(Sprite sprite, PropertiesBase properties) {
         super(properties);
-        sprite = sprite;
+        this.sprite = sprite;
+        System.out.println("sw: " + sprite.getWidth() + " sh: "+ sprite.getHeight());
+        if (sprite != null && sprite.getFile() != null)
+            load(sprite.getFile());
+
     }
 
     @Override
     public void createProperties() {
         VBox v = new VBox();
         alignmentAll(v);
-        TextField img = new TextField();
+        img = new TextField();
         img.setEditable(false);
         img.setOnMouseClicked(e -> {
             File file = FileSistem.openFile();
             if (file == null || file.isDirectory())
                 return;
-            if (sprite == null) {
-                sprite = new Sprite(file);
-                component = sprite;
-                item.ob.addComponent(sprite);
-                System.out.println("add image");
-            }
-            else
-                sprite.load(file);
-            img.setText(file.getName());
-
+            load(file);
         });
-        if (sprite != null && sprite.getFile() != null)
-            img.setText(sprite.getFile().getName());
         v.getChildren().add(itemTitle("Image", 20));
         v.getChildren().add(newItem("URL: ", img, 20));
-        TextFieldNumber w = new TextFieldNumber(item.ob.vector.getWidth(), Pos.CENTER);
+        w = new TextFieldNumber(item.ob.vector.getWidth(), Pos.CENTER);
         w.setOnAction(e -> {
             if (sprite != null && w.getText().trim().length() > 0)
                 sprite.setWidth(Integer.parseInt(w.getText().trim()));
         });
-        TextFieldNumber h = new TextFieldNumber(item.ob.vector.getHeight(), Pos.CENTER);
+        h = new TextFieldNumber(item.ob.vector.getHeight(), Pos.CENTER);
         h.setOnAction(e -> {
             if (sprite != null && h.getText().trim().length() > 0)
                 sprite.setHeight(Integer.parseInt(h.getText().trim()));
@@ -75,6 +70,19 @@ public class ImageProperties extends ComponentProperties {
        getChildren().add(v);
     }
 
+    private void load(File file){
+        if (sprite == null) {
+            sprite = new Sprite(file);
+            component = sprite;
+            item.ob.addComponent(sprite);
+            System.out.println("add image");
+        }
+        else
+            sprite.load(file);
+        w.setText(String.valueOf(sprite.getWidth()));
+        h.setText(String.valueOf(sprite.getHeight()));
+        img.setText(file.getName());
+    }
 
 
 }
