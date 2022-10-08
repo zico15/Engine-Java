@@ -34,7 +34,7 @@ public class Project {
 
     public static void save(){
         if (Project.getProject() != null && Project.getProject().gameProject != null){
-            FileController.save(new File(Project.getProject().getDirectory(), "settings.cx"), Project.getProject().gameProject);
+            GameProject.save(Project.getProject().getDirectory(), Project.getProject().gameProject);
         }
     }
 

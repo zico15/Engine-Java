@@ -60,14 +60,13 @@ public class MainViewController extends Control {
         treeResource.clear();
         treeResource.setRootFile(file);
         Project.setProject(new Project(file));
-
         Scene scene = new Scene();
         Prefab sceneMain = new Prefab("Scene", scene);
         Project.getProject().gameProject.setScene(scene);
         Project.getProject().gameProject.setSceneMain(sceneMain);
+        Project.getProject().gameProject.addPrefab(sceneMain);
         saveProject();
         treeScene.load(null, scene);
-        treeResource.load(file, treeResource.getRootItem());
         System.out.println("newProject: " + file);
     }
     @FXML
@@ -78,7 +77,6 @@ public class MainViewController extends Control {
             return;
         Project.setProject(new Project(file));
         Project.load();
-        treeResource.clear();
         treeScene.load(null, Project.getScene());
         treeResource.setRootFile(file);
         treeResource.load(file, treeResource.getRootItem());
@@ -88,7 +86,9 @@ public class MainViewController extends Control {
     @FXML
     protected void saveProject()
     {
-       Project.save();
+        Project.save();
+        treeResource.clear();
+        treeResource.load(Project.getProject().getDirectory(), treeResource.getRootItem());
     }
 
     @FXML

@@ -22,7 +22,6 @@ import static com.properties.PropertiesItem.*;
  * **/
 public class ImageProperties extends ComponentProperties {
 
-
     private Sprite sprite;
     private TextField img;
     private TextFieldNumber w,h;
@@ -38,7 +37,6 @@ public class ImageProperties extends ComponentProperties {
         System.out.println("sw: " + sprite.getWidth() + " sh: "+ sprite.getHeight());
         if (sprite != null && sprite.getFile() != null)
             load(sprite.getFile());
-
     }
 
     @Override
