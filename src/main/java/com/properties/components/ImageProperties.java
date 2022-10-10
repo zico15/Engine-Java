@@ -24,7 +24,7 @@ public class ImageProperties extends ComponentProperties {
 
     private Sprite sprite;
     private TextField img;
-    private TextFieldNumber w,h;
+    private TextFieldNumber w,h, r;
 
     public ImageProperties(PropertiesBase properties) {
         super(properties);
@@ -63,8 +63,14 @@ public class ImageProperties extends ComponentProperties {
             if (sprite != null && h.getText().trim().length() > 0)
                 sprite.setHeight(Integer.parseInt(h.getText().trim()));
         });
+        r = new TextFieldNumber(item.ob.vector.getHeight(), Pos.CENTER);
+        r.setOnAction(e -> {
+            if (sprite != null && h.getText().trim().length() > 0)
+                sprite.setRotate(Integer.parseInt(h.getText().trim()));
+        });
         v.getChildren().add(newItem("W:", w , 20));
         v.getChildren().add(newItem("H: ", h , 20));
+        v.getChildren().add(r);
        getChildren().add(v);
     }
 
