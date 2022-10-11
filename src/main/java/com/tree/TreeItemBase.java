@@ -43,6 +43,8 @@ public class TreeItemBase extends TreeItem {
             return (ImageBase.ICON_OBJECT);
         if ("TileMaps".equals(type))
             return (ImageBase.ICON_TILEMAP);
+        if ("folderBuild".equals(type))
+            return (ImageBase.ICON_FOLDER_BUILD);
         return (ImageBase.ICON_FILE);
     }
 }

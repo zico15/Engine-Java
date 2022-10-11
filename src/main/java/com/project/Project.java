@@ -1,10 +1,11 @@
 package com.project;
 
+import engine2d.objects.GameNode;
 import engine2d.objects.GameProject;
 import engine2d.objects.Scene;
-import engine2d.system.FileController;
 
 import java.io.File;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Project {
 
@@ -45,6 +46,27 @@ public class Project {
 
              }
         }
+    }
+
+    private int getSizeGameObject(GameNode ob){
+        if (ob == null)
+            return 0;
+        AtomicInteger size = new AtomicInteger(1);
+        size.addAndGet(ob.getComponents().size());;
+        ob.getChildren().forEach(c -> {
+            size.addAndGet(getSizeGameObject(c));
+        });
+        return size.get();
+    }
+    public int getSizeElements(){
+        AtomicInteger size = new AtomicInteger(1);
+        if (gameProject == null)
+            return 0;
+        size.addAndGet(gameProject.getPrefabs().size());
+        gameProject.getPrefabs().forEach(c -> {
+            size.addAndGet(getSizeGameObject(c.getGameObject()));
+        });
+        return size.get();
     }
 
     public static Scene getScene(){

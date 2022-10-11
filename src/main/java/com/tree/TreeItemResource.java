@@ -57,8 +57,12 @@ public class TreeItemResource extends TreeItemBase   {
         {
             type = type.substring(type.lastIndexOf(".") + 1, type.length());
             System.out.println("type: "+type);
-        }else if (file.exists() && file.isDirectory())
-            type = "folder";
+        }else if (file.exists() && file.isDirectory()) {
+            if ("Build".equals(file.getName()))
+                type = "folderBuild";
+            else
+                type = "folder";
+        }
         else
             type = "file";
         super.setValue(file.getName());

@@ -2,7 +2,9 @@ package com.properties;
 
 import com.properties.components.ImageProperties;
 import com.properties.components.MenuComponents;
+import com.properties.components.ScriptProperties;
 import com.tree.TreeItemObject;
+import engine2d.components.Script;
 import engine2d.components.Sprite;
 import engine2d.objects.GameNode;
 import javafx.scene.Node;
@@ -27,8 +29,10 @@ public class PropertiesGameObject extends PropertiesBase {
 
     private void loadComponents(GameNode gameObject){
         gameObject.getComponents().forEach(c-> {
-            if (c instanceof Sprite )
+            if (c instanceof Sprite)
                 getChildren().add(new ImageProperties((Sprite) c, this));
+            else if (c instanceof Script)
+                getChildren().add(new ScriptProperties((Script) c, this));
         });
     }
 

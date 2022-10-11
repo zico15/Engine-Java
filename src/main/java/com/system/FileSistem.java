@@ -27,6 +27,14 @@ public class FileSistem {
         return (fileChooser.showOpenDialog(Main.stage));
     }
 
+    public static File openFile(File dir)
+    {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(dir);
+        fileChooser.setTitle("Open File");
+        return (fileChooser.showOpenDialog(Main.stage));
+    }
+
     public static File saveFile()
     {
         FileChooser fileChooser = new FileChooser();

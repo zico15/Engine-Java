@@ -26,12 +26,10 @@ public class MenuComponents extends ComponentProperties {
         menu.setPopupSide(Side.RIGHT);
         menu.getStyleClass().add("my-menuButton");
         menu.getItems().add(newMenuItem("Image", e-> {
-            System.out.println("Image");
-            ImageProperties img = new ImageProperties(properties);
-            properties.getChildren().add(properties.getSize() - 1, img);
+            properties.getChildren().add(properties.getSize() - 1, new ImageProperties(properties));
         }));
         menu.getItems().add(newMenuItem("Scrips", e-> {
-            System.out.println("Scrips");
+            properties.getChildren().add(properties.getSize() - 1, new ScriptProperties(properties));
         }));
         alignment(menu, NONE, NONE, 0, 0);
         getChildren().add(menu);

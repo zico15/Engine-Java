@@ -14,12 +14,10 @@ public class ImageBase {
     public static final String ICON_SCENE = "/com/icons/scene.png";
     public static final String ICON_OBJECT = "/com/icons/object.png";
     public static final String ICON_FOLDER = "/com/icons/folder.png";
+    public static final String ICON_FOLDER_BUILD = "/com/icons/folder_read.png";
     public static final String ICON_JAVA = "/com/icons/java.png";
-
     public static final String ICON_FILE = "/com/icons/file.png";
-
     public static final String ICON_TILEMAP = "/com/icons/tilemap.png";
-
     private static final HashMap<String, Image> ICONS = new HashMap<>();
 
     public static Image getIcons(String fileName) {
@@ -37,7 +35,6 @@ public class ImageBase {
         ICONS.put(name, img);
         return img;
     }
-
     public static BufferedImage convert(Image fxImage) {
         int width = (int) Math.ceil(fxImage.getWidth());
         int height = (int) Math.ceil(fxImage.getHeight());

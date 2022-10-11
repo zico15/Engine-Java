@@ -1,5 +1,6 @@
 package com;
 
+import com.build.Build;
 import com.canva.CanvasView;
 import com.project.Project;
 import com.system.FileSistem;
@@ -14,6 +15,7 @@ import engine2d.system.FileController;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Control;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 
@@ -21,8 +23,10 @@ import java.io.File;
 
 public class MainViewController extends Control {
 
-    public static CanvasView canvas = new CanvasView();
 
+    public static CanvasView canvas = new CanvasView();
+    @FXML
+    private ProgressBar progressBar;
     @FXML
     private AnchorPane panelProject;
 
@@ -47,6 +51,7 @@ public class MainViewController extends Control {
         tabProperties.getTabs().add(TreeBase.newTab("Resource", treeResource));
         tabProperties.getTabs().add(TreeBase.newTab("Properties", listProperties));
         tabPaneMain.getTabs().add(TreeBase.newTab("Scene", canvas));
+        tab = tabPaneMain;
     }
 
     @FXML
@@ -79,6 +84,7 @@ public class MainViewController extends Control {
         Project.load();
         treeScene.load(null, Project.getScene());
         treeResource.setRootFile(file);
+        treeResource.clear();
         treeResource.load(file, treeResource.getRootItem());
         System.out.println(file);
     }
@@ -89,6 +95,14 @@ public class MainViewController extends Control {
         Project.save();
         treeResource.clear();
         treeResource.load(Project.getProject().getDirectory(), treeResource.getRootItem());
+    }
+
+    @FXML
+    protected void buildProject()
+    {
+        Build build = new Build(Project.getProject(), progressBar);
+        build.start();
+        System.out.println("Build Project");
     }
 
     @FXML

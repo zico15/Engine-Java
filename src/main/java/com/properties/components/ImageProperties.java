@@ -34,7 +34,6 @@ public class ImageProperties extends ComponentProperties {
     public ImageProperties(Sprite sprite, PropertiesBase properties) {
         super(properties);
         this.sprite = sprite;
-        System.out.println("sw: " + sprite.getWidth() + " sh: "+ sprite.getHeight());
         if (sprite != null && sprite.getFile() != null)
             load(sprite.getFile());
     }

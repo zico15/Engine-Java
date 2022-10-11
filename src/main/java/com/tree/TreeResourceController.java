@@ -1,5 +1,6 @@
 package com.tree;
 
+import com.project.Project;
 import com.system.FileSistem;
 import javafx.scene.control.*;
 
@@ -50,7 +51,7 @@ public class TreeResourceController extends TreeView<String> {
         {
             TreeItem i = addItem(item, f);
             if (f.isDirectory())
-                load(f, i);
+                  load(f, i);
         }
     }
 
