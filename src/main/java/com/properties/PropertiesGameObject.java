@@ -6,7 +6,7 @@ import com.properties.components.ScriptProperties;
 import com.tree.TreeItemObject;
 import engine2d.components.Script;
 import engine2d.components.Sprite;
-import engine2d.objects.GameNode;
+import engine2d.objects.GameObject;
 import javafx.scene.Node;
 
 import static com.properties.PropertiesItem.*;
@@ -27,7 +27,7 @@ public class PropertiesGameObject extends PropertiesBase {
         getChildren().add(new MenuComponents(this));
     }
 
-    private void loadComponents(GameNode gameObject){
+    private void loadComponents(GameObject gameObject){
         gameObject.getComponents().forEach(c-> {
             if (c instanceof Sprite)
                 getChildren().add(new ImageProperties((Sprite) c, this));

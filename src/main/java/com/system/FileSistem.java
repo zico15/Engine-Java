@@ -20,6 +20,14 @@ public class FileSistem {
         return (fileChooser.showDialog(Main.stage));
     }
 
+    public static File openFile(FileChooser.ExtensionFilter filter)
+    {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().setAll(filter);
+        fileChooser.setTitle("Open File");
+        return (fileChooser.showOpenDialog(Main.stage));
+    }
+
     public static File openFile()
     {
         FileChooser fileChooser = new FileChooser();

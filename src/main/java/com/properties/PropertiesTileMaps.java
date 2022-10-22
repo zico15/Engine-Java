@@ -63,6 +63,7 @@ public class PropertiesTileMaps extends PropertiesBase {
             if (file == null || file.isDirectory())
                 return;
             tileMaps.setSprite(file);
+            System.out.println(tileMaps.getSprite());
             Sprite sprite = tileMaps.getSprite();
             if (sprite == null)
                 return;

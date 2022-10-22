@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.MainViewController">
+<AnchorPane minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.MainViewController">
     <children>
-        <MenuBar focusTraversable="false" layoutY="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <MenuBar fx:id="menuBarFile" focusTraversable="false" layoutY="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                  <MenuItem mnemonicParsing="false" onAction="#newProject" text="New Project" />
+                  <Menu mnemonicParsing="false" text="New Project">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#newProject" text="New Project Tester" />
+                    </items>
+                  </Menu>
                   <MenuItem mnemonicParsing="false" onAction="#openProject" text="Open Project" />
                   <MenuItem mnemonicParsing="false" onAction="#saveProject" text="Save" />
                         <MenuItem mnemonicParsing="false" onAction="#laodtester" text="Close" />
                     </items>
                 </Menu>
+            <Menu mnemonicParsing="false" text="Plugins">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#installPlugins" text="Install" />
+                  <MenuItem mnemonicParsing="false" onAction="#uninstallPlugins" text="Uninstall" />
+              </items>
+            </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Delete" />

@@ -1,6 +1,6 @@
 package com.project;
 
-import engine2d.objects.GameNode;
+import engine2d.objects.GameObject;
 import engine2d.objects.GameProject;
 import engine2d.objects.Scene;
 
@@ -48,7 +48,7 @@ public class Project {
         }
     }
 
-    private int getSizeGameObject(GameNode ob){
+    private int getSizeGameObject(GameObject ob){
         if (ob == null)
             return 0;
         AtomicInteger size = new AtomicInteger(1);

@@ -1,7 +1,7 @@
 package com.properties;
 
 import com.tree.TreeItemObject;
-import engine2d.objects.GameNode;
+import engine2d.objects.GameObject;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
@@ -10,7 +10,7 @@ import static com.properties.PropertiesItem.NONE;
 public abstract class PropertiesBase extends VBox{
 
     private final TreeItemObject item;
-    private final GameNode gameObject;
+    private final GameObject gameObject;
 
     PropertiesBase(TreeItemObject itemObject){
         this.item = itemObject;
@@ -33,7 +33,7 @@ public abstract class PropertiesBase extends VBox{
         return item;
     }
 
-    public GameNode getGameObject() {
+    public GameObject getGameObject() {
         return gameObject;
     }
     public final int getSize(){

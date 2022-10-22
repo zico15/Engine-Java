@@ -4,6 +4,19 @@ package com.system;/*
  * and open the template in the editor.
  */
 
+import plugins.Plugins;
+
+import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.nio.channels.FileChannel;
+import java.util.Enumeration;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+
 /**
  * @author 35191
  */
@@ -51,7 +64,7 @@ public class SystemLib {
     
     
     }
-    
+    */
     public static String getInstanceFile(File file){
     
         if(file!= null && file.exists()){
@@ -63,7 +76,7 @@ public class SystemLib {
 		while (entries.hasMoreElements()) {
 			ZipEntry zipEntry = (ZipEntry) entries.nextElement();
 			String name = zipEntry.getName();
-                        //System.out.println(name);
+
 			if (!zipEntry.isDirectory() && name.contains("InstanceLib")){
                                 name = name.substring(0, name.lastIndexOf(".class"));
                                 name = name.replace('/', '.');
@@ -72,16 +85,18 @@ public class SystemLib {
 			}
 		}
         } catch (IOException ex) {
-            Logger.getLogger(SystemLib.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }
         return null;
     }
-    
-    public static Lib addLib(File file) {
+
+    public static Plugins installPlugins(File file) {
+
+
     // try {
        // Getting the jar URL which contains target class
-       Lib lib = null;
+        Plugins lib = null;
    
        if(file!=null && file.exists() && file.length()>0){
         URL[] classLoaderUrls = null;
@@ -89,9 +104,9 @@ public class SystemLib {
         try {
             classLoaderUrls = new URL[]{file.toURI().toURL()};
         } catch (MalformedURLException ex) {
-            Logger.getLogger(SystemLib.class.getName()).log(Level.SEVERE, null, ex);
+
         }
-         if(classLoaderUrls!=null) { 
+         if(classLoaderUrls!=null) {
          
         // Create a new URLClassLoader 
         URLClassLoader urlClassLoader = new URLClassLoader(classLoaderUrls);
@@ -101,11 +116,11 @@ public class SystemLib {
         Class<?> pluginClass = null;
         try {
             pluginClass = urlClassLoader.loadClass(getInstanceFile(file));
-            //System.out.println("Plugin: "+pluginClass != null); 
+            System.out.println("Plugin: "+pluginClass != null);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SystemLib.class.getName()).log(Level.SEVERE, null, ex);
+
         }
-        
+
         if(pluginClass!=null){
         // Create a new instance from the loaded class
         Constructor<?> constructor;
@@ -115,27 +130,28 @@ public class SystemLib {
             Object libObj = constructor.newInstance();         
             //System.out.println("pluginObj: "+pluginObj != null);
             
-           lib = (Lib) libObj;
+           lib = (Plugins) libObj;
            if(lib!=null){      
                copyFile(file, new File(new File(System.getProperty("user.dir")), "lib"));
            }
 //            Method method = pluginClass.getDeclaredMethod("instance");        
 //   
 //            lib =  (Lib) method.invoke(libObj);
-        } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            Logger.getLogger(SystemLib.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException |
+                 InvocationTargetException ex) {
+
         }
         }
     } }
          return lib;
     }
-    
+    /*
     public ArrayList<Lib> getALL(){    
         return libs;
     
     }
     
-    
+    */
     public static void copyFile(File source, File destination){
         FileChannel sourceChannel = null;
         FileChannel destinationChannel = null;
@@ -148,9 +164,9 @@ public class SystemLib {
             destinationChannel = new FileOutputStream(destination).getChannel();
             sourceChannel.transferTo(0, sourceChannel.size(),      destinationChannel);
         }   catch (FileNotFoundException ex) {
-                Logger.getLogger(SystemLib.class.getName()).log(Level.SEVERE, null, ex);
+
             } catch (IOException ex) {
-                Logger.getLogger(SystemLib.class.getName()).log(Level.SEVERE, null, ex);
+
             } finally {
 
                 try {
@@ -158,11 +174,11 @@ public class SystemLib {
                     if (destinationChannel != null && destinationChannel.isOpen()) destinationChannel.close();
 
             } catch (IOException ex) {
-                Logger.getLogger(SystemLib.class.getName()).log(Level.SEVERE, null, ex);
+
             }
 
        }
     }
-    
-    */
+
+
 }

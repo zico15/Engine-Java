@@ -3,6 +3,7 @@ module com {
     requires javafx.fxml;
     requires javafx.web;
     requires engine2d.lib;
+    requires EnginePlugins;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;

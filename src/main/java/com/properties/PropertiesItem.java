@@ -89,7 +89,7 @@ public class PropertiesItem {
 
     @NotNull
     public static final Node itemTitle(@NotNull TreeItemObject item, double height)  {
-        return itemTitle(item.ob.getType().toUpperCase(), height);
+        return itemTitle(item.ob.getClass().getName().toUpperCase(), height);
     }
 
     public static final Node itemTitle(String title, double height)  {
@@ -106,10 +106,10 @@ public class PropertiesItem {
 
     @NotNull
     public static final Node itemName(@NotNull TreeItemObject item, double height){
-        TextField name = new TextField(item.ob.name);
+        TextField name = new TextField(item.ob.getName());
         name.setOnKeyReleased(e -> {
             String n = name.getText().trim();
-            item.ob.name = n;
+            item.ob.setName(n);
             item.setValue(n);
         });
         name.setAlignment(Pos.TOP_LEFT);

@@ -39,7 +39,7 @@ public class TreeItemBase extends TreeItem {
             return (ImageBase.ICON_JAVA);
         if ("Scene".equals(type))
             return (ImageBase.ICON_SCENE);
-        if ("GameObject".equals(type) || "GameNode".equals(type))
+        if ("GameObject".equals(type) || "GameObject".equals(type))
             return (ImageBase.ICON_OBJECT);
         if ("TileMaps".equals(type))
             return (ImageBase.ICON_TILEMAP);

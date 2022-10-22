@@ -1,12 +1,13 @@
 package com.build;
 
 import com.project.Project;
-import engine2d.objects.GameNode;
-import engine2d.system.FileController;
+import engine2d.objects.GameObject;
 import javafx.scene.control.ProgressBar;
 
 import java.io.File;
 import java.io.IOException;
+
+import static com.MainViewController.treeResource;
 
 public class Build extends Thread{
 
@@ -20,11 +21,11 @@ public class Build extends Thread{
             return;
         System.out.println("size: " + project.getSizeElements());
     }
-    
-    private void create(final File file, GameNode node){
+
+    private void create(final File file, GameObject node) {
         if (file == null || !file.exists() || node == null)
             return;
-        File f = new File(file, node.name + ".java");
+        File f = new File(file, node.getName() + ".java");
         if (!f.exists()) {
             try {
                 f.createNewFile();
@@ -51,6 +52,10 @@ public class Build extends Thread{
             }
         }
         progressBar.setVisible(false);
+        treeResource.setRootFile(Project.getProject().getDirectory());
+        treeResource.clear();
+        treeResource.load(Project.getProject().getDirectory(), treeResource.getRootItem());
+        System.out.println(Project.getProject().getDirectory());
     }
 
 }

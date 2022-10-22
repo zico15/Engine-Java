@@ -2,7 +2,7 @@ package com.tree;
 
 import com.MainViewController;
 import com.system.ImageBase;
-import engine2d.objects.GameNode;
+import engine2d.objects.GameObject;
 import engine2d.objects.GameObject;
 import engine2d.objects.Scene;
 import engine2d.objects.TileMaps;
@@ -26,7 +26,7 @@ public class TreeSceneController extends TreeView<String> {
         });
     }
 
-       public void load(TreeItemObject item, GameNode ob) {
+       public void load(TreeItemObject item, GameObject ob) {
         if (ob == null)
             return;
         TreeItemObject i = new TreeItemObject(ob);
@@ -40,7 +40,7 @@ public class TreeSceneController extends TreeView<String> {
             item.getChildren().add(i);
         }
     }
-    public void addItem(TreeItemObject item, GameNode ob) {
+    public void addItem(TreeItemObject item, GameObject ob) {
         if (ob == null)
             return;
         TreeItemObject i = new TreeItemObject(ob);
@@ -62,7 +62,7 @@ public class TreeSceneController extends TreeView<String> {
                 entered = result.get();
 
             if (entered != null)
-                addItem(item, new GameNode(entered));
+                addItem(item, new GameObject(entered));
             System.out.println(entered);
         });
         MenuItem addTileMap = new MenuItem("create tileMap");
