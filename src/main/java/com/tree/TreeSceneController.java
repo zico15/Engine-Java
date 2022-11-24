@@ -26,7 +26,7 @@ public class TreeSceneController extends TreeView<String> {
         });
     }
 
-       public void load(TreeItemObject item, GameObject ob) {
+    public void load(TreeItemObject item, GameObject ob) {
         if (ob == null)
             return;
         TreeItemObject i = new TreeItemObject(ob);
@@ -49,7 +49,7 @@ public class TreeSceneController extends TreeView<String> {
         item.getChildren().add(i);
     }
 
-    private ContextMenu creadMenu() {
+    public ContextMenu creadMenu() {
         MenuItem addobject = new MenuItem("create object");
         addobject.setOnAction(e -> {
             TreeItemObject item = (TreeItemObject) getSelectionModel().getSelectedItem();

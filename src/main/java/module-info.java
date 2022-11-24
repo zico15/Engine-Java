@@ -16,6 +16,10 @@ module com {
     opens com to javafx.fxml;
     exports com;
     exports com.tree;
+    exports com.system;
+    exports com.build;
+    exports com.project;
+    exports com.properties.components;
     opens com.tree to javafx.fxml;
     exports com.properties;
     opens com.properties to javafx.fxml;

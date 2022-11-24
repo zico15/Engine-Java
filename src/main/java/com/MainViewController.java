@@ -1,8 +1,6 @@
 package com;
 
-import com.build.Build;
 import com.canva.CanvasView;
-import com.project.Project;
 import com.system.FileSistem;
 import com.system.SystemLib;
 import com.tree.TreeBase;
@@ -10,8 +8,6 @@ import com.tree.TreeResourceController;
 import com.tree.TreeSceneController;
 import engine2d.components.ComponentBase;
 import engine2d.components.Sprite;
-import engine2d.objects.Scene;
-import engine2d.project.Prefab;
 import engine2d.system.FileController;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.GraphicsContext;
@@ -22,96 +18,80 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import plugins.Plugins;
-
-import javax.sound.sampled.Port;
 import java.io.File;
 
 public class MainViewController extends Control {
 
 
     public static CanvasView canvas = new CanvasView();
-    public static MainViewController mainViewController;
+    private static MainViewController MAIN_VIEW;
     @FXML
-    private ProgressBar progressBar;
+    private   ProgressBar progressBar;
     @FXML
     private AnchorPane panelProject;
     @FXML
-    public MenuBar menuBarFile;
+    private MenuBar menuBarFile;
     @FXML
     private TabPane tabProperties;
 
     @FXML
     private TabPane tabPaneMain;
-    private GraphicsContext gc;
-    public static TreeSceneController treeScene;
+
+    private String name;
+    public GraphicsContext gc;
+    private static TreeSceneController treeScene;
     public static TreeResourceController treeResource;
 
-    public static AnchorPane  listProperties;
+    private static AnchorPane  listProperties;
 
-    public static TabPane tab;
+    private static TabPane tab;
+
+    public static TreeSceneController getTreeScene() {
+        return treeScene;
+    }
+
+    public static void setTreeScene(TreeSceneController treeScene) {
+        MainViewController.treeScene = treeScene;
+    }
+
+    public static TreeResourceController getTreeResource() {
+        return treeResource;
+    }
+
+    public static void setTreeResource(TreeResourceController treeResource) {
+        MainViewController.treeResource = treeResource;
+    }
+
+    public static AnchorPane getListProperties() {
+        return listProperties;
+    }
+
+    public static void setListProperties(AnchorPane listProperties) {
+        MainViewController.listProperties = listProperties;
+    }
+
+    public static TabPane getTab() {
+        return tab;
+    }
+
+    public static void setTab(TabPane tab) {
+        MainViewController.tab = tab;
+    }
+
     @FXML
     private void initialize() {
-        mainViewController = this;
-        treeScene = new TreeSceneController();
-        treeResource = new TreeResourceController();
-        listProperties = new AnchorPane();
-        tabProperties.getTabs().add(TreeBase.newTab("Scene", treeScene));
-        tabProperties.getTabs().add(TreeBase.newTab("Resource", treeResource));
-        tabProperties.getTabs().add(TreeBase.newTab("Properties", listProperties));
-        tabPaneMain.getTabs().add(TreeBase.newTab("Scene", canvas));
-        tab = tabPaneMain;
+        MAIN_VIEW = this;
+        setTreeScene(new TreeSceneController());
+        setTreeResource(new TreeResourceController());
+        setListProperties(new AnchorPane());
+        getTabProperties().getTabs().add(TreeBase.newTab("Scene", getTreeScene()));
+        getTabProperties().getTabs().add(TreeBase.newTab("Resource", getTreeResource()));
+        getTabProperties().getTabs().add(TreeBase.newTab("Properties", getListProperties()));
+        getTabPaneMain().getTabs().add(TreeBase.newTab("Scene", canvas));
+        setTab(getTabPaneMain());
     }
 
-    @FXML
-    protected void newProject()
-    {
-        File file = FileSistem.saveFile();
-        if (file == null)
-            return;
-        file.mkdir();
-        tab = tabPaneMain;
-        treeResource.clear();
-        treeResource.setRootFile(file);
-        Project.setProject(new Project(file));
-        Scene scene = new Scene();
-        Prefab sceneMain = new Prefab("Scene", scene);
-        Project.getProject().gameProject.setScene(scene);
-        Project.getProject().gameProject.setSceneMain(sceneMain);
-        Project.getProject().gameProject.addPrefab(sceneMain);
-        saveProject();
-        treeScene.load(null, scene);
-        System.out.println("newProject: " + file);
-    }
-    @FXML
-    protected void openProject()
-    {
-        File file = FileSistem.openFolder();
-        if (file == null || !file.isDirectory())
-            return;
-        Project.setProject(new Project(file));
-        Project.load();
-        treeScene.load(null, Project.getScene());
-        treeResource.setRootFile(file);
-        treeResource.clear();
-        treeResource.load(file, treeResource.getRootItem());
-        System.out.println(file);
-    }
 
-    @FXML
-    protected void saveProject()
-    {
-        Project.save();
-        treeResource.clear();
-        treeResource.load(Project.getProject().getDirectory(), treeResource.getRootItem());
-    }
-
-    @FXML
-    protected void buildProject()
-    {
-        Build build = new Build(Project.getProject(), progressBar);
-        build.start();
-        System.out.println("Build Project");
-    }
 
     @FXML
     protected void installPlugins(){
@@ -157,5 +137,25 @@ public class MainViewController extends Control {
             canvas.loop.start();
         canvas.isRun = !canvas.isRun;
         canvas.render();
+    }
+
+    public static ProgressBar getProgressBar() {
+        return MAIN_VIEW.progressBar;
+    }
+
+    public static AnchorPane getPanelProject() {
+        return MAIN_VIEW.panelProject;
+    }
+
+    public static MenuBar getMenuBarFile() {
+        return MAIN_VIEW.menuBarFile;
+    }
+
+    public static TabPane getTabProperties() {
+        return MAIN_VIEW.tabProperties;
+    }
+
+    public static TabPane getTabPaneMain() {
+        return MAIN_VIEW.tabPaneMain;
     }
 }

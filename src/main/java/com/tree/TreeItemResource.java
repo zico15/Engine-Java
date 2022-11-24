@@ -24,22 +24,22 @@ public class TreeItemResource extends TreeItemBase   {
             previewCode();
         else
             return;
-        if (MainViewController.tab.getSelectionModel() != null)
-            MainViewController.tab.getSelectionModel().select(tab);
+        if (MainViewController.getTab().getSelectionModel() != null)
+            MainViewController.getTab().getSelectionModel().select(tab);
     }
 
     private void previewCode()
     {
         if (tab != null)
         {
-            if(!MainViewController.tab.getTabs().contains(tab))
-                MainViewController.tab.getTabs().add(tab);
+            if(!MainViewController.getTab().getTabs().contains(tab))
+                MainViewController.getTab().getTabs().add(tab);
             return ;
         }
         textArea = new TextArea();
         textArea.setText(FileSistem.readFile(file));
         tab = TreeBase.newTab(file.getName(), textArea);
-        MainViewController.tab.getTabs().add(tab);
+        MainViewController.getTab().getTabs().add(tab);
     }
 
     @Override

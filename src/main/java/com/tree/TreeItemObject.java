@@ -6,7 +6,6 @@ import com.properties.PropertiesScene;
 import com.properties.PropertiesTileMaps;
 import com.system.ImageBase;
 import engine2d.objects.GameObject;
-import engine2d.objects.GameObject;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 
@@ -26,9 +25,9 @@ public class TreeItemObject extends TreeItemBase {
 
     @Override
     public void preview() {
-        MainViewController.listProperties.getChildren().clear();
+        MainViewController.getListProperties().getChildren().clear();
         if (properties != null){
-            MainViewController.listProperties.getChildren().add(properties);
+            MainViewController.getListProperties().getChildren().add(properties);
             MainViewController.canvas.setOnMouseMoved(e -> onMouseMove(e));
             MainViewController.canvas.setOnMouseClicked(e -> onMouseClick(e));
             return;
@@ -40,7 +39,7 @@ public class TreeItemObject extends TreeItemBase {
             properties = new PropertiesTileMaps(this);
         else
             properties = new PropertiesGameObject(this);
-        MainViewController.listProperties.getChildren().add(properties);
+        MainViewController.getListProperties().getChildren().add(properties);
         MainViewController.canvas.setOnMouseMoved(e -> onMouseMove(e));
         MainViewController.canvas.setOnMouseClicked(e -> onMouseClick(e));
     }

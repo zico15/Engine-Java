@@ -10,14 +10,10 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                  <Menu mnemonicParsing="false" text="New Project">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#newProject" text="New Project Tester" />
-                    </items>
-                  </Menu>
-                  <MenuItem mnemonicParsing="false" onAction="#openProject" text="Open Project" />
-                  <MenuItem mnemonicParsing="false" onAction="#saveProject" text="Save" />
-                        <MenuItem mnemonicParsing="false" onAction="#laodtester" text="Close" />
+                  <Menu mnemonicParsing="false" text="New Project" />
+                  <MenuItem mnemonicParsing="false" text="Open Project" />
+                  <MenuItem mnemonicParsing="false" text="Save" />
+                        <MenuItem mnemonicParsing="false" text="Close" />
                     </items>
                 </Menu>
             <Menu mnemonicParsing="false" text="Plugins">
@@ -38,7 +34,7 @@
                 </Menu>
             <Menu mnemonicParsing="false" text="Build">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#buildProject" text="Build Project" />
+                  <MenuItem mnemonicParsing="false" text="Build Project" />
                </items></Menu>
             </menus>
         </MenuBar>
