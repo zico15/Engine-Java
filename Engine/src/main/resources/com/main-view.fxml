@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.view.MainViewController">
+    <children>
+        <MenuBar fx:id="menuBarTop" focusTraversable="false" layoutY="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <Menu mnemonicParsing="false" text="New Project" />
+                        <MenuItem mnemonicParsing="false" text="Open Project" />
+                        <MenuItem mnemonicParsing="false" text="Save" />
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Plugins">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#installPlugins" text="Install" />
+                        <MenuItem mnemonicParsing="false" onAction="#uninstallPlugins" text="Uninstall" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+            <Menu fx:id="menuTopWindow" mnemonicParsing="false" text="Window">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Build">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Build Project" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+            <children>
+                <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                        <AnchorPane minHeight="0.0" minWidth="30.0" prefHeight="568.0" prefWidth="139.0" SplitPane.resizableWithParent="false">
+                            <children>
+                                <TabPane fx:id="tabProperties" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" side="LEFT" tabMinWidth="80.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                            <children>
+                                <TabPane fx:id="tabPaneMain" focusTraversable="false" layoutX="37.0" layoutY="28.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            </children>
+                        </AnchorPane>
+                    </items>
+                </SplitPane>
+            </children>
+        </AnchorPane>
+        <BorderPane layoutX="-6.0" layoutY="-50.0" maxHeight="21.0" minHeight="21.0" prefHeight="21.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
+            <center>
+                <ToggleButton mnemonicParsing="false" onAction="#onHelloButtonClick" styleClass="button-run" BorderPane.alignment="CENTER" />
+            </center>
+        </BorderPane>
+        <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0" visible="false" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+            <opaqueInsets>
+                <Insets right="5.0" top="5.0" />
+            </opaqueInsets>
+        </ProgressBar>
+    </children>
+</AnchorPane>

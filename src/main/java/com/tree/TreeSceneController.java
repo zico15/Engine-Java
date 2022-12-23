@@ -1,21 +1,17 @@
 package com.tree;
 
-import com.MainViewController;
+
 import com.system.ImageBase;
 import engine2d.objects.GameObject;
-import engine2d.objects.GameObject;
-import engine2d.objects.Scene;
 import engine2d.objects.TileMaps;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextInputDialog;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 
 import java.util.Optional;
 
 public class TreeSceneController extends TreeView<String> {
     private TreeItemObject rootItem;
+    private Tab             tabView;
     private static final Image imgScene = ImageBase.getIcons(ImageBase.ICON_SCENE);
 
     public TreeSceneController() {
@@ -92,5 +88,13 @@ public class TreeSceneController extends TreeView<String> {
             System.out.println("delete");
         });
         return new ContextMenu(addobject, addTileMap, delete);
+    }
+
+    public Tab getTabView() {
+        return tabView;
+    }
+
+    public void setTabView(Tab tabView) {
+        this.tabView = tabView;
     }
 }

@@ -11,10 +11,7 @@ import engine2d.components.Sprite;
 import engine2d.system.FileController;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Control;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import plugins.Plugins;
@@ -51,6 +48,14 @@ public class MainViewController extends Control {
     }
 
     public static void setTreeScene(TreeSceneController treeScene) {
+        int index = -1;
+        treeScene.setTabView(TreeBase.newTab("Scene", treeScene));
+        if (MainViewController.treeScene != null)
+             index = getTabProperties().getTabs().indexOf(MainViewController.treeScene.getTabView());
+        if (index >= 0)
+            getTabProperties().getTabs().set(index, treeScene.getTabView());
+        else
+            getTabProperties().getTabs().add(treeScene.getTabView());
         MainViewController.treeScene = treeScene;
     }
 
@@ -59,6 +64,14 @@ public class MainViewController extends Control {
     }
 
     public static void setTreeResource(TreeResourceController treeResource) {
+        int index = -1;
+        treeResource.setTabView(TreeBase.newTab("Resource", treeResource));
+        if (MainViewController.treeResource != null)
+            index = getTabProperties().getTabs().indexOf(MainViewController.treeResource.getTabView());
+        if (index >= 0)
+            getTabProperties().getTabs().set(index, treeResource.getTabView());
+        else
+            getTabProperties().getTabs().add(treeResource.getTabView());
         MainViewController.treeResource = treeResource;
     }
 
@@ -84,8 +97,6 @@ public class MainViewController extends Control {
         setTreeScene(new TreeSceneController());
         setTreeResource(new TreeResourceController());
         setListProperties(new AnchorPane());
-        getTabProperties().getTabs().add(TreeBase.newTab("Scene", getTreeScene()));
-        getTabProperties().getTabs().add(TreeBase.newTab("Resource", getTreeResource()));
         getTabProperties().getTabs().add(TreeBase.newTab("Properties", getListProperties()));
         getTabPaneMain().getTabs().add(TreeBase.newTab("Scene", canvas));
         setTab(getTabPaneMain());
@@ -95,16 +106,12 @@ public class MainViewController extends Control {
 
     @FXML
     protected void installPlugins(){
-
         File file = FileSistem.openFile(new FileChooser.ExtensionFilter("JAVA files (*.jar)", "*.jar"));
         if (file == null)
             return;
-
         Plugins plugins = SystemLib.installPlugins(file);
                 plugins.install();
                 System.out.println("Plugin: " + plugins != null);
-
-
     }
 
     @FXML

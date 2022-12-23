@@ -11,7 +11,7 @@ import java.util.Optional;
 public class TreeResourceController extends TreeView<String> {
 
     private TreeItemResource rootItem = null;
-
+    private Tab tabView;
     public TreeResourceController() {
         setFocused(false);
         getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> ((TreeItemResource) newValue).preview());
@@ -104,5 +104,13 @@ public class TreeResourceController extends TreeView<String> {
 
     public TreeItemResource getRootItem() {
         return rootItem;
+    }
+
+    public Tab getTabView() {
+        return tabView;
+    }
+
+    public void setTabView(Tab tabView) {
+        this.tabView = tabView;
     }
 }
