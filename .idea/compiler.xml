@@ -6,7 +6,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="demo" />
         <module name="Engine" />
         <module name="Game" />
       </profile>
@@ -20,7 +19,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Game" options="--add-exports com/javafx.application=com.example.game --add-exports com/javafx.fxml=com.example.game --add-exports com/javafx.stage=com.example.game --add-exports com/javafx.scene=com.example.game --add-exports com/plugins=com.example.game" />
+      <module name="Game" options="" />
     </option>
   </component>
 </project>
