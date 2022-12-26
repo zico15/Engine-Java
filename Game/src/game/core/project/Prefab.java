@@ -1,7 +1,6 @@
 package game.core.project;
 
 
-
 import game.core.objects.GameObject;
 import game.core.system.FileController;
 

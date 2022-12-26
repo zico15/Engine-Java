@@ -1,40 +1,66 @@
 package game.lib;
 
+import com.system.FileSistem;
 import com.view.ComponentView;
-import game.components.view.GameObjectProperties;
-import game.components.view.ScenePanel;
-import game.components.view.SceneTreeView;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.ToggleButton;
+import game.components.tree.base.BaseResourceComponentTree;
+import game.components.view.objects.GameObjectProperties;
+import game.components.view.objects.ScenePanel;
+import game.components.view.objects.SceneTreeView;
+import game.components.view.resources.ResourceTreeView;
+import game.core.project.GameProject;
+import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import plugins.Plugins;
+
+import java.io.File;
 
 public class InstanceLib extends Plugins {
 
     private ScenePanel scene;
+
+    private  ResourceTreeView resourceTreeView;
+
+    private SceneTreeView sceneTreeView;
+
+    private GameObjectProperties gameObjectProperties;
+
     @Override
     public void install() {
         TabPane pane = ComponentView.getComponent("tabPaneMain");
         scene = new ScenePanel();
         pane.getTabs().add(scene.getTab());
         ComponentView.addComponent(scene);
-        MenuBar menu = ComponentView.getComponent("menuBarTop");
-        menu.getMenus().forEach(e -> {
-            if ("Window".equalsIgnoreCase(e.getText()))
-                e.getItems().add(scene.getMenuWindow());
-        });
         TabPane properties = ComponentView.getComponent("tabProperties");
-        SceneTreeView sceneTreeView = new SceneTreeView(scene);
+        sceneTreeView = new SceneTreeView(scene);
         ComponentView.addComponent(sceneTreeView);
         properties.getTabs().add(sceneTreeView.getTabView());
-        properties.getTabs().add(new GameObjectProperties(properties).getTab());
-
+        resourceTreeView = new ResourceTreeView();
+        properties.getTabs().add(resourceTreeView.getTabView());
+        gameObjectProperties = new GameObjectProperties(properties);
+        properties.getTabs().add(gameObjectProperties.getTabView());
         ToggleButton toggleButton = ComponentView.getComponent("enginePlayer");
-        toggleButton.setOnAction(e-> {
+        toggleButton.setOnAction(e -> {
             System.out.println("toggleButton");
             scene.drawing();
         });
-        System.out.println("install02");
+        initMenuTop(ComponentView.getComponent("menuBarTop"));
+    }
+
+    private void initMenuTop(MenuBar menu)
+    {
+        menu.getMenus().forEach(e -> {
+            if ("Window".equalsIgnoreCase(e.getText()))
+                e.getItems().add(scene.getMenuWindow());
+            else if ("File".equalsIgnoreCase(e.getText())) {
+                for (MenuItem m : e.getItems()){
+                    if ("New Project".equalsIgnoreCase(m.getText())) {
+                        System.out.println("File: "+ m.getText());
+                        GameProject.creatingMenu(((Menu) m), resourceTreeView);
+                        break;
+                    }
+                }
+            }
+        });
     }
 
     @Override

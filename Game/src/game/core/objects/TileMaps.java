@@ -1,10 +1,8 @@
 package game.core.objects;
 
 
-
 import game.core.base.ImageBuffer;
 import game.core.components.Sprite;
-import game.core.render.Graphics2D;
 import game.core.transforme.Vector2D;
 import javafx.scene.canvas.GraphicsContext;
 

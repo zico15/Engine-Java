@@ -11,8 +11,8 @@ public abstract class ObjectBase {
 
     private final List<GameObject> children = new ArrayList<>();
     private final List<ComponentBase> components = new ArrayList<>();
-    private Vector2D vector = new Vector2D();
     public BaseEvents baseEvents;
+    private Vector2D vector = new Vector2D();
     private String name;
     private GameObject parent;
 

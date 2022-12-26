@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08f1f1df-a125-4ac7-81c6-b8aee8dabee5" name="Changes" comment="" />
+    <list default="true" id="1db84f3b-bd20-412e-aa4a-be37ed9774d7" name="Changes" comment="Game Tester" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -86,6 +86,14 @@
       <workItem from="1671894112830" duration="160000" />
       <workItem from="1671894352636" duration="23000" />
     </task>
+    <task id="LOCAL-00001" summary="Game Tester">
+      <created>1672014520630</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1672014520630</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,6 +109,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Game Tester" />
+    <option name="LAST_COMMIT_MESSAGE" value="Game Tester" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

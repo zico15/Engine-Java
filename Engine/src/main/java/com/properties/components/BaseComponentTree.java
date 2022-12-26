@@ -1,6 +1,6 @@
 package com.properties.components;
 
-import com.tree.TreeSceneController;
+import com.tree.TreeViewController;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TreeItem;
 import javafx.scene.image.Image;
@@ -11,21 +11,26 @@ import java.util.ArrayList;
 public abstract class BaseComponentTree extends  TreeItem<String> {
 
 
-    private final TreeSceneController controller;
+    private final TreeViewController controller;
 
     private ContextMenu contextMenu;
     private final ArrayList<BaseComponentTree> baseComponentTrees = new ArrayList<>();
+    private final ImageView icon;
 
-    public BaseComponentTree(TreeSceneController controller, Image icon){
-        ImageView imageView = new ImageView(icon);
-        imageView.setFitWidth(15);
-        imageView.setFitHeight(15);
-        imageView.setFocusTraversable(false);
+    public BaseComponentTree(TreeViewController controller, Image icon){
+        this.icon = new ImageView(icon);
+        this.icon.setFitWidth(15);
+        this.icon.setFitHeight(15);
+        this.icon.setFocusTraversable(false);
         this.setValue(getClass().getSimpleName());
-        this.setGraphic(imageView);
+        this.setGraphic(this.icon);
         this.controller = controller;
     }
 
+    public final void setIcon(Image img)
+    {
+        this.icon.setImage(img);
+    }
     public final void  addTree(BaseComponentTree tree){
         baseComponentTrees.add(tree);
         setExpanded(true);
@@ -33,7 +38,7 @@ public abstract class BaseComponentTree extends  TreeItem<String> {
     }
     public abstract void preview();
 
-    public TreeSceneController getController() {
+    public TreeViewController getController() {
         return controller;
     }
 

@@ -1,14 +1,8 @@
 package com.view;
 
-import com.canva.CanvasView;
 import com.system.FileSistem;
 import com.system.SystemLib;
-import com.tree.TreeResourceController;
-import com.tree.TreeSceneController;
 import javafx.fxml.FXML;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.TabPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import plugins.Plugins;
 

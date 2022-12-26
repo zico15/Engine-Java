@@ -29,7 +29,7 @@ public class Sprite extends ComponentBase {
     }
 
     public Sprite(File file, int width, int height) {
-       this(file);
+        this(file);
         this.width = width;
         this.height = height;
     }
@@ -48,7 +48,7 @@ public class Sprite extends ComponentBase {
         System.out.println("load Sprite: " + file.getPath());
         try {
             image = new Image(new FileInputStream(file));
-           return !image.isError();
+            return !image.isError();
         } catch (FileNotFoundException e) {
             image = null;
             this.file = null;

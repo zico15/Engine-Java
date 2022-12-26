@@ -2,7 +2,7 @@ package game.components.properties;
 
 import com.properties.components.Layouts;
 import com.system.FileSistem;
-import game.components.view.GameObjectProperties;
+import game.components.view.objects.GameObjectProperties;
 import game.core.components.Sprite;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -12,7 +12,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
 import java.io.File;
@@ -21,8 +20,8 @@ public class ImageProperties extends VBox {
 
     private final GameObjectProperties properties;
 
-    private  Sprite sprite = new Sprite();
-    private TextField textFieldFile;
+    private Sprite sprite = new Sprite();
+    private final TextField textFieldFile;
 
     public ImageProperties(GameObjectProperties properties) {
         this.properties = properties;
@@ -32,17 +31,17 @@ public class ImageProperties extends VBox {
         Pane pane = new Pane(lt);
         pane.setStyle("-fx-background-color: #0093ff;");
         textFieldFile = new TextField();
-        textFieldFile.addEventHandler(MouseEvent.MOUSE_PRESSED, evt ->  {
+        textFieldFile.addEventHandler(MouseEvent.MOUSE_PRESSED, evt -> {
             File file = FileSistem.openFile();
-            System.out.println("Teste: " + file);
-            if (sprite.load(file))
+            if (file != null && file.exists() && file.isFile() && sprite.load(file))
                 textFieldFile.setText(file.getName());
             else
-                textFieldFile.setText(null);
+                textFieldFile.setText(sprite.getFile() != null ? sprite.getFile().getName() : "");
         });
         addItem(pane);
         addItem(textFieldFile);
     }
+
     public ImageProperties(GameObjectProperties properties, Sprite sprite) {
         this(properties);
         this.sprite = sprite;
@@ -52,20 +51,20 @@ public class ImageProperties extends VBox {
             textFieldFile.setText(null);
     }
 
-    private void addItem(Region node){
-        Layouts.alignment(node, Layouts.LEFT_RIGHT);
-        getChildren().add(node);
-        setMargin(node, new Insets(0, 0, 8, 0));
-    }
-
-    public static MenuItem creatingProperties(GameObjectProperties properties){
+    public static MenuItem creatingProperties(GameObjectProperties properties) {
         MenuItem item = new MenuItem("Image");
-        item.setOnAction( e-> {
+        item.setOnAction(e -> {
             ImageProperties imageProperties = new ImageProperties(properties);
             properties.addItemBack(imageProperties);
             properties.getGameObject().addComponent(imageProperties.getSprite());
         });
         return item;
+    }
+
+    private void addItem(Region node) {
+        Layouts.alignment(node, Layouts.LEFT_RIGHT);
+        getChildren().add(node);
+        setMargin(node, new Insets(0, 0, 8, 0));
     }
 
     public Sprite getSprite() {

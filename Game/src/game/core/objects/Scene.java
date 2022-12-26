@@ -43,7 +43,6 @@ public class Scene extends GameObject implements IStart, IRender, IUpdate {
     }
 
 
-
     @Override
     public String toString() {
         return "Scene{" + baseEvents + "}";

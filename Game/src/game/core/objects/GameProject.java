@@ -1,20 +1,17 @@
 package game.core.objects;
 
 
-
 import game.core.base.BaseStructure;
 import game.core.project.Prefab;
-import game.core.render.Graphics2D;
 import game.core.system.FileController;
 import javafx.scene.canvas.GraphicsContext;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public final class GameProject implements BaseStructure {
 
-    private List<Prefab> prefabs = new ArrayList<>();
+    private final List<Prefab> prefabs = new ArrayList<>();
     private Prefab sceneMain;
     private Scene scene;
 

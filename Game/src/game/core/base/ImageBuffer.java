@@ -1,8 +1,6 @@
 package game.core.base;
 
 import javax.imageio.ImageIO;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -45,7 +43,7 @@ public class ImageBuffer implements Serializable {
     }
 
     public void setArgb(int x, int y, int a, int r, int g, int b) {
-        image.setRGB(x, y,  (a << 24 | r << 16 | g << 8 | b));
+        image.setRGB(x, y, (a << 24 | r << 16 | g << 8 | b));
     }
 
     public int getWidth() {

@@ -2,7 +2,6 @@ package game.core.base;
 
 
 import game.core.objects.GameObject;
-import game.core.render.Graphics2D;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;

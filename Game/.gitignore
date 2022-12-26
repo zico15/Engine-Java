@@ -16,7 +16,7 @@ target/
 .apt_generated
 .classpath
 .factorypath
-.project
+.gameProject
 .settings
 .springBeans
 .sts4-cache

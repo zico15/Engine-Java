@@ -1,17 +1,10 @@
 package com.view;
 
-import com.tree.TreeBase;
-import com.tree.TreeResourceController;
-import com.tree.TreeSceneController;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicReference;
 
 
 public abstract class ComponentView extends Control {

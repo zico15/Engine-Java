@@ -5,11 +5,11 @@ import game.core.base.ImageBuffer;
 
 import java.awt.*;
 
-public class Graphics2D  {
+public class Graphics2D {
 
     private final int width;
     private final int height;
-    private transient ImageBuffer buffer;
+    private final transient ImageBuffer buffer;
 
     public Graphics2D() {
         var dimension = Toolkit.getDefaultToolkit().getScreenSize();
