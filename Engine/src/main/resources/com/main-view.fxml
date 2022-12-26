@@ -64,7 +64,7 @@
         </AnchorPane>
         <BorderPane layoutX="-6.0" layoutY="-50.0" maxHeight="21.0" minHeight="21.0" prefHeight="21.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
             <center>
-                <ToggleButton mnemonicParsing="false" onAction="#onHelloButtonClick" styleClass="button-run" BorderPane.alignment="CENTER" />
+                <ToggleButton fx:id="enginePlayer" mnemonicParsing="false" onAction="#onHelloButtonClick" styleClass="button-run" BorderPane.alignment="CENTER" />
             </center>
         </BorderPane>
         <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0" visible="false" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">

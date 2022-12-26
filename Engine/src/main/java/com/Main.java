@@ -20,6 +20,7 @@ public class Main extends Application {
         this.stage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        scene.setOnKeyPressed(e -> System.out.println(e.getCode().getChar()));
         stage.setTitle("Game!");
         stage.setScene(scene);
         stage.show();

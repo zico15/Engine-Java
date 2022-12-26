@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public abstract class ComponentView extends Control {
 
-    private static HashMap<String, Parent> nodes = new HashMap<>();
+    private static HashMap<String, Node> nodes = new HashMap<>();
     @FXML
     private ProgressBar progressBar;
     @FXML
@@ -27,17 +27,21 @@ public abstract class ComponentView extends Control {
     private TabPane tabPaneMain;
 
     @FXML
+    private ToggleButton enginePlayer;
+
+    @FXML
     private void initialize() {
         addComponent(progressBar);
         addComponent(menuBarTop);
         addComponent(tabProperties);
         addComponent(tabPaneMain);
+        addComponent(enginePlayer);
         initializeView();
     }
 
     abstract void initializeView();
 
-    public static boolean addComponent(Parent node){
+    public static boolean addComponent(Node node){
         try{
             if (nodes == null || nodes.containsKey(node.getId()))
                 return false;
@@ -49,7 +53,7 @@ public abstract class ComponentView extends Control {
         }
         return true;
     }
-    public static boolean setComponent(Parent node){
+    public static boolean setComponent(Node node){
         try{
                 if (node == null)
                      return false;
@@ -61,7 +65,7 @@ public abstract class ComponentView extends Control {
         }
         return true;
     }
-    public static boolean removeComponent(Parent node){
+    public static boolean removeComponent(Node node){
         try{
         if (node == null)
             return false;
@@ -76,4 +80,5 @@ public abstract class ComponentView extends Control {
     public static <T> T getComponent(String id) {
          return (T) nodes.get(id);
      }
+
 }

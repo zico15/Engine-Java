@@ -24,8 +24,12 @@ public class MainViewController extends ComponentView {
             return;
         System.out.println(file);
         Plugins p = SystemLib.installPlugins(file);
-        if (p != null)
-                p.install();
+        try {
+            p.install();
+        } catch (NullPointerException e)
+        {
+            System.err.println("installPlugins: " + e.getMessage());
+        }
     }
 
     @FXML

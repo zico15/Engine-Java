@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="EnginePlugins">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../EnginePlugins/out/artifacts/EnginePlugins_jar/EnginePlugins.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

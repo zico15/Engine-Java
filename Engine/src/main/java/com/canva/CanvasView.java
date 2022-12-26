@@ -4,7 +4,6 @@ package com.canva;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 
-
 public class CanvasView extends Canvas {
 
 
