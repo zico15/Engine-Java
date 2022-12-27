@@ -1,6 +1,5 @@
 package com.tree;
 
-
 import com.properties.components.BaseComponentTree;
 import javafx.scene.control.*;
 
