@@ -6,11 +6,9 @@ import game.components.tree.base.fileType;
 import game.components.view.objects.GameObjectProperties;
 import game.components.view.objects.ScenePanel;
 import game.core.objects.Scene;
-import game.lib.Icons;
+import game.core.system.Icons;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.Image;
-import java.io.IOException;
 
 public class SceneComponentTree extends BaseGameComponentTree {
 

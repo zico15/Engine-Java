@@ -13,10 +13,10 @@ public class Scene extends GameObject implements IStart, IRender, IUpdate {
 
     public final ArrayList<GameObject> objectsTemp = new ArrayList<>();
 
+    private static int id = 1;
 
     public Scene() {
-        super("scene_01");
-        System.out.println("Scene");
+        super("scene_" + id++);
         baseEvents = new BaseEvents();
     }
 

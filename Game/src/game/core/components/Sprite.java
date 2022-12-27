@@ -15,7 +15,7 @@ public class Sprite extends ComponentBase {
     private File file;
     private transient ImageBuffer buffer;
 
-    private Image image;
+    private transient Image image;
     private int width;
     private int height;
 

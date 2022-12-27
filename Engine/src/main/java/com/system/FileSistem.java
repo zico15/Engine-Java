@@ -38,6 +38,35 @@ public class FileSistem {
         return (fileChooser.showOpenDialog(Main.stage));
     }
 
+    public static final void saveObject(File file, Object ob) {
+        try {
+            if (!file.exists())
+                file.createNewFile();
+            ObjectOutputStream objOutput = new ObjectOutputStream(new FileOutputStream(file));
+            objOutput.writeObject(ob);
+            objOutput.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static final Object readObject(File file) {
+        try {
+            ObjectInputStream reader = new ObjectInputStream(new FileInputStream(file));
+            while (true) {
+                return reader.readObject();
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static File saveFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("save File");

@@ -30,7 +30,8 @@ public class ScenePanel extends Canvas {
 
     public void drawing() {
         gc.clearRect(0,0, getWidth(), getHeight());
-        ((Scene) getGameObject()).render(gc);
+        if (gameObject != null)
+            ((Scene) getGameObject()).render(gc);
     }
 
     public Tab getTab() {

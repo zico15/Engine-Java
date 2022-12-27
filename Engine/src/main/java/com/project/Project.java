@@ -2,12 +2,11 @@ package com.project;
 
 
 import java.io.File;
+import java.io.Serializable;
 
-public class Project {
+public class Project implements Serializable {
 
     private static Project project = new Project();
-
-
     private File directory;
 
     public Project() {
@@ -30,11 +29,11 @@ public class Project {
         ;
     }
 
-    public static void save() {
+    public void save() {
 
     }
 
-    public static void load() {
+    public void load(File file) {
         if (Project.getProject() != null) {
 
         }

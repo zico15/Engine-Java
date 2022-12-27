@@ -1,28 +1,16 @@
 package game.lib;
 
-import com.system.FileSistem;
 import com.view.ComponentView;
-import game.components.tree.base.BaseResourceComponentTree;
 import game.components.view.objects.GameObjectProperties;
 import game.components.view.objects.ScenePanel;
 import game.components.view.objects.SceneTreeView;
 import game.components.view.resources.ResourceTreeView;
-import game.core.project.GameProject;
 import javafx.scene.control.*;
-import javafx.stage.FileChooser;
 import plugins.Plugins;
 
-import java.io.File;
+import static game.core.system.GameEngine.*;
 
 public class InstanceLib extends Plugins {
-
-    private ScenePanel scene;
-
-    private  ResourceTreeView resourceTreeView;
-
-    private SceneTreeView sceneTreeView;
-
-    private GameObjectProperties gameObjectProperties;
 
     @Override
     public void install() {
@@ -43,25 +31,10 @@ public class InstanceLib extends Plugins {
             System.out.println("toggleButton");
             scene.drawing();
         });
-        initMenuTop(ComponentView.getComponent("menuBarTop"));
+        creatingMenu();
     }
 
-    private void initMenuTop(MenuBar menu)
-    {
-        menu.getMenus().forEach(e -> {
-            if ("Window".equalsIgnoreCase(e.getText()))
-                e.getItems().add(scene.getMenuWindow());
-            else if ("File".equalsIgnoreCase(e.getText())) {
-                for (MenuItem m : e.getItems()){
-                    if ("New Project".equalsIgnoreCase(m.getText())) {
-                        System.out.println("File: "+ m.getText());
-                        GameProject.creatingMenu(((Menu) m), resourceTreeView);
-                        break;
-                    }
-                }
-            }
-        });
-    }
+
 
     @Override
     public void uninstall() {

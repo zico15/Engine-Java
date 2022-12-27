@@ -2,16 +2,13 @@ package game.components.tree.base;
 
 import com.properties.components.BaseComponentTree;
 import com.tree.TreeViewController;
-import game.components.tree.objects.GameObjectComponentTree;
-import game.components.tree.objects.SceneComponentTree;
-import game.components.tree.resources.FolderComponentTree;
+import game.components.tree.resources.ResourceComponentTree;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 
 import java.io.File;
-import java.io.IOException;
 
 public abstract class BaseResourceComponentTree extends BaseComponentTree {
 
@@ -43,7 +40,7 @@ public abstract class BaseResourceComponentTree extends BaseComponentTree {
                     return;
                 File f = new File(getFile(), v);
                 if( f.mkdirs())
-                    addTree(new FolderComponentTree(getController(), f));
+                    addTree(new ResourceComponentTree(getController(), f));
                 System.out.println(f + " /  " + f.exists());
             });
         });
@@ -65,8 +62,9 @@ public abstract class BaseResourceComponentTree extends BaseComponentTree {
 
     public static fileType getExtensionType(File file) {
 
-        if (file.isDirectory())
-            return fileType.FOLDER_ANY;
+        if (file.isDirectory()) {
+            return "Build".equals(file.getName()) ? fileType.FOLDER_BUILD : fileType.FOLDER_ANY;
+        }
         String name = file.getName();
         String extension = name.contains(".") ? name.substring(name.lastIndexOf(".") + 1,name.length()) : name;
         extension = extension.trim().toLowerCase();

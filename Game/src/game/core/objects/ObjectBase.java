@@ -4,10 +4,11 @@ import game.core.base.BaseEvents;
 import game.core.components.ComponentBase;
 import game.core.transforme.Vector2D;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ObjectBase {
+public abstract class ObjectBase implements Serializable {
 
     private final List<GameObject> children = new ArrayList<>();
     private final List<ComponentBase> components = new ArrayList<>();

@@ -4,9 +4,10 @@ package game.core.base;
 import game.core.objects.GameObject;
 import javafx.scene.canvas.GraphicsContext;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BaseEvents {
+public class BaseEvents implements Serializable {
 
     private final ArrayList<IStart> starts = new ArrayList<>();
     private final ArrayList<IRender> renders = new ArrayList<>();
