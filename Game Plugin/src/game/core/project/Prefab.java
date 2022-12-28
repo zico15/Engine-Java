@@ -1,7 +1,7 @@
 package game.core.project;
 
 
-import com.system.FileSistem;
+import com.system.FileSystem;
 import game.core.objects.GameObject;
 import java.io.File;
 import java.io.Serializable;
@@ -24,11 +24,11 @@ public class Prefab implements Serializable {
         if (!dir.exists())
             dir.mkdirs();
         System.out.println("Prefab: " + new File(dir, name));
-        FileSistem.saveObject(new File(dir, name + ".pref"), this);
+        FileSystem.saveObject(new File(dir, name + ".pref"), this);
     }
 
     public void load(File file) {
-        this.setGameObject((GameObject) FileSistem.readObject(new File(file, getPath())));
+        this.setGameObject((GameObject) FileSystem.readObject(new File(file, getPath())));
     }
 
     public String getPath() {

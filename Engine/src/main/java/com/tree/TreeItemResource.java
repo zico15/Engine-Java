@@ -1,7 +1,6 @@
 package com.tree;
 
-import com.view.MainViewController;
-import com.system.FileSistem;
+import com.system.FileSystem;
 import com.system.ImageBase;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
@@ -29,7 +28,7 @@ public class TreeItemResource extends TreeItemBase {
     private void previewCode() {
 
         textArea = new TextArea();
-        textArea.setText(FileSistem.readFile(file));
+        textArea.setText(FileSystem.readFile(file));
 
     }
 

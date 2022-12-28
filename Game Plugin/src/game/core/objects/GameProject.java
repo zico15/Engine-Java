@@ -1,7 +1,7 @@
 package game.core.objects;
 
 
-import com.system.FileSistem;
+import com.system.FileSystem;
 import game.core.base.BaseStructure;
 import game.core.project.Prefab;
 import javafx.scene.canvas.GraphicsContext;
@@ -18,7 +18,7 @@ public final class GameProject implements BaseStructure {
     public static GameProject load(File file) {
         GameProject project = null;
         if (file != null && file.exists() && file.isFile()) {
-            project = (GameProject) FileSistem.readObject(file);
+            project = (GameProject) FileSystem.readObject(file);
             System.out.println("load: GameProject");
         }
         return project;
@@ -32,7 +32,7 @@ public final class GameProject implements BaseStructure {
         project.getPrefabs().forEach(p -> {
             p.save(file);
         });
-        FileSistem.saveObject(new File(file, "settings.cx"), project);
+        FileSystem.saveObject(new File(file, "settings.cx"), project);
     }
 
     @Override

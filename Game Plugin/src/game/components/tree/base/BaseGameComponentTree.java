@@ -31,6 +31,8 @@ public abstract class BaseGameComponentTree extends BaseComponentTree {
 
     public void setGameObject(GameObject gameObject) {
         this.gameObject = gameObject;
+        if (gameObject != null)
+            setValue(gameObject.getName());
     }
 
     public abstract ContextMenu creatingMenu();

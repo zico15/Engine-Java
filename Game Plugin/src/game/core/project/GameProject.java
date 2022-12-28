@@ -1,7 +1,7 @@
 package game.core.project;
 
 import com.project.Project;
-import com.system.FileSistem;
+import com.system.FileSystem;
 import game.components.tree.base.BaseResourceComponentTree;
 import game.components.tree.base.fileType;
 import game.core.objects.Scene;
@@ -9,6 +9,7 @@ import game.core.objects.Scene;
 import java.io.File;
 import java.util.ArrayList;
 
+import game.core.system.FileSystemGame;
 import game.core.system.GameEngine;
 
 
@@ -24,12 +25,12 @@ public class GameProject extends Project {
     {
         GameEngine.resourceTreeView.load(file);
         scenes.clear();
-        sceneSelect = null;
         setDirectory(file);
         loadScenes(file);
         if (scenes.size() == 0)
             scenes.add(new Scene());
-        GameEngine.sceneTreeView.load(scenes.get(0));
+        sceneSelect = scenes.get(0);
+        GameEngine.sceneTreeView.load(sceneSelect);
     }
 
     private void loadScenes(File file)
@@ -42,9 +43,15 @@ public class GameProject extends Project {
                     loadScenes(f);
                 else if (BaseResourceComponentTree.getExtensionType(f) == fileType.FILE_SCENE)
                 {
-                    Object o = FileSistem.readObject(f);
-                    if (o instanceof Scene)
-                        scenes.add((Scene) o);
+                    try {
+                        Object o = FileSystemGame.readGameObject(f);
+                        if (o instanceof Scene)
+                            scenes.add((Scene) o);
+                        System.out.println(f);
+                    }catch (Exception e)
+                    {
+                        System.err.println(f);
+                    }
                 }
             }
         }
@@ -55,7 +62,9 @@ public class GameProject extends Project {
         System.out.println("project: "  + getDirectory());
         if (getDirectory() != null && getDirectory().exists()) {
             System.out.println("save project");
-            scenes.forEach(scene -> FileSistem.saveObject(new File(getDirectory(), (scene.getName() + ".scene")), scene));
+            scenes.forEach(scene -> {
+                FileSystemGame.writeGameObject(new File(getDirectory(), (scene.getPackage() + ".scene")), scene);
+            });
         }
         GameEngine.resourceTreeView.load(getDirectory());
     }

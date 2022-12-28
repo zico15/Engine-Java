@@ -4,6 +4,7 @@ import game.core.base.BaseEvents;
 import game.core.components.ComponentBase;
 import game.core.transforme.Vector2D;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,8 @@ public abstract class ObjectBase implements Serializable {
     private Vector2D vector = new Vector2D();
     private String name;
     private GameObject parent;
+
+    private String packageName;
 
     public ObjectBase() {
     }
@@ -93,5 +96,16 @@ public abstract class ObjectBase implements Serializable {
 
     public void setVector(Vector2D vector) {
         this.vector = vector;
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public String getPackage(){
+        return packageName == null ? getName() : packageName + "/" + getName();
+    }
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
     }
 }

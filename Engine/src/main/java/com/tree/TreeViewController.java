@@ -10,10 +10,12 @@ public class TreeViewController extends TreeView<String> {
     public TreeViewController() {
         setFocused(false);
         getSelectionModel().selectedItemProperty().addListener((observable, old_val, new_val) -> {
-            BaseComponentTree item = (BaseComponentTree) new_val;
-            setContextMenu(item.getContextMenu());
-            item.preview();
-            selectedItem(item);
+            if (new_val != null) {
+                BaseComponentTree item = (BaseComponentTree) new_val;
+                setContextMenu(item.getContextMenu());
+                item.preview();
+                selectedItem(item);
+            }
         });
     }
 

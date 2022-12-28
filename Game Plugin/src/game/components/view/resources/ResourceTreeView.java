@@ -3,11 +3,15 @@ package game.components.view.resources;
 import com.properties.components.BaseComponentTree;
 import com.tree.TreeBase;
 import com.tree.TreeViewController;
+import game.components.tree.base.BaseResourceComponentTree;
 import game.components.tree.base.fileType;
 import game.components.tree.resources.ResourceComponentTree;
+import game.components.tree.resources.SceneResourceComponentTree;
 import game.core.system.Icons;
 
 import java.io.File;
+
+import static game.components.tree.base.BaseResourceComponentTree.getExtensionType;
 
 
 public class ResourceTreeView extends TreeViewController {
@@ -26,6 +30,8 @@ public class ResourceTreeView extends TreeViewController {
 
     public void load(File file)
     {
+        setContextMenu(null);
+        getSelectionModel().select(null);
         componentTree = new ResourceComponentTree(this, file);
         System.out.println(getClass().getSimpleName() + ": load");
         componentTree.load(file);
@@ -40,11 +46,11 @@ public class ResourceTreeView extends TreeViewController {
         {
             for (File f : file.listFiles())
             {
-                ResourceComponentTree tree = new ResourceComponentTree(this, f);
+                ResourceComponentTree tree = getExtensionType(f) == fileType.FILE_SCENE ? new SceneResourceComponentTree(this, f) :
+                new ResourceComponentTree(this, f);
                 componentTree.addTree(tree);
                 if (f.isDirectory())
                     loadResources(f, tree);
-
             }
         }
     }

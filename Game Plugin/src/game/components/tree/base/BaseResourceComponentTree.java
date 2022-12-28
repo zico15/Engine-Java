@@ -3,6 +3,7 @@ package game.components.tree.base;
 import com.properties.components.BaseComponentTree;
 import com.tree.TreeViewController;
 import game.components.tree.resources.ResourceComponentTree;
+import game.core.system.GameEngine;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputDialog;
@@ -51,6 +52,10 @@ public abstract class BaseResourceComponentTree extends BaseComponentTree {
         return new ContextMenu(addFolder, addFile);
     }
 
+    public String getSubFile() {
+        String project = GameEngine.gameProject.getDirectory().getPath() + "/";
+        return getFile().getPath().replace(project, "");
+    }
     public File getFile() {
         return file;
     }

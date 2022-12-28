@@ -1,15 +1,17 @@
 package game.core.system;
 
-import com.system.FileSistem;
+import com.system.FileSystem;
 import com.view.ComponentView;
 import game.components.view.objects.GameObjectProperties;
 import game.components.view.objects.ScenePanel;
 import game.components.view.objects.SceneTreeView;
 import game.components.view.resources.ResourceTreeView;
+import game.core.objects.Scene;
 import game.core.project.GameProject;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.stage.FileChooser;
 
 import java.io.File;
 
@@ -39,13 +41,18 @@ public class GameEngine {
                         System.out.println("File: "+ m.getText());
                         MenuItem newProject = new MenuItem("Game Java");
                         newProject.setOnAction(e -> {
-                            File file = FileSistem.saveFile();
+                            File file = FileSystem.saveFile();
                             if (file != null) {
                                 file.mkdirs();
                                 gameProject.load(file);
                             }
                         });
                         MenuItem openProject = new MenuItem("Open");
+                        openProject.setOnAction(e -> {
+                            File file = FileSystem.openFolder();
+                            if (file != null && file.exists() && file.isDirectory())
+                                gameProject.load(file);
+                        });
                         ((Menu) m).getItems().add(newProject);
                         ((Menu) m).getItems().add(openProject);
                     } else if ("Save".equalsIgnoreCase(m.getText())) {

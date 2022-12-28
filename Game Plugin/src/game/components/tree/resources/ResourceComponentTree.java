@@ -18,10 +18,14 @@ public class ResourceComponentTree extends BaseResourceComponentTree {
     }
 
     public void load(File file){
-        setFile(file);
-        setValue(file.getName());
-        fileType type = BaseResourceComponentTree.getExtensionType(file);
-        setIcon(Icons.get(type));
+
+        if (file != null) {
+            String name = file.getName().contains(".") ? file.getName().substring(0, file.getName().lastIndexOf(".")) : file.getName();
+            setFile(file);
+            setValue(name);
+            fileType type = BaseResourceComponentTree.getExtensionType(file);
+            setIcon(Icons.get(type));
+        }
     }
 
 }

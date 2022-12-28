@@ -1,6 +1,6 @@
 package com.view;
 
-import com.system.FileSistem;
+import com.system.FileSystem;
 import com.system.SystemLib;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
@@ -13,7 +13,7 @@ public class MainViewController extends ComponentView {
 
     @FXML
     protected void installPlugins() {
-        File file = FileSistem.openFile(new FileChooser.ExtensionFilter("JAVA files (*.jar)", "*.jar"));
+        File file = FileSystem.openFile(new FileChooser.ExtensionFilter("JAVA files (*.jar)", "*.jar"));
         if (file == null)
             return;
         System.out.println(file);

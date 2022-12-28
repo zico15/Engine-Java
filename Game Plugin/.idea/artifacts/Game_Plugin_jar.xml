@@ -3,7 +3,6 @@
     <output-path>$PROJECT_DIR$/out/artifacts/Game_Plugin_jar</output-path>
     <root id="archive" name="Game Plugin.jar">
       <element id="module-output" name="Game Plugin" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../Engine/out/artifacts/Engine.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

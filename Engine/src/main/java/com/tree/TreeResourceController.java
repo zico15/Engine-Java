@@ -1,6 +1,6 @@
 package com.tree;
 
-import com.system.FileSistem;
+import com.system.FileSystem;
 import javafx.scene.control.*;
 
 import java.io.File;
@@ -80,7 +80,7 @@ public class TreeResourceController extends TreeView<String> {
 
             if (entered != null && item.file.isDirectory()) {
                 File f = new File(item.file, entered + ".java");
-                FileSistem.createFileJava(f);
+                FileSystem.createFileJava(f);
                 addItem(item, f);
             }
             System.out.println(entered);
