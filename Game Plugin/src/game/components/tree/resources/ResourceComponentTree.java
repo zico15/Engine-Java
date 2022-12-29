@@ -4,14 +4,15 @@ import com.tree.TreeViewController;
 import game.components.tree.base.BaseResourceComponentTree;
 import game.components.tree.base.fileType;
 import game.core.system.Icons;
+import game.project.prefabs.Prefab;
 
 import java.io.File;
 
 public class ResourceComponentTree extends BaseResourceComponentTree {
 
 
-    public ResourceComponentTree(TreeViewController controller, File file) {
-        super(file, controller, null);
+    public ResourceComponentTree(Prefab prefab, TreeViewController controller, File file) {
+        super(prefab, file, controller, null);
         load(file);
         if (!file.isDirectory())
             setContextMenu(null);

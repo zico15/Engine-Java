@@ -1,20 +1,17 @@
 package game.components.tree.resources;
 
 import com.tree.TreeViewController;
-import game.components.tree.base.BaseResourceComponentTree;
-import game.components.tree.base.fileType;
 import game.core.objects.Scene;
 import game.core.system.GameEngine;
-import game.core.system.Icons;
+import game.project.prefabs.Prefab;
 
 import java.io.File;
 
 public class SceneResourceComponentTree extends ResourceComponentTree {
 
 
-    public SceneResourceComponentTree(TreeViewController controller, File file) {
-        super(controller, file);
-        System.out.println("SceneResourceComponentTree");
+    public SceneResourceComponentTree(Prefab prefab, TreeViewController controller, File file) {
+        super(prefab, controller, file);
         load(file);
     }
 

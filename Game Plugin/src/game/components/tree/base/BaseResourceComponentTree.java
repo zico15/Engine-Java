@@ -4,6 +4,7 @@ import com.properties.components.BaseComponentTree;
 import com.tree.TreeViewController;
 import game.components.tree.resources.ResourceComponentTree;
 import game.core.system.GameEngine;
+import game.project.prefabs.Prefab;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputDialog;
@@ -15,12 +16,13 @@ public abstract class BaseResourceComponentTree extends BaseComponentTree {
 
     private File file;
 
+    private final Prefab prefab;
 
-
-    public BaseResourceComponentTree(File file, TreeViewController controller, Image icon) {
+    public BaseResourceComponentTree(Prefab prefab, File file, TreeViewController controller, Image icon) {
         super(controller, icon);
         this.setFile(file);
         setContextMenu(creatingMenu());
+        this.prefab = prefab;
     }
 
     @Override
@@ -41,7 +43,7 @@ public abstract class BaseResourceComponentTree extends BaseComponentTree {
                     return;
                 File f = new File(getFile(), v);
                 if( f.mkdirs())
-                    addTree(new ResourceComponentTree(getController(), f));
+                    addTree(new ResourceComponentTree(null, getController(), f));
                 System.out.println(f + " /  " + f.exists());
             });
         });
@@ -66,7 +68,6 @@ public abstract class BaseResourceComponentTree extends BaseComponentTree {
 
 
     public static fileType getExtensionType(File file) {
-
         if (file.isDirectory()) {
             return "Build".equals(file.getName()) ? fileType.FOLDER_BUILD : fileType.FOLDER_ANY;
         }
@@ -85,5 +86,7 @@ public abstract class BaseResourceComponentTree extends BaseComponentTree {
     }
 
 
-
+    public Prefab getPrefab() {
+        return prefab;
+    }
 }

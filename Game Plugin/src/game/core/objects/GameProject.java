@@ -3,7 +3,7 @@ package game.core.objects;
 
 import com.system.FileSystem;
 import game.core.base.BaseStructure;
-import game.core.project.Prefab;
+import game.project.prefabs.Prefab;
 import javafx.scene.canvas.GraphicsContext;
 import java.io.File;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public final class GameProject implements BaseStructure {
         if (!file.exists())
             file.mkdirs();
         project.getPrefabs().forEach(p -> {
-            p.save(file);
+           // p.save(file);
         });
         FileSystem.saveObject(new File(file, "settings.cx"), project);
     }

@@ -6,12 +6,10 @@ import game.components.view.objects.GameObjectProperties;
 import game.components.view.objects.ScenePanel;
 import game.components.view.objects.SceneTreeView;
 import game.components.view.resources.ResourceTreeView;
-import game.core.objects.Scene;
-import game.core.project.GameProject;
+import game.project.GameProject;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.stage.FileChooser;
 
 import java.io.File;
 

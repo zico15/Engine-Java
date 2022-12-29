@@ -130,4 +130,14 @@ public class FileSystem {
         }
         return img;
     }
+
+    public static void rename(File file, String name){
+        String newFilePath = file.getAbsolutePath().replace(file.getName(), "") + name;
+        File newFile = new File(newFilePath);
+        if(file.renameTo(newFile)){
+            System.out.println("File renamed");
+        }else{
+            System.out.println("Sorry! the file can't be renamed");
+        }
+    }
 }

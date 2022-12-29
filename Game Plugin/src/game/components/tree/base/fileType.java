@@ -9,5 +9,6 @@ public enum fileType {
     FILE_JAVA,
     FILE_CODE,
     FILE_SCENE,
-    FILE_OBJECT
+    FILE_OBJECT,
+    FILE_PREFAB,
 }

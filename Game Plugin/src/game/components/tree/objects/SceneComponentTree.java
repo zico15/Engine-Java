@@ -10,14 +10,14 @@ import game.core.system.Icons;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 
-public class SceneComponentTree extends BaseGameComponentTree {
+public class SceneComponentTree extends GameObjectComponentTree {
 
     private static int id = 1;
 
     public SceneComponentTree(TreeViewController controller, ScenePanel scenePanel) {
-        super(controller, Icons.get(fileType.FILE_SCENE), scenePanel);
+        super(controller, scenePanel);
         setGameObject(new Scene("Scene_" + id++));
-        setValue(getGameObject().getName());
+        setIcon(Icons.get(fileType.FILE_SCENE));
         scenePanel.setGameObject(getGameObject());
     }
 

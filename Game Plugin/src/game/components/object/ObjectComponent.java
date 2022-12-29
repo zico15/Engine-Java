@@ -19,6 +19,6 @@ public class ObjectComponent {
     public ObjectComponent(GameObject gameObject){
         this.gameObject = gameObject;
         gameObjectComponentTree = new GameObjectComponentTree(GameEngine.sceneTreeView, GameEngine.scene);
-        resourceComponentTree = new ResourceComponentTree(GameEngine.resourceTreeView, new File(GameEngine.gameProject.getDirectory(), gameObject.getPackage()));
+        //resourceComponentTree = new ResourceComponentTree(GameEngine.resourceTreeView, new File(GameEngine.gameProject.getDirectory(), gameObject.getPackage()));
     }
 }
