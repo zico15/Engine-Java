@@ -6,6 +6,7 @@ import game.components.properties.ImageProperties;
 import game.components.tree.base.BaseGameComponentTree;
 import game.core.components.Sprite;
 import game.core.objects.GameObject;
+import game.core.objects.Scene;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Side;
@@ -59,24 +60,28 @@ public class GameObjectProperties extends AnchorPane {
         if (gameObject == null)
             return;
         addName();
-        if (!isEditable)
-            return;
-        addTitle("  Position");
-        addPositionXY();
-        addPositionWH();
+        if (!(baseGameComponentTree.getGameObject()  instanceof Scene))
+        {
+            addTitle("  Position");
+            addPositionXY();
+            addPositionWH();
+        }
         gameObject.getComponents().forEach(c -> {
             if (c instanceof Sprite)
                 properties.addItem(new ImageProperties(this, (Sprite) c));
         });
-        createProperties();
+        if (isEditable)
+            createProperties();
     }
 
-    private void addTitle(String title) {
+    public void addTitle(String title) {
         Label lt = new Label(title);
-        lt.setTextAlignment(TextAlignment.CENTER);
+        lt.setAlignment(Pos.CENTER);
         lt.setMinHeight(25);
-        Pane pane = new Pane(lt);
+        Layouts.alignment(lt, Layouts.LEFT_RIGHT);
+        AnchorPane pane = new AnchorPane(lt);
         pane.setStyle("-fx-background-color: #0093ff;");
+
         addItem(pane);
     }
 
@@ -88,7 +93,7 @@ public class GameObjectProperties extends AnchorPane {
                 baseGameComponentTree.setValue(gameObject.getName());
             }
         });
-        addTitle("  Name");
+        addTitle("Name");
         addItem(name);
     }
 
@@ -162,10 +167,10 @@ public class GameObjectProperties extends AnchorPane {
         addItem(p2);
     }
 
-    private void addItem(Region node) {
+    public static void addItem(Region node) {
         Layouts.alignment(node, Layouts.LEFT_RIGHT);
-        vBox.getChildren().add(node);
-        VBox.setMargin(node, new Insets(0, 0, 8, 0));
+        GameObjectProperties.properties.vBox.getChildren().add(node);
+        GameObjectProperties.properties.vBox.setMargin(node, new Insets(0, 0, 8, 0));
     }
 
     public void addItemBack(Region node) {

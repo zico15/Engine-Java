@@ -26,11 +26,6 @@ public class ImageProperties extends VBox {
 
     public ImageProperties(GameObjectProperties properties) {
         this.properties = properties;
-        Label lt = new Label("Image");
-        lt.setTextAlignment(TextAlignment.CENTER);
-        lt.setMinHeight(25);
-        Pane pane = new Pane(lt);
-        pane.setStyle("-fx-background-color: #0093ff;");
         textFieldFile = new TextField();
         textFieldFile.addEventHandler(MouseEvent.MOUSE_PRESSED, evt -> {
             File file = FileSystem.openFile(GameEngine.gameProject.getDirectory());
@@ -39,7 +34,7 @@ public class ImageProperties extends VBox {
             else
                 textFieldFile.setText(sprite.getFile() != null ? sprite.getFile().getName() : "");
         });
-        addItem(pane);
+        properties.addTitle("Image");
         addItem(textFieldFile);
     }
 

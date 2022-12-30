@@ -21,7 +21,9 @@ public final class Icons {
                     new Image(SceneComponentTree.class.getResource("/resources/icons/java.png").openStream()),
                     new Image(SceneComponentTree.class.getResource("/resources/icons/file_code.png").openStream()),
                     new Image(SceneComponentTree.class.getResource("/resources/icons/scene.png").openStream()),
-                    new Image(SceneComponentTree.class.getResource("/resources/icons/object.png").openStream())
+                    new Image(SceneComponentTree.class.getResource("/resources/icons/object.png").openStream()),
+                    new Image(SceneComponentTree.class.getResource("/resources/icons/object.png").openStream()),
+                    new Image(SceneComponentTree.class.getResource("/resources/icons/tilemap.png").openStream())
             };
         } catch (IOException e) {
             throw new RuntimeException(e);

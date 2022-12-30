@@ -11,4 +11,5 @@ public enum fileType {
     FILE_SCENE,
     FILE_OBJECT,
     FILE_PREFAB,
+    FILE_TILE_MAPS,
 }

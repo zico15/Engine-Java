@@ -36,23 +36,24 @@ public class Sprite extends ComponentBase {
 
     @Override
     public void render(GraphicsContext gc) {
-        if (image != null) {
+        if (getImage() != null) {
             Vector2D v = getParent().getVector();
-            gc.drawImage(image, v.getX(), v.getY(), v.getWidth(), v.getHeight());
+            gc.drawImage(getImage(), v.getX(), v.getY(), v.getWidth(), v.getHeight());
             System.out.println("render(GraphicsContext gc)");
         }
     }
 
     public boolean load(File file) {
         this.file = file;
-        System.out.println("load Sprite: " + file.getPath());
-        try {
-            image = new Image(new FileInputStream(file));
-            return !image.isError();
-        } catch (FileNotFoundException e) {
-            image = null;
-            this.file = null;
-            System.err.println("Sprite");
+        if (file != null && file.exists()) {
+            try {
+                image = new Image(new FileInputStream(file));
+                return !getImage().isError();
+            } catch (FileNotFoundException e) {
+                image = null;
+                this.file = null;
+                System.err.println("Sprite");
+            }
         }
         return false;
     }
@@ -100,5 +101,9 @@ public class Sprite extends ComponentBase {
 
     public File getFile() {
         return file;
+    }
+
+    public Image getImage() {
+        return image;
     }
 }

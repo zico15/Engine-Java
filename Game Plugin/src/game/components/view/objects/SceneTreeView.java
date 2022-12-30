@@ -8,7 +8,6 @@ import game.components.tree.objects.GameObjectComponentTree;
 import game.components.tree.objects.SceneComponentTree;
 import game.core.objects.GameObject;
 import game.core.objects.Scene;
-import game.project.GameEngine;
 
 
 public class SceneTreeView extends TreeViewController {
@@ -24,12 +23,10 @@ public class SceneTreeView extends TreeViewController {
 
     public void load(Scene scene)
     {
-        componentTree = new SceneComponentTree(this, scenePanel);
-        componentTree.setGameObject(scene);
+        componentTree = new SceneComponentTree(scene);
         setRoot(componentTree);
         scenePanel.setGameObject(scene);
         if (scene != null) {
-
             loadGameObject(componentTree, scene);
             scene.load_system();
         }
@@ -39,12 +36,10 @@ public class SceneTreeView extends TreeViewController {
     {
         if (gameObject != null)
         {
-                gameObject.getChildren().forEach(objs -> {
-                    System.out.println(objs);
-                    GameObjectComponentTree item = new GameObjectComponentTree(objs);
-                    gameObjectComponentTree.addTree(item);
-                    loadGameObject(item, objs);
-
+             gameObject.getChildren().forEach(objs -> {
+                 GameObjectComponentTree item = GameObjectComponentTree.newGameObjectComponentTree(objs);
+                 gameObjectComponentTree.addTree(item);
+                 loadGameObject(item, objs);
             } );
         }
     }

@@ -63,6 +63,15 @@ public abstract class ObjectBase implements Serializable {
         return null;
     }
 
+    public final <T> ComponentBase getComponent(Class<T> type) {
+        int size = getComponents().size();
+        for (int i = 0; i < size; i++) {
+            if (getComponents().get(i).getClass().equals(type))
+                return getComponents().get(i);
+        }
+        return null;
+    }
+
     public final boolean addComponent(ComponentBase component) {
         if (component == null)
             return false;

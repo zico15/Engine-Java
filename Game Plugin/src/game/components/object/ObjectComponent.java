@@ -3,7 +3,6 @@ package game.components.object;
 import game.components.tree.objects.GameObjectComponentTree;
 import game.components.tree.resources.ResourceComponentTree;
 import game.core.objects.GameObject;
-import game.project.GameEngine;
 
 public class ObjectComponent {
 
@@ -16,7 +15,7 @@ public class ObjectComponent {
 
     public ObjectComponent(GameObject gameObject){
         this.gameObject = gameObject;
-        gameObjectComponentTree = new GameObjectComponentTree(GameEngine.sceneTreeView, GameEngine.scene);
+        gameObjectComponentTree = new GameObjectComponentTree(gameObject);
         //resourceComponentTree = new ResourceComponentTree(GameEngine.resourceTreeView, new File(GameEngine.gameProject.getDirectory(), gameObject.getPackage()));
     }
 }

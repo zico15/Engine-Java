@@ -14,13 +14,17 @@ public class TileMaps extends GameObject {
     protected ImageBuffer buffer;
     private Sprite sprite;
 
+    private static int id = 1;
+
     public TileMaps() {
-        this("tileMaps_1");
+        this("tileMaps_" + id++);
     }
 
     public TileMaps(String name) {
         super(name);
         setVector(new UpdateVector());
+        sprite = new Sprite();
+        addComponent(sprite);
     }
 
     @Override

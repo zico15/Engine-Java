@@ -13,6 +13,8 @@ public abstract class BaseGameComponentTree extends BaseComponentTree {
 
     private final ScenePanel scenePanel;
 
+    private fileType type;
+
     public BaseGameComponentTree(TreeViewController controller, Image icon, ScenePanel scenePanel) {
         super(controller, icon);
         this.scenePanel = scenePanel;
@@ -39,5 +41,13 @@ public abstract class BaseGameComponentTree extends BaseComponentTree {
 
     public ScenePanel getScenePanel() {
         return scenePanel;
+    }
+
+    public fileType getType() {
+        return type;
+    }
+
+    public void setType(fileType type) {
+        this.type = type;
     }
 }

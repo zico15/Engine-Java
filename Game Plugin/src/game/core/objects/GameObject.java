@@ -9,8 +9,9 @@ import javafx.scene.canvas.GraphicsContext;
  **/
 public class GameObject extends ObjectBase {
 
+    private static int id = 1;
     public GameObject() {
-        super("gameObject_1");
+        super("gameObject_" + id++);
     }
 
     public GameObject(String name) {

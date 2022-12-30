@@ -1,48 +1,23 @@
 package game.components.tree.objects;
 
-import com.tree.TreeViewController;
-import game.components.tree.base.BaseGameComponentTree;
 import game.components.tree.base.fileType;
 import game.components.view.objects.GameObjectProperties;
-import game.components.view.objects.ScenePanel;
 import game.core.objects.Scene;
 import game.core.system.Icons;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
 
 public class SceneComponentTree extends GameObjectComponentTree {
 
     private static int id = 1;
 
-    public SceneComponentTree(TreeViewController controller, ScenePanel scenePanel) {
-        super(controller, scenePanel);
-        setGameObject(new Scene("Scene_" + id++));
-        setIcon(Icons.get(fileType.FILE_SCENE));
-        scenePanel.setGameObject(getGameObject());
+    public SceneComponentTree(Scene scene) {
+        super(scene);
     }
 
     @Override
     public void preview() {
         getScenePanel().setGameObject(getGameObject());
         GameObjectProperties.load(this, false);
-
     }
-
-    @Override
-    public ContextMenu creatingMenu() {
-        MenuItem addobject = new MenuItem("New GameObject");
-        addobject.setOnAction(e -> {
-            GameObjectComponentTree gameObjectComponentTree = new GameObjectComponentTree(getController(), getScenePanel());
-            addTree(gameObjectComponentTree);
-            getGameObject().addGameObject(gameObjectComponentTree.getGameObject());
-        });
-        MenuItem addscript = new MenuItem("New script");
-        addscript.setOnAction(e -> {
-
-        });
-        return new ContextMenu(addobject, addscript);
-    }
-
 
 
 }
