@@ -3,9 +3,7 @@ package game.components.object;
 import game.components.tree.objects.GameObjectComponentTree;
 import game.components.tree.resources.ResourceComponentTree;
 import game.core.objects.GameObject;
-import game.core.system.GameEngine;
-
-import java.io.File;
+import game.project.GameEngine;
 
 public class ObjectComponent {
 

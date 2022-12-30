@@ -7,6 +7,7 @@ import game.components.view.objects.GameObjectProperties;
 import game.components.view.objects.ScenePanel;
 import game.core.objects.GameObject;
 import game.core.system.Icons;
+import game.project.GameEngine;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 
@@ -15,6 +16,11 @@ public class GameObjectComponentTree extends BaseGameComponentTree {
 
     private static int id = 1;
 
+    public GameObjectComponentTree(GameObject gameObject) {
+        super(GameEngine.sceneTreeView, Icons.get(fileType.FILE_OBJECT), GameEngine.scene);
+        setGameObject(gameObject);
+        setValue(getGameObject().getName());
+    }
     public GameObjectComponentTree(TreeViewController controller, ScenePanel scenePanel) {
         super(controller, Icons.get(fileType.FILE_OBJECT), scenePanel);
         setGameObject(new GameObject("GameObject_" + id++));

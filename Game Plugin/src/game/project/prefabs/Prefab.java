@@ -1,13 +1,8 @@
 package game.project.prefabs;
 
 
-import game.components.tree.objects.GameObjectComponentTree;
 import game.components.tree.resources.ResourceComponentTree;
-import game.core.objects.GameObject;
-import game.core.system.FileSystemGame;
-import game.core.system.GameEngine;
 
-import java.io.File;
 import java.io.Serializable;
 
 public abstract class Prefab<T> implements Serializable {

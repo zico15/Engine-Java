@@ -33,7 +33,7 @@ public class GameObject extends ObjectBase {
         return ob;
     }
 
-    protected final void load_system() {
+    public final void load_system() {
         getComponents().forEach(c -> c.load_system());
         getChildren().forEach(c -> c.load_system());
     }

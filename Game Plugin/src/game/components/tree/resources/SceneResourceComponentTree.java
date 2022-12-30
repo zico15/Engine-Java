@@ -2,7 +2,7 @@ package game.components.tree.resources;
 
 import com.tree.TreeViewController;
 import game.core.objects.Scene;
-import game.core.system.GameEngine;
+import game.project.GameEngine;
 import game.project.prefabs.Prefab;
 
 import java.io.File;

@@ -4,6 +4,7 @@ import com.properties.components.Layouts;
 import com.system.FileSystem;
 import game.components.view.objects.GameObjectProperties;
 import game.core.components.Sprite;
+import game.project.GameEngine;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -32,7 +33,7 @@ public class ImageProperties extends VBox {
         pane.setStyle("-fx-background-color: #0093ff;");
         textFieldFile = new TextField();
         textFieldFile.addEventHandler(MouseEvent.MOUSE_PRESSED, evt -> {
-            File file = FileSystem.openFile();
+            File file = FileSystem.openFile(GameEngine.gameProject.getDirectory());
             if (file != null && file.exists() && file.isFile() && sprite.load(file))
                 textFieldFile.setText(file.getName());
             else

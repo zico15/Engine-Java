@@ -8,7 +8,7 @@ import game.components.view.resources.ResourceTreeView;
 import javafx.scene.control.*;
 import plugins.Plugins;
 
-import static game.core.system.GameEngine.*;
+import static game.project.GameEngine.*;
 
 public class InstanceLib extends Plugins {
 

@@ -3,7 +3,7 @@ package game.components.tree.base;
 import com.properties.components.BaseComponentTree;
 import com.tree.TreeViewController;
 import game.components.tree.resources.ResourceComponentTree;
-import game.core.system.GameEngine;
+import game.project.GameEngine;
 import game.project.prefabs.Prefab;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;

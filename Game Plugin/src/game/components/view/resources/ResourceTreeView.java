@@ -1,6 +1,7 @@
 package game.components.view.resources;
 
 import com.properties.components.BaseComponentTree;
+import com.system.FileSystem;
 import com.tree.TreeBase;
 import com.tree.TreeViewController;
 import game.components.tree.base.BaseResourceComponentTree;
@@ -9,11 +10,20 @@ import game.components.tree.resources.ResourceComponentTree;
 
 import game.core.system.FileSystemGame;
 import game.core.system.Icons;
+import game.project.GameEngine;
 import game.project.prefabs.Prefab;
 import game.project.prefabs.PrefabFile;
 import game.project.prefabs.PrefabFolder;
 import game.project.prefabs.PrefabGameObject;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.List;
 
 import static game.components.tree.base.BaseResourceComponentTree.getExtensionType;
 
@@ -25,6 +35,41 @@ public class ResourceTreeView extends TreeViewController {
     public ResourceTreeView() {
         setTabView(TreeBase.newTab("Resource", this));
         setId("resourceTreeView");
+        setOnDragDetected(event -> {
+            Dragboard db = startDragAndDrop(TransferMode.ANY);
+            System.out.println("Circle 1 drag detected");
+            /* Put a string on a dragboard */
+            ClipboardContent content = new ClipboardContent();
+            content.putString("detected");
+            db.setContent(content);
+            event.consume();
+        });
+        setOnDragOver(event -> {
+            if (event.getDragboard().hasFiles() && getRoot() != null) {
+                event.acceptTransferModes(TransferMode.ANY);
+            }
+
+            event.consume();
+        });
+        setOnDragDropped((DragEvent event) -> {
+            if (getRoot() != null) {
+                List<File> files = event.getDragboard().getFiles();
+                files.forEach(f -> {
+
+                    ResourceComponentTree item =  getSelectionModel().getSelectedItem() != null ? ((ResourceComponentTree)getSelectionModel().getSelectedItem()) : componentTree;
+
+                    try {
+                        File dest = new File(item.getFile(), f.getName());
+                        FileSystem.copy(f, dest);
+                        item.addTree(new ResourceComponentTree(null, this, dest));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    System.out.println(f);
+                });
+            }
+            event.consume();
+        });
     }
 
     @Override

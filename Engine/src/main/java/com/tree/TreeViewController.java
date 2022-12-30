@@ -1,7 +1,12 @@
 package com.tree;
 
 import com.properties.components.BaseComponentTree;
+import javafx.event.EventHandler;
 import javafx.scene.control.*;
+import javafx.scene.input.*;
+
+import java.io.File;
+import java.util.List;
 
 public class TreeViewController extends TreeView<String> {
 

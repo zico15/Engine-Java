@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="Game Plugin:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Game_Plugin_jar</output-path>
-    <root id="archive" name="Game Plugin.jar">
-      <element id="module-output" name="Game Plugin" />
-    </root>
-  </artifact>
-</component>

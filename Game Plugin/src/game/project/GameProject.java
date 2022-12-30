@@ -3,13 +3,13 @@ package game.project;
 import com.project.Project;
 import game.components.tree.base.BaseResourceComponentTree;
 import game.components.tree.base.fileType;
+import game.core.objects.GameObject;
 import game.core.objects.Scene;
 
 import java.io.File;
 import java.util.ArrayList;
 
 import game.core.system.FileSystemGame;
-import game.core.system.GameEngine;
 import game.project.prefabs.Prefab;
 import org.jetbrains.annotations.NotNull;
 
@@ -58,12 +58,13 @@ public class GameProject extends Project {
                         System.out.println(f);
                     }catch (Exception e)
                     {
-                        System.err.println(f);
+                        System.err.println(f  + "\n" + e);
                     }
                 }
             }
         }
     }
+
 
     @Override
     public void save() {
