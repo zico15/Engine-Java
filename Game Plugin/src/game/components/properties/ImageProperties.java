@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 import java.io.File;
+import java.util.function.Consumer;
 
 public class ImageProperties extends VBox {
 
@@ -24,18 +25,32 @@ public class ImageProperties extends VBox {
     private Sprite sprite = new Sprite();
     private final TextField textFieldFile;
 
+    private Consumer<ImageProperties>  action;
+
     public ImageProperties(GameObjectProperties properties) {
         this.properties = properties;
         textFieldFile = new TextField();
         textFieldFile.addEventHandler(MouseEvent.MOUSE_PRESSED, evt -> {
             File file = FileSystem.openFile(GameEngine.gameProject.getDirectory());
-            if (file != null && file.exists() && file.isFile() && sprite.load(file))
-                textFieldFile.setText(file.getName());
-            else
-                textFieldFile.setText(sprite.getFile() != null ? sprite.getFile().getName() : "");
-        });
+            setSprite(file);
+            });
         properties.addTitle("Image");
         addItem(textFieldFile);
+    }
+
+    private void setSprite(File file)
+    {
+        if (file != null && file.exists() && file.isFile() && sprite.load(file))
+            textFieldFile.setText(file.getName());
+        else
+            textFieldFile.setText(sprite.getFile() != null ? sprite.getFile().getName() : "");
+        if (action != null)
+            action.accept(this);
+    }
+
+    public void setAction(Consumer<ImageProperties>  action)
+    {
+        this.action = action;
     }
 
     public ImageProperties(GameObjectProperties properties, Sprite sprite) {

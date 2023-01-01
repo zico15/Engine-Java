@@ -16,8 +16,7 @@ public class Sprite extends ComponentBase {
     private transient ImageBuffer buffer;
 
     private transient Image image;
-    private int width;
-    private int height;
+
 
     public Sprite() {
         image = null;
@@ -30,8 +29,6 @@ public class Sprite extends ComponentBase {
 
     public Sprite(File file, int width, int height) {
         this(file);
-        this.width = width;
-        this.height = height;
     }
 
     @Override
@@ -39,7 +36,6 @@ public class Sprite extends ComponentBase {
         if (getImage() != null) {
             Vector2D v = getParent().getVector();
             gc.drawImage(getImage(), v.getX(), v.getY(), v.getWidth(), v.getHeight());
-            System.out.println("render(GraphicsContext gc)");
         }
     }
 
@@ -68,35 +64,13 @@ public class Sprite extends ComponentBase {
     }
 
     public int getWidth() {
-        return width;
+        return image != null ? (int) image.getWidth() : 0;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-        if (buffer != null && width > 0)
-            buffer.resize(width, height);
-    }
+
 
     public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-        if (buffer != null && height > 0)
-            buffer.resize(width, height);
-    }
-
-    public ImageBuffer getBuffer() {
-        return buffer;
-    }
-
-    public void setBuffer(ImageBuffer buffer) {
-        this.buffer = buffer;
-        if (getBuffer() != null) {
-            this.width = getBuffer().getWidth();
-            this.height = getBuffer().getHeight();
-        }
+        return image != null ? (int) image.getHeight() : 0;
     }
 
     public File getFile() {

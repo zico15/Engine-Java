@@ -27,6 +27,9 @@ public abstract class BaseGameComponentTree extends BaseComponentTree {
             System.out.println(gameObject.getName());
     }
 
+    public void unselect(){
+
+    }
     public GameObject getGameObject() {
         return gameObject;
     }

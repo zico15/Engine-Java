@@ -15,6 +15,8 @@ public class SceneTreeView extends TreeViewController {
     private SceneComponentTree componentTree;
     private ScenePanel scenePanel;
 
+    private BaseGameComponentTree select;
+
     public SceneTreeView(ScenePanel scenePanel) {
         setTabView(TreeBase.newTab("Scene", this));
         setId("sceneTreeView");
@@ -25,7 +27,7 @@ public class SceneTreeView extends TreeViewController {
     {
         componentTree = new SceneComponentTree(scene);
         setRoot(componentTree);
-        scenePanel.setGameObject(scene);
+        scenePanel.setScenes(scene);
         if (scene != null) {
             loadGameObject(componentTree, scene);
             scene.load_system();
@@ -45,7 +47,10 @@ public class SceneTreeView extends TreeViewController {
     }
     @Override
     public void selectedItem(BaseComponentTree item) {
-        ((BaseGameComponentTree) item).getScenePanel().drawing();
+        if (select != null)
+            select.unselect();
+        select = (BaseGameComponentTree) item;
+        select.getScenePanel().drawing();
     }
 
 }

@@ -1,20 +1,24 @@
 package game.core.objects;
 
 
-import game.core.base.ImageBuffer;
 import game.core.components.Sprite;
-import game.core.transforme.Vector2D;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
 import java.io.File;
+import java.io.Serializable;
+import java.util.ArrayList;
 
 
 public class TileMaps extends GameObject {
 
-    protected ImageBuffer buffer;
     private Sprite sprite;
 
     private static int id = 1;
+
+    private int grid = 32;
+
+    private ArrayList<Tile> tiles = new ArrayList<>();
 
     public TileMaps() {
         this("tileMaps_" + id++);
@@ -22,27 +26,45 @@ public class TileMaps extends GameObject {
 
     public TileMaps(String name) {
         super(name);
-        setVector(new UpdateVector());
         sprite = new Sprite();
         addComponent(sprite);
     }
 
     @Override
-    public void render(GraphicsContext graphics2D) {
-       /* if (getBuffer() != null)
-            graphics2D.drawImage(buffer, 0, 0);*/
+    void render(GraphicsContext graphics2D) {
+        if (sprite.getImage() != null)
+            tiles.forEach(t -> drawTile(t, graphics2D));
     }
 
-    public void print(ImageBuffer image, Vector2D vector, int x1, int y1) {
+    private void drawTile(Tile tile, GraphicsContext graphics2D){
+        if ((tile.x_sub + grid) <= sprite.getWidth() && (tile.y_sub + grid) <= sprite.getHeight())
+            graphics2D.drawImage(sprite.getImage(), tile.x_sub, tile.y_sub, grid, grid, tile.x, tile.y, grid, grid);
+    }
 
-
-        if (buffer == null || x1 + vector.getWidth() > buffer.getWidth() || y1 + vector.getHeight() > buffer.getWidth())
-            return;
-        System.out.println("vector: " + vector);
-        for (int y = 0; y < vector.getHeight(); y++) {
-            for (int x = 0; x < vector.getWidth(); x++) {
-                buffer.setArgb(x1 + x, y1 + y, image.getArgb(x + vector.getX(), y + vector.getY()));
+    public boolean setTile(int x, int y, int x_sub, int y_sub)
+    {
+        for (Tile t : tiles){
+            if (t.isEqual(x, y))
+            {
+                t.x_sub = x_sub;
+                t.y_sub = y_sub;
+                return true;
             }
+        }
+        Tile t = new Tile(x, y, x_sub , y_sub);
+        System.out.println(t);
+        return tiles.add(t);
+    }
+
+    public void removeTile(int x, int y){
+        int index = 0;
+        for (Tile t : tiles){
+            if (t.isEqual(x, y))
+            {
+                tiles.remove(index);
+                break;
+            }
+            index++;
         }
     }
 
@@ -59,16 +81,47 @@ public class TileMaps extends GameObject {
         this.sprite = sprite;
     }
 
-
-    public ImageBuffer getBuffer() {
-        return buffer;
+    public int getGrid() {
+        return grid;
     }
 
-    public void setBuffer(ImageBuffer buffer) {
-        this.buffer = buffer;
+    public void setGrid(int grid) {
+        this.grid = grid;
     }
 
-    private class UpdateVector extends Vector2D {
+
+    public class Tile implements Serializable {
+
+        public int x;
+        public int y;
+        public int x_sub;
+        public int y_sub;
+
+
+
+        public Tile(int x, int y, int x_sub, int y_sub){
+            this.x = x;
+            this.y = y;
+            this.x_sub = x_sub;
+            this.y_sub = y_sub;
+        }
+
+        public boolean isEqual(int x, int y){
+            return   this.x == x && this.y == y;
+        }
+
+        @Override
+        public String toString() {
+            return "Tile{" +
+                    "x=" + x +
+                    ", y=" + y +
+                    ", x_sub=" + x_sub +
+                    ", y_sub=" + y_sub +
+                    '}';
+        }
+    }
+
+   /* private class UpdateVector extends Vector2D {
 
         private void update() {
             buffer = new ImageBuffer(getWidth(), getHeight());
@@ -89,5 +142,5 @@ public class TileMaps extends GameObject {
                 update();
             }
         }
-    }
+    }*/
 }

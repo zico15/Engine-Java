@@ -7,24 +7,30 @@ import game.components.tree.base.BaseGameComponentTree;
 import game.core.components.Sprite;
 import game.core.objects.GameObject;
 import game.core.objects.Scene;
+import game.project.GameEngine;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Side;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameObjectProperties extends AnchorPane {
 
-
-    private static GameObjectProperties properties;
+    public static GameObjectProperties properties;
     private GameObject gameObject;
     private BaseGameComponentTree baseGameComponentTree;
     private Tab tabView;
 
     private VBox vBox;
     private final TabPane tabPaneMain;
+
+    private ArrayList<Region> componentsProperties = new ArrayList<>();
 
     public GameObjectProperties(TabPane tabPaneMain) {
         setTabView(TreeBase.newTab("Properties", this));
@@ -38,7 +44,9 @@ public class GameObjectProperties extends AnchorPane {
 
     public static void load(BaseGameComponentTree baseGameComponentTree, Boolean isEditable) {
         if (GameObjectProperties.properties != null) {
+            GameEngine.scene.setGameObject(baseGameComponentTree.getGameObject());
             GameObjectProperties.properties.getChildren().clear();
+            GameObjectProperties.properties.componentsProperties.clear();
             if (!GameObjectProperties.properties.tabPaneMain.getTabs().contains(GameObjectProperties.properties.getTabView()))
                 GameObjectProperties.properties.tabPaneMain.getTabs().add(GameObjectProperties.properties.getTabView());
             GameObjectProperties.properties.vBox = new VBox();
@@ -66,12 +74,24 @@ public class GameObjectProperties extends AnchorPane {
             addPositionXY();
             addPositionWH();
         }
-        gameObject.getComponents().forEach(c -> {
-            if (c instanceof Sprite)
-                properties.addItem(new ImageProperties(this, (Sprite) c));
-        });
-        if (isEditable)
+        if (isEditable) {
+            gameObject.getComponents().forEach(c -> {
+                if (c instanceof Sprite)
+                    properties.addItem(new ImageProperties(this, (Sprite) c));
+
+            });
             createProperties();
+        }
+    }
+
+    public static <T> List<T> getComponents(Class<T> component){
+        List<T> tList = new ArrayList<>();
+        for (Node r : GameObjectProperties.properties.getChildren()) {
+            System.out.println(r.getClass().getSimpleName());
+            if (r.getClass().equals(component))
+                tList.add((T) r);
+        }
+        return tList;
     }
 
     public void addTitle(String title) {

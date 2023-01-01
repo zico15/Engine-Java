@@ -15,7 +15,7 @@ public class SceneComponentTree extends GameObjectComponentTree {
 
     @Override
     public void preview() {
-        getScenePanel().setGameObject(getGameObject());
+        getScenePanel().setScenes((Scene) getGameObject());
         GameObjectProperties.load(this, false);
     }
 

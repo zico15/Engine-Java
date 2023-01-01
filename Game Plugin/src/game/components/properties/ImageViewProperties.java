@@ -1,40 +1,34 @@
 package game.components.properties;
 
-import com.properties.components.Layouts;
-import com.system.FileSystem;
 import game.components.view.objects.GameObjectProperties;
 import game.core.components.Sprite;
-import game.project.GameEngine;
-import javafx.geometry.Insets;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 
-import java.io.File;
+import java.util.function.Consumer;
 
 public class ImageViewProperties extends ScrollPane {
 
     private final GameObjectProperties properties;
 
-    private final Sprite sprite;
-    private ImageView imageView;
+    private Sprite sprite;
+    private final Canvas canvas;
 
+    private final GraphicsContext graphicsContext2D;
 
+    private Consumer<GraphicsContext> action;
 
     public ImageViewProperties(GameObjectProperties properties, Sprite sprite) {
         this.properties = properties;
-        this.sprite = sprite;
-        imageView = new ImageView();
-        if (sprite != null) {
-            System.out.println("ImageViewProperties: true image: " + sprite.getImage() != null);
-            imageView.setImage(sprite.getImage());
-        }
-        getChildren().add(imageView);
+        canvas = new Canvas();
+        graphicsContext2D = getCanvas().getGraphicsContext2D();
+        this.setSprite(sprite);
+        setContent(getCanvas());
+
     }
+
 
     public static MenuItem creatingProperties(GameObjectProperties properties) {
         MenuItem item = new MenuItem("Image View");
@@ -44,14 +38,39 @@ public class ImageViewProperties extends ScrollPane {
         return item;
     }
 
-    private void addItem(Region node) {
-        Layouts.alignment(node, Layouts.LEFT_RIGHT);
-        getChildren().add(node);
-      //  setMargin(node, new Insets(0, 0, 8, 0));
-    }
 
     public Sprite getSprite() {
         return sprite;
     }
 
+    public void drawSprite(){
+        getGraphicsContext2D().clearRect(0, 0 , getCanvas().getWidth(), getCanvas().getHeight());
+        if (sprite != null && sprite.getImage() != null) {
+            getCanvas().setWidth(sprite.getImage().getWidth());
+            getCanvas().setHeight(sprite.getImage().getHeight());
+            getGraphicsContext2D().drawImage(sprite.getImage(),  0, 0);
+        }
+        else {
+            getCanvas().setWidth(0);
+            getCanvas().setHeight(0);
+        }
+        if (action  != null)
+            action.accept(getGraphicsContext2D());
+    }
+    public void setSprite(Sprite sprite) {
+        this.sprite = sprite;
+        drawSprite();
+    }
+
+    public void setAction(Consumer<GraphicsContext> action) {
+        this.action = action;
+    }
+
+    public GraphicsContext getGraphicsContext2D() {
+        return graphicsContext2D;
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
+    }
 }

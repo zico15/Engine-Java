@@ -4,13 +4,14 @@ import com.system.FileSystem;
 import com.system.SystemLib;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import plugins.Plugins;
 
 import java.io.File;
 
 public class MainViewController extends ComponentView {
 
-
+    public static Stage stage;
     @FXML
     protected void installPlugins() {
         File file = FileSystem.openFile(new FileChooser.ExtensionFilter("JAVA files (*.jar)", "*.jar"));

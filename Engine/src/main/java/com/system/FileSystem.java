@@ -2,6 +2,7 @@ package com.system;
 
 import com.Main;
 import com.project.Project;
+import com.view.MainViewController;
 import javafx.scene.image.Image;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -16,27 +17,27 @@ public class FileSystem {
     public static File openFolder() {
         DirectoryChooser fileChooser = new DirectoryChooser();
         fileChooser.setTitle("Open Folder");
-        return (fileChooser.showDialog(Main.stage));
+        return (fileChooser.showDialog(MainViewController.stage));
     }
 
     public static File openFile(FileChooser.ExtensionFilter filter) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().setAll(filter);
         fileChooser.setTitle("Open File");
-        return (fileChooser.showOpenDialog(Main.stage));
+        return (fileChooser.showOpenDialog(MainViewController.stage));
     }
 
     public static File openFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open File");
-        return (fileChooser.showOpenDialog(Main.stage));
+        return (fileChooser.showOpenDialog(MainViewController.stage));
     }
 
     public static File openFile(File dir) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(dir);
         fileChooser.setTitle("Open File");
-        return (fileChooser.showOpenDialog(Main.stage));
+        return (fileChooser.showOpenDialog(MainViewController.stage));
     }
 
     public static final void saveObject(File file, Object ob) {
@@ -78,7 +79,7 @@ public class FileSystem {
     public static File saveFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("save File");
-        return (fileChooser.showSaveDialog(Main.stage));
+        return (fileChooser.showSaveDialog(MainViewController.stage));
     }
 
     public static void createFileJava(File file) {

@@ -20,7 +20,6 @@ public class GameObject extends ObjectBase {
 
 
     void render(GraphicsContext graphics2D) {
-        System.out.println("GameObject");
         getComponents().forEach(c -> c.render(graphics2D));
         getChildren().forEach(c -> c.render(graphics2D));
     }
