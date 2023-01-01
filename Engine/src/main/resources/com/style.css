@@ -1,34 +1,40 @@
 .root {
--fx-base: rgb(50, 50, 50);
--fx-background: rgb(50, 50, 50);
--fx-control-inner-background:  rgb(50, 50, 50);
+    -fx-base: rgb(50, 50, 50);
+    -fx-background: rgb(50, 50, 50);
+    -fx-control-inner-background:  rgb(50, 50, 50);
+    -fx-faint-focus-color: transparent;
 }
 
 .tab {
--fx-background-color:  -fx-base;
+    -fx-background-color:  -fx-base;
+    -fx-focus-color: transparent;
 }
 .tab .headers-region .tab .tab-container .tab-close-button > .jfx-svg-glyph {
      -fx-background-color: red;
 }
 
 .menu-bar {
--fx-background-color: -fx-base;
+    -fx-background-color: -fx-base;
+    -fx-focus-color: transparent;
 }
 
 .tool-bar:horizontal {
--fx-background-color:
-linear-gradient(to bottom, derive(-fx-base,+50%), derive(-fx-base,-40%), derive(-fx-base,-20%));
+    -fx-focus-color: transparent;
+    -fx-background-color:
+    linear-gradient(to bottom, derive(-fx-base,+50%), derive(-fx-base,-40%), derive(-fx-base,-20%));
 }
 
 .button {
--fx-background-color: transparent;
+    -fx-background-color: transparent;
+    -fx-focus-color: transparent;
 }
 .button:hover {
--fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
--fx-color: -fx-hover-base;
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-color: -fx-hover-base;
 }
 
 .button-run {
+    -fx-focus-color: transparent;
     -fx-background-color: transparent;
     -fx-background-image: url("run.png");
     -fx-background-repeat: stretch;
@@ -42,32 +48,45 @@ linear-gradient(to bottom, derive(-fx-base,+50%), derive(-fx-base,-40%), derive(
     -fx-background-size: 15 15;
 }
 .table-view {
--fx-table-cell-border-color:derive(-fx-base,+10%);
--fx-table-header-border-color:derive(-fx-base,+20%);
+    -fx-focus-color: transparent;
+    -fx-table-cell-border-color:derive(-fx-base,+10%);
+    -fx-table-header-border-color:derive(-fx-base,+20%);
 }
 
 .split-pane:horizontal > * > .split-pane-divider {
--fx-border-color: transparent -fx-base transparent -fx-base;
--fx-background-color: transparent, derive(-fx-base,20%);
--fx-background-insets: 0, 0 1 0 1;
+    -fx-focus-color: transparent;
+    -fx-border-color: transparent -fx-base transparent -fx-base;
+    -fx-background-color: transparent, derive(-fx-base,20%);
+    -fx-background-insets: 0, 0 1 0 1;
 }
 
 .my-menuButton
 {
+    -fx-focus-color: transparent;
     -fx-background-color: #0093ff;
     -fx-background-radius: 0;
 }
 
 
 .my-gridpane {
--fx-background-color: radial-gradient(radius 100%, derive(-fx-base,20%), derive(-fx-base,-20%));
+    -fx-focus-color: transparent;
+    -fx-background-color: radial-gradient(radius 100%, derive(-fx-base,20%), derive(-fx-base,-20%));
 }
 
 .separator-label {
--fx-text-fill: orange;
+    -fx-focus-color: transparent;
+    -fx-text-fill: orange;
 }
 .canvas
 {
--fx-background-color: orange;
+    -fx-focus-color: transparent;
+    -fx-background-color: orange;
+}
+.scroll-bar {
+    -fx-faint-focus-color: transparent;
+}
+
+.scroll-pane {
+    -fx-faint-focus-color: transparent;
 }
 

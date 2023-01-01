@@ -1,18 +1,17 @@
 package game.components.view.objects;
 
+import com.properties.components.Layouts;
 import com.tree.TreeBase;
 import com.view.ComponentView;
-import com.view.MainViewController;
 import game.core.objects.GameObject;
 import game.core.objects.Scene;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 
 public class ScenePanel extends Canvas {
 
@@ -24,13 +23,21 @@ public class ScenePanel extends Canvas {
 
     private Scene scenes;
     private static long lastUpdate = 0;
+
+    private final ScrollPane scrollPane;
+
+    private final AnimationTimer animationTimer;
     private static int index = 0;
     private static double[] frameRates = new double[100];
     public ScenePanel() {
         setId("gameScenePanel");
+        this.setFocused(false);
+        Layouts.alignment(this, Layouts.ALL);
+        scrollPane = new ScrollPane(this);
+        scrollPane.setFocusTraversable(false);
         tab = TreeBase.newTab("Scene", this);
         gc = getGraphicsContext2D();
-        AnimationTimer frameRateMeter = new AnimationTimer()
+        animationTimer = new AnimationTimer()
         {
             @Override
             public void handle(long now)
@@ -47,7 +54,7 @@ public class ScenePanel extends Canvas {
                 lastUpdate = now;
             }
         };
-        frameRateMeter.start();
+        getAnimationTimer().start();
     }
 
     public void drawing() {
@@ -114,5 +121,13 @@ public class ScenePanel extends Canvas {
 
     public void setScenes(Scene scenes) {
         this.scenes = scenes;
+    }
+
+    public ScrollPane getScrollPane() {
+        return scrollPane;
+    }
+
+    public AnimationTimer getAnimationTimer() {
+        return animationTimer;
     }
 }

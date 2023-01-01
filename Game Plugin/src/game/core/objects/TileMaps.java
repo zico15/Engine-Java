@@ -32,8 +32,10 @@ public class TileMaps extends GameObject {
 
     @Override
     void render(GraphicsContext graphics2D) {
+
         if (sprite.getImage() != null)
             tiles.forEach(t -> drawTile(t, graphics2D));
+        getChildren().forEach(c -> c.render(graphics2D));
     }
 
     private void drawTile(Tile tile, GraphicsContext graphics2D){
@@ -51,9 +53,7 @@ public class TileMaps extends GameObject {
                 return true;
             }
         }
-        Tile t = new Tile(x, y, x_sub , y_sub);
-        System.out.println(t);
-        return tiles.add(t);
+        return tiles.add( new Tile(x, y, x_sub , y_sub));
     }
 
     public void removeTile(int x, int y){

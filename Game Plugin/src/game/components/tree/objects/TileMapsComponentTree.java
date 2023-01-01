@@ -1,22 +1,14 @@
 package game.components.tree.objects;
 
-import com.almasb.fxgl.core.collection.Array;
 import game.components.properties.ImageProperties;
 import game.components.properties.ImageViewProperties;
-import game.components.tree.base.fileType;
 import game.components.view.objects.GameObjectProperties;
 import game.core.components.Sprite;
-import game.core.objects.Scene;
 import game.core.objects.TileMaps;
-import game.core.system.Icons;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 
 import java.awt.*;
-import java.io.Closeable;
-import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class TileMapsComponentTree extends GameObjectComponentTree {
@@ -49,41 +41,65 @@ public class TileMapsComponentTree extends GameObjectComponentTree {
                 System.out.println("action");
             });
         getScenePanel().setOnMouseReleased(e -> {
-            int x = ((int) (e.getX() / 32) * 32), y = ((int) (e.getY() / 32) * 32);
-            rectangle2D.setSize(x, y);
-            if (e.getButton() == MouseButton.PRIMARY)
-                tileMaps.setTile(x, y, x_sub.get(), y_sub.get());
-            if (e.getButton() == MouseButton.SECONDARY)
-                tileMaps.removeTile(x, y);
+            System.out.println("rectangle2D: " + rectangle2D != null);
+            rectangle2D =  correction();
+            for (int x = rectangle2D.x; x < rectangle2D.width; x += tileMaps.getGrid())
+            {
+                for (int y = rectangle2D.y; y < rectangle2D.height; y += tileMaps.getGrid())
+                {
+                    if (e.getButton() == MouseButton.PRIMARY)
+                        tileMaps.setTile(x, y, x_sub.get(), y_sub.get());
+                    if (e.getButton() == MouseButton.SECONDARY)
+                        tileMaps.removeTile(x, y);
+                }
+            }
             System.out.println("canava :"+ rectangle2D);
             rectangle2D = null;
+            getScenePanel().getAnimationTimer().start();
         });
+       /* getScenePanel().setOnMouseClicked(e -> {
+            int x = ((int) (e.getX() / 32) * 32), y = ((int) (e.getY() / 32) * 32);
+            rectangle2D = new Rectangle();
+            rectangle2D.setLocation(x, y);
+            getScenePanel().getAnimationTimer().stop();
+        });*/
         getScenePanel().setOnMousePressed(e -> {
             int x = ((int) (e.getX() / 32) * 32), y = ((int) (e.getY() / 32) * 32);
             rectangle2D = new Rectangle();
             rectangle2D.setLocation(x, y);
+            getScenePanel().getAnimationTimer().stop();
         });
-        getScenePanel().setOnMouseMoved(e -> {
-            System.out.println("setOnMouseMoved");
+        getScenePanel().setOnMouseDragged(e -> {
             if (rectangle2D != null)
             {
-                int w = ((int) (e.getX() / 32) * 32), h = ((int) (e.getY() / 32) * 32);
-                System.out.println(rectangle2D.x + " / " + rectangle2D.y + " / " + (w - rectangle2D.x )  + " / " + (h - rectangle2D.y));
-                getScenePanel().getGraphicsContext2D().setStroke(Color.GREEN);
-                getScenePanel().getGraphicsContext2D().strokeRect(rectangle2D.x, rectangle2D.y, w - rectangle2D.x, h - rectangle2D.y);
+                int x = ((int) (e.getX() / 32) * 32) + 32, y = ((int) (e.getY() / 32) * 32) + 32;
+                rectangle2D.setSize(x, y);
+                getScenePanel().drawing();
+                correction();
             }
         });
+
         GameObjectProperties.addItem(imageProperties);
         GameObjectProperties.addItem(imageViewProperties);
     }
 
+    private Rectangle correction(){
+        int x = rectangle2D.x < rectangle2D.width ? rectangle2D.x : rectangle2D.width;
+        int y = rectangle2D.y < rectangle2D.height ?  rectangle2D.y : rectangle2D.height;
+        int w = rectangle2D.x < rectangle2D.width ? rectangle2D.width : rectangle2D.x;
+        int h = rectangle2D.y < rectangle2D.height ?  rectangle2D.height : rectangle2D.y;
+        getScenePanel().getGraphicsContext2D().setStroke(Color.GREEN);
+        getScenePanel().getGraphicsContext2D().strokeRect(x, y, (w - x), (h - y));
+        return  new  Rectangle(x, y, w, h);
+    }
 
     @Override
     public void unselect() {
+        getScenePanel().setOnMouseClicked(null);
         getScenePanel().setOnMousePressed(null);
         getScenePanel().setOnMouseReleased(null);
-        getScenePanel().setOnMouseMoved(null);
-        System.out.println("close");;
+        getScenePanel().setOnMouseDragged(null);
+        System.out.println("unselect");
     }
 
 

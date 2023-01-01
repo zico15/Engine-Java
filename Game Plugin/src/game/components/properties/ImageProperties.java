@@ -34,8 +34,8 @@ public class ImageProperties extends VBox {
             File file = FileSystem.openFile(GameEngine.gameProject.getDirectory());
             setSprite(file);
             });
-        properties.addTitle("Image");
-        addItem(textFieldFile);
+        ComponentProperties.addItem(ComponentProperties.addTitle("Image"), this);
+        ComponentProperties.addItem(textFieldFile, this);
     }
 
     private void setSprite(File file)
@@ -72,11 +72,6 @@ public class ImageProperties extends VBox {
         return item;
     }
 
-    private void addItem(Region node) {
-        Layouts.alignment(node, Layouts.LEFT_RIGHT);
-        getChildren().add(node);
-        setMargin(node, new Insets(0, 0, 8, 0));
-    }
 
     public Sprite getSprite() {
         return sprite;

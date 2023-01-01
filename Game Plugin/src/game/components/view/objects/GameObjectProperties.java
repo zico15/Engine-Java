@@ -33,7 +33,18 @@ public class GameObjectProperties extends AnchorPane {
     private ArrayList<Region> componentsProperties = new ArrayList<>();
 
     public GameObjectProperties(TabPane tabPaneMain) {
-        setTabView(TreeBase.newTab("Properties", this));
+
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setFocusTraversable(false);
+        this.setFocused(false);
+        setFocusTraversable(false);
+        Layouts.alignment(this, Layouts.LEFT_RIGHT);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setPannable(true);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setContent(this);
+        setTabView(TreeBase.newTab("Properties", scrollPane));
         this.tabPaneMain = tabPaneMain;
         GameObjectProperties.properties = this;
     }
@@ -195,7 +206,7 @@ public class GameObjectProperties extends AnchorPane {
 
     public void addItemBack(Region node) {
         Layouts.alignment(node, Layouts.LEFT_RIGHT);
-        vBox.getChildren().add(vBox.getChildren().size() - 1, node);
+        vBox.getChildren().add((vBox.getChildren().size()  - 1) , node);
         VBox.setMargin(node, new Insets(0, 0, 8, 0));
     }
 

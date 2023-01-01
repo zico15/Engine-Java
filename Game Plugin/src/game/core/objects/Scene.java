@@ -34,7 +34,7 @@ public class Scene extends GameObject implements IStart, IRender, IUpdate {
     @Override
     public void render(GraphicsContext graphics2D) {
         super.render(graphics2D);
-        baseEvents.render(graphics2D);
+        //baseEvents.render(graphics2D);
     }
 
     @Override

@@ -3,6 +3,7 @@ package game.core.objects;
 import game.core.base.BaseEvents;
 import game.core.components.ComponentBase;
 import game.core.transforme.Vector2D;
+import javafx.scene.canvas.GraphicsContext;
 
 import java.io.File;
 import java.io.Serializable;
@@ -86,6 +87,7 @@ public abstract class ObjectBase implements Serializable {
     protected void start_system() {
 
     }
+
 
     public final String getType() {
         return getClass().getSimpleName();

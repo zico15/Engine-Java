@@ -18,8 +18,8 @@ public class TreeViewController extends TreeView<String> {
             if (new_val != null) {
                 BaseComponentTree item = (BaseComponentTree) new_val;
                 setContextMenu(item.getContextMenu());
-                item.preview();
                 selectedItem(item);
+                item.preview();
             }
         });
     }

@@ -24,6 +24,8 @@ public class GameObject extends ObjectBase {
         getChildren().forEach(c -> c.render(graphics2D));
     }
 
+
+
     public GameObject addGameObject(GameObject ob) {
         if (ob == null)
             return null;
