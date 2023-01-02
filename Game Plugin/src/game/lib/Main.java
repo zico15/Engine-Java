@@ -2,6 +2,7 @@ package game.lib;
 
 
 import game.project.GameProject;
+import game.project.build.BuildProject;
 import game.project.prefabs.Prefab;
 import game.project.prefabs.PrefabFolder;
 
@@ -17,11 +18,9 @@ public class Main {
     private void load(){
 
         GameProject gameProject = new GameProject();
-        Prefab<File> p = new PrefabFolder(new File("/nfs/homes/edos-san/Documents/casa/.pref"));
-        gameProject.addPrefab(p);
-        //File file = p.getObject();
-        // FileSystemGame.writePrefab(new File("/nfs/homes/edos-san/Documents/teste1"), p);
-        //  p.setName("casa");
+        gameProject.setDirectory(new File("C:\\Users\\carlo\\Documents\\Engine-Java\\untitled"));
+        BuildProject buildProject = new BuildProject(gameProject);
+        buildProject.start();
 
     }
 

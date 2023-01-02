@@ -18,6 +18,8 @@ public class GameProject extends Project {
 
 
     private Scene sceneSelect;
+
+    private String name = "anyname";
     private final ArrayList<Scene> scenes = new ArrayList<>();
 
     private final ArrayList<Prefab> prefabs = new ArrayList<>();
@@ -88,5 +90,13 @@ public class GameProject extends Project {
 
     public void setSceneSelect(Scene sceneSelect) {
         this.sceneSelect = sceneSelect;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
