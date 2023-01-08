@@ -1,5 +1,6 @@
 package game.core.system;
 
+import com.system.FileSystem;
 import game.components.tree.base.fileType;
 import game.project.prefabs.Prefab;
 
@@ -48,7 +49,6 @@ public class FileSystemGame {
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public static fileType getExtensionType(File file) {
@@ -58,13 +58,13 @@ public class FileSystemGame {
         String name = file.getName();
         String extension = name.contains(".") ? name.substring(name.lastIndexOf(".") + 1,name.length()) : name;
         extension = extension.trim().toLowerCase();
-        switch (extension)
-        {
-            case "java": return fileType.FILE_JAVA;
-            case "cpp": return fileType.FILE_CODE;
-            case "scene": return fileType.FILE_SCENE;
-            case "png": return fileType.FILE_IMAGE;
-        }
-        return  fileType.FILE_ANY;
+        return switch (extension) {
+            case "java" -> fileType.FILE_JAVA;
+            case "cpp" -> fileType.FILE_CODE;
+            case "scene" -> fileType.FILE_SCENE;
+            case "png" -> fileType.FILE_IMAGE;
+            case "class" -> fileType.FILE_CLASS;
+            default -> fileType.FILE_ANY;
+        };
     }
 }

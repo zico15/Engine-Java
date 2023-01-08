@@ -113,6 +113,20 @@ public class FileSystem {
         }
     }
 
+    public static void createFileTxt(File file, String txt) {
+            try {
+                if (!file.exists())
+                    file.createNewFile();
+                try (BufferedWriter bw = new BufferedWriter(new PrintWriter(file))) {
+                    bw.write(txt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+    }
+
     public static final String readFile(File file) {
         String data = "";
         try {

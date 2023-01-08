@@ -21,6 +21,7 @@ public class Main {
         gameProject.setDirectory(new File("C:\\Users\\carlo\\Documents\\Engine-Java\\untitled"));
         BuildProject buildProject = new BuildProject(gameProject);
         buildProject.start();
+      
 
     }
 

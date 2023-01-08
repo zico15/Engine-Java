@@ -68,9 +68,8 @@ public abstract class BaseResourceComponentTree extends BaseComponentTree {
 
 
     public static fileType getExtensionType(File file) {
-        if (file.isDirectory()) {
-            return "Build".equals(file.getName()) ? fileType.FOLDER_BUILD : fileType.FOLDER_ANY;
-        }
+        if (file.isDirectory() && "Build".equals(file.getName()))
+            return fileType.FOLDER_BUILD;
         String name = file.getName();
         String extension = name.contains(".") ? name.substring(name.lastIndexOf(".") + 1,name.length()) : name;
         extension = extension.trim().toLowerCase();

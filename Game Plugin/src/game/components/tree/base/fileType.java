@@ -12,4 +12,5 @@ public enum fileType {
     FILE_OBJECT,
     FILE_PREFAB,
     FILE_TILE_MAPS,
+    FILE_CLASS
 }
