@@ -5,6 +5,7 @@ import game.components.view.objects.GameObjectProperties;
 import game.components.view.objects.ScenePanel;
 import game.components.view.objects.SceneTreeView;
 import game.components.view.resources.ResourceTreeView;
+import game.project.GameEngine;
 import javafx.scene.control.*;
 import plugins.Plugins;
 
@@ -14,9 +15,9 @@ public class InstanceLib extends Plugins {
 
     @Override
     public void install() {
-        TabPane pane = ComponentView.getComponent("tabPaneMain");
+        GameEngine.tabPaneMain = ComponentView.getComponent("tabPaneMain");
         scene = new ScenePanel();
-        pane.getTabs().add(scene.getTab());
+        GameEngine.tabPaneMain.getTabs().add(scene.getTab());
         ComponentView.addComponent(scene);
         TabPane properties = ComponentView.getComponent("tabProperties");
         sceneTreeView = new SceneTreeView(scene);

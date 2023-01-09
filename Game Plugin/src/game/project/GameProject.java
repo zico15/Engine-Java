@@ -34,7 +34,7 @@ public class GameProject extends Project {
         setDirectory(file);
         loadScenes(file);
         if (scenes.size() == 0)
-            scenes.add(new Scene_1());
+            scenes.add(new Scene());
         sceneSelect = scenes.get(0);
         GameEngine.sceneTreeView.load(sceneSelect);
     }

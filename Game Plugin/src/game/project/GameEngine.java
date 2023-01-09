@@ -10,6 +10,7 @@ import game.project.GameProject;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 
 import java.io.File;
 
@@ -24,6 +25,8 @@ public class GameEngine {
     public static  GameObjectProperties gameObjectProperties;
 
     public static final GameProject gameProject = new GameProject();
+
+    public static TabPane tabPaneMain;
 
 
     public static void creatingMenu()

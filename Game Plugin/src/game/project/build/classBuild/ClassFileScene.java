@@ -7,6 +7,7 @@ import game.core.objects.Scene;
 import game.core.objects.TileMaps;
 
 import java.io.File;
+import java.util.List;
 
 public class ClassFileScene extends CreateClassFile {
 
@@ -18,6 +19,7 @@ public class ClassFileScene extends CreateClassFile {
         super(scene.getName(), packageName);
         addImport("game.core.components.*");
         addImport("game.core.transforme.*");
+        addImport("import java.util.List");
         setExtendsName("Scene");
         this.scene = scene;
         functionBlock constructor = createBock("public", null, scene.getName(), null);
@@ -33,10 +35,10 @@ public class ClassFileScene extends CreateClassFile {
 
 
     private void addComponents(functionBlock block, GameObject gameObject, String thisName){
-        block.add("     %s.setVector(new Vector2D(%s));", thisName, scene.getVector());
+        block.add("     %s.setVector(new Vector2D(%s));", thisName, gameObject.getVector());
         for (ComponentBase component : gameObject.getComponents()){
             if (component instanceof Sprite)
-                block.add("     %s.addComponent(new Sprite(\""+ ((Sprite)component).getFile().getPath()+"\"));", thisName);
+                block.add("     %s.addComponent(new Sprite(\""+ ((Sprite)component).getFile().getPath().replaceAll(String.valueOf('\\'), "\\\\")+"\"));", thisName);
         }
     }
 
@@ -45,9 +47,19 @@ public class ClassFileScene extends CreateClassFile {
         block.add("{");
         block.add("     %s %s = new %s(\"%s\");", type, obName, type,  gameObject.getName());
         addComponents(block, gameObject, obName);
+        if (gameObject instanceof TileMaps)
+            loadTileMaps(block, (TileMaps) gameObject, obName);
         gameObject.getChildren().forEach(o -> loadGameObject(block, o, obName, o.getClass().getSimpleName()));
         block.add("     %s.addGameObject(%s);", thisName, obName);
         block.add("}");
+    }
+
+    private void loadTileMaps(functionBlock block, TileMaps  tileMaps,  String thisName){
+        String tiles = "";
+        int size = tileMaps.getTiles().size();
+        for (int i = 0; i < size; i++)
+            tiles += String.format(("new TileMaps.Tile(%s)" + (i + 1 < size ? ", " : "")), tileMaps.getTiles().get(0).toString());
+        block.add("     %s.getTiles().addAll(List.of(%s));", thisName, tiles);
     }
 
 

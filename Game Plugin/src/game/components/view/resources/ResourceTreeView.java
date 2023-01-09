@@ -6,6 +6,7 @@ import com.tree.TreeBase;
 import com.tree.TreeViewController;
 import game.components.tree.base.BaseResourceComponentTree;
 import game.components.tree.base.fileType;
+import game.components.tree.resources.JavaResourceComponentTree;
 import game.components.tree.resources.ResourceComponentTree;
 
 import game.core.system.FileSystemGame;
@@ -121,6 +122,9 @@ public class ResourceTreeView extends TreeViewController {
             }
             case FOLDER_ANY -> {
                 return (new ResourceComponentTree(new PrefabFolder(file), this, file));
+            }
+            case FILE_JAVA -> {
+                return (new JavaResourceComponentTree(new PrefabFolder(file), this, file));
             }
         }
         return new ResourceComponentTree(new PrefabFile(file), this, file);

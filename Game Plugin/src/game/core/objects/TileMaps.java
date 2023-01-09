@@ -3,7 +3,6 @@ package game.core.objects;
 
 import game.core.components.Sprite;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 
 import java.io.File;
 import java.io.Serializable;
@@ -34,7 +33,7 @@ public class TileMaps extends GameObject {
     void render(GraphicsContext graphics2D) {
 
         if (sprite.getImage() != null)
-            tiles.forEach(t -> drawTile(t, graphics2D));
+            getTiles().forEach(t -> drawTile(t, graphics2D));
         getChildren().forEach(c -> c.render(graphics2D));
     }
 
@@ -45,7 +44,7 @@ public class TileMaps extends GameObject {
 
     public boolean setTile(int x, int y, int x_sub, int y_sub)
     {
-        for (Tile t : tiles){
+        for (Tile t : getTiles()){
             if (t.isEqual(x, y))
             {
                 t.x_sub = x_sub;
@@ -53,21 +52,20 @@ public class TileMaps extends GameObject {
                 return true;
             }
         }
-        return tiles.add( new Tile(x, y, x_sub , y_sub));
+        return getTiles().add( new Tile(x, y, x_sub , y_sub));
     }
 
     public void removeTile(int x, int y){
         int index = 0;
-        for (Tile t : tiles){
+        for (Tile t : getTiles()){
             if (t.isEqual(x, y))
             {
-                tiles.remove(index);
+                getTiles().remove(index);
                 break;
             }
             index++;
         }
     }
-
 
     public Sprite getSprite() {
         return sprite;
@@ -89,8 +87,12 @@ public class TileMaps extends GameObject {
         this.grid = grid;
     }
 
+    public ArrayList<Tile> getTiles() {
+        return tiles;
+    }
 
-    public class Tile implements Serializable {
+
+    public static class Tile implements Serializable {
 
         public int x;
         public int y;
@@ -112,35 +114,8 @@ public class TileMaps extends GameObject {
 
         @Override
         public String toString() {
-            return "Tile{" +
-                    "x=" + x +
-                    ", y=" + y +
-                    ", x_sub=" + x_sub +
-                    ", y_sub=" + y_sub +
-                    '}';
+            return  x +"," + y + "," + x_sub +"," + y_sub ;
         }
     }
 
-   /* private class UpdateVector extends Vector2D {
-
-        private void update() {
-            buffer = new ImageBuffer(getWidth(), getHeight());
-        }
-
-        @Override
-        public void setHeight(int height) {
-            if (height >= 0) {
-                super.setHeight(height);
-                update();
-            }
-        }
-
-        @Override
-        public void setWidth(int width) {
-            if (width >= 0) {
-                super.setWidth(width);
-                update();
-            }
-        }
-    }*/
 }
