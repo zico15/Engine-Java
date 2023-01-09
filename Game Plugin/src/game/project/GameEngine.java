@@ -57,7 +57,15 @@ public class GameEngine {
                         m.setOnAction(e-> gameProject.save());
                     }
                 }
+            }else if ("Build".equalsIgnoreCase(menu.getText())) {
+                for (MenuItem m : menu.getItems()){
+                    if ("Build Project".equalsIgnoreCase(m.getText())) {
+                        m.setOnAction(e -> gameProject.build());
+                        break;
+                    }
+                }
             }
+
         });
 
     }

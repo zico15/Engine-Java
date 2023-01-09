@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import game.core.system.FileSystemGame;
+import game.project.build.BuildProject;
 import game.project.prefabs.Prefab;
 import org.jetbrains.annotations.NotNull;
 
@@ -77,6 +78,9 @@ public class GameProject extends Project {
                 FileSystemGame.writeGameObject(new File(getDirectory(), (scene.getPackage() + ".scene")), scene);
             });
         }
+        //class
+        System.out.println("create class");
+
         GameEngine.resourceTreeView.load(getDirectory());
     }
 
@@ -98,5 +102,11 @@ public class GameProject extends Project {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void build(){
+       BuildProject buildProject = new BuildProject(this);
+        buildProject.run();
+
     }
 }

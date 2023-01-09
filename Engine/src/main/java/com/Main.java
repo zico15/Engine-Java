@@ -22,7 +22,6 @@ public class Main extends Application {
         MainViewController.stage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
-        scene.addEventHandler(MouseEvent.MOUSE_MOVED, mouseEvent -> );
         scene.setOnKeyPressed(e -> System.out.println(e.getCode().getChar()));
         stage.setTitle("Game!");
         stage.setScene(scene);

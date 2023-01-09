@@ -1,10 +1,11 @@
 package game.lib;
 
 
-import game.project.GameProject;
-import game.project.build.BuildProject;
-import game.project.prefabs.Prefab;
-import game.project.prefabs.PrefabFolder;
+import game.core.components.Sprite;
+import game.core.objects.GameObject;
+import game.core.transforme.Vector2D;
+import game.project.build.classBuild.ClassFileGameObject;
+import game.project.build.classBuild.CreateClassFile;
 
 import java.io.File;
 
@@ -17,10 +18,20 @@ public class Main {
 
     private void load(){
 
-        GameProject gameProject = new GameProject();
+        GameObject gameObject = new GameObject("GameTeste");
+        gameObject.setVector(new Vector2D(50, 70, 100, 150));
+        gameObject.addComponent(new Sprite(new File("image")));
+
+        ClassFileGameObject classFile = new ClassFileGameObject(gameObject, "game.lib");
+        classFile.addImport("game.project.GameProject");
+        classFile.addImport("game.project.build.BuildProject");
+        classFile.addImport("game.project.build.classBuild.CreateClassFile");
+        classFile.setExtendsName("GameProject");
+        classFile.save(new File(System.getProperty("user.dir"), "asset/GameObject_1.java"));
+        /*GameProject gameProject = new GameProject();
         gameProject.setDirectory(new File("C:\\Users\\carlo\\Documents\\Engine-Java\\untitled"));
         BuildProject buildProject = new BuildProject(gameProject);
-        buildProject.start();
+        buildProject.start();*/
       
 
     }

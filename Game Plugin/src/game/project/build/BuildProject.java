@@ -3,6 +3,7 @@ package game.project.build;
 import game.components.tree.base.fileType;
 import game.core.system.FileSystemGame;
 import game.project.GameProject;
+import game.project.build.classBuild.ClassFileGameObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,8 +34,14 @@ public class BuildProject extends Thread {
        // jar cmf Hello.mf Hello.jar Hello.class Hello.java
         files.add(".\\src\\META-INF\\MANIFEST.MF");
         files.add(".\\Build\\" +project.getName() + ".jar");
+        // create class
+        project.getScenes().forEach(scene -> {
+            ClassFileGameObject.createFiles(scene, project.getDirectory());
+        });
         getFiles(project.getDirectory());
     }
+
+
     @Override
     public void run() {
         try {

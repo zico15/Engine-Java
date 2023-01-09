@@ -19,14 +19,6 @@ public class Vector2D implements Serializable {
         this.height = height;
     }
 
-    @Override
-    public String toString() {
-        return "x:" + getX() +
-                ", y:" + getY() +
-                ", w:" + getWidth() +
-                ", h" + getHeight();
-    }
-
     public int getX() {
         return x;
     }
@@ -57,5 +49,10 @@ public class Vector2D implements Serializable {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    @Override
+    public String toString() {
+        return  getX() + "," + getY() + ", " + getWidth() +", " + getHeight();
     }
 }
