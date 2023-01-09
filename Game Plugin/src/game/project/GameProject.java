@@ -9,6 +9,7 @@ import game.core.objects.Scene;
 import java.io.File;
 import java.util.ArrayList;
 
+import game.core.objects.Scene_1;
 import game.core.system.FileSystemGame;
 import game.project.build.BuildProject;
 import game.project.prefabs.Prefab;
@@ -33,7 +34,7 @@ public class GameProject extends Project {
         setDirectory(file);
         loadScenes(file);
         if (scenes.size() == 0)
-            scenes.add(new Scene());
+            scenes.add(new Scene_1());
         sceneSelect = scenes.get(0);
         GameEngine.sceneTreeView.load(sceneSelect);
     }

@@ -2,8 +2,10 @@ package game.project.build;
 
 import game.components.tree.base.fileType;
 import game.core.system.FileSystemGame;
+import game.project.GameEngine;
 import game.project.GameProject;
 import game.project.build.classBuild.ClassFileGameObject;
+import game.project.build.classBuild.ClassFileScene;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +38,9 @@ public class BuildProject extends Thread {
         files.add(".\\Build\\" +project.getName() + ".jar");
         // create class
         project.getScenes().forEach(scene -> {
-            ClassFileGameObject.createFiles(scene, project.getDirectory());
+            ClassFileScene classFileScene = new ClassFileScene(scene, scene.getPackageName());
+            classFileScene.save(new File(project.getDirectory(), scene.getName() + ".java"));
+            //ClassFileGameObject.createFiles(scene, project.getDirectory());
         });
         getFiles(project.getDirectory());
     }
@@ -47,6 +51,7 @@ public class BuildProject extends Thread {
         try {
             creatingClassFiles();
             creatingJarFile();
+            GameEngine.resourceTreeView.load(project.getDirectory());
         } catch (IOException | InterruptedException e) {
             System.err.println(e.getMessage());
         }finally {

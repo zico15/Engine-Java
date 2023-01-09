@@ -3,6 +3,7 @@ package game.lib;
 
 import game.core.components.Sprite;
 import game.core.objects.GameObject;
+import game.core.objects.Scene;
 import game.core.transforme.Vector2D;
 import game.project.build.classBuild.ClassFileGameObject;
 import game.project.build.classBuild.CreateClassFile;

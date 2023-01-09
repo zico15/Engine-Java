@@ -67,6 +67,16 @@ public  class CreateClassFile   {
         classFile.add(line);
     }
 
+    /***
+     * String %s
+     * Float %f
+     * Char  %c
+     * Int   %i
+     * ***/
+    public void add(String format, Object... args){
+        add(String.format(format, args));
+    }
+
     public void save(@NotNull File file)
     {
         classFile.add(0, head());
@@ -120,6 +130,15 @@ public  class CreateClassFile   {
             lines.add("         "+line);
         }
 
+        /***
+         * String %s
+         * Float %f
+         * Char  %c
+         * Int   %i
+         * ***/
+        public void add(String format, Object... args){
+            add(String.format(format, args));
+        }
         @Override
         public String toString() {
             String text = "";

@@ -2,6 +2,9 @@ package game.core.objects;
 
 
 import game.core.base.BaseEvents;
+import game.core.components.ComponentBase;
+import game.core.components.Sprite;
+import game.project.build.classBuild.CreateClassFile;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
@@ -39,4 +42,5 @@ public class GameObject extends ObjectBase {
         getComponents().forEach(c -> c.load_system());
         getChildren().forEach(c -> c.load_system());
     }
+
 }
