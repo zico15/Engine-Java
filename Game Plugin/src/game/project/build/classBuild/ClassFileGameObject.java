@@ -22,7 +22,7 @@ public class ClassFileGameObject extends CreateClassFile {
     private void addComponents(functionBlock block){
         for (ComponentBase component : gameObject.getComponents()){
             if (component instanceof Sprite)
-                block.add("addComponent(new Sprite(\""+ ((Sprite)component).getFile().getPath()+"\"));");
+                block.add("addComponent(new Sprite(\""+ ((Sprite)component).getFile()+"\"));");
         }
     }
 

@@ -71,7 +71,7 @@ public class TileMaps extends GameObject {
         return sprite;
     }
 
-    public void setSprite(File file) {
+    public void setSprite(String file) {
         sprite = new Sprite(file);
     }
 

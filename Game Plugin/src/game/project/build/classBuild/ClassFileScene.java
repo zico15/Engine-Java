@@ -16,10 +16,11 @@ public class ClassFileScene extends CreateClassFile {
 
     private String space;
     public ClassFileScene(Scene scene, String packageName) {
-        super(scene.getName(), packageName);
+        super(scene.getName(), "game.project.scenes");
         addImport("game.core.components.*");
         addImport("game.core.transforme.*");
-        addImport("import java.util.List");
+        addImport("game.core.objects.*");
+        addImport("java.util.List");
         setExtendsName("Scene");
         this.scene = scene;
         functionBlock constructor = createBock("public", null, scene.getName(), null);
@@ -38,7 +39,7 @@ public class ClassFileScene extends CreateClassFile {
         block.add("     %s.setVector(new Vector2D(%s));", thisName, gameObject.getVector());
         for (ComponentBase component : gameObject.getComponents()){
             if (component instanceof Sprite)
-                block.add("     %s.addComponent(new Sprite(\""+ ((Sprite)component).getFile().getPath().replaceAll(String.valueOf('\\'), "\\\\")+"\"));", thisName);
+                block.add("     %s.addComponent(new Sprite(\""+ ((Sprite)component).getFile()+"\"));", thisName);
         }
     }
 

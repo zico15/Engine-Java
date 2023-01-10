@@ -5,6 +5,7 @@ import com.system.FileSystem;
 import game.components.view.objects.GameObjectProperties;
 import game.core.components.Sprite;
 import game.project.GameEngine;
+import game.project.GameProject;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -16,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.function.Consumer;
 
 public class ImageProperties extends VBox {
@@ -32,18 +34,26 @@ public class ImageProperties extends VBox {
         textFieldFile = new TextField();
         textFieldFile.addEventHandler(MouseEvent.MOUSE_PRESSED, evt -> {
             File file = FileSystem.openFile(GameEngine.gameProject.getDirectory());
-            setSprite(file);
+            if (file != null) {
+                File dest = new File(GameProject.getProject().getAsset(), file.getName());
+                try {
+                    FileSystem.copy(file, dest);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                setSprite("asset/"+ file.getName());
+            }
             });
         ComponentProperties.addItem(ComponentProperties.addTitle("Image"), this);
         ComponentProperties.addItem(textFieldFile, this);
     }
 
-    private void setSprite(File file)
+    private void setSprite(String file)
     {
-        if (file != null && file.exists() && file.isFile() && sprite.load(file))
-            textFieldFile.setText(file.getName());
+        if (file != null && !file.isEmpty() && sprite.load(file))
+            textFieldFile.setText(file);
         else
-            textFieldFile.setText(sprite.getFile() != null ? sprite.getFile().getName() : "");
+            textFieldFile.setText(sprite.getFile() != null ? sprite.getFile() : "");
         if (action != null)
             action.accept(this);
     }
@@ -57,7 +67,7 @@ public class ImageProperties extends VBox {
         this(properties);
         this.sprite = sprite;
         if (sprite.getFile() != null)
-            textFieldFile.setText(sprite.getFile().getName());
+            textFieldFile.setText(sprite.getFile());
         else
             textFieldFile.setText(null);
     }

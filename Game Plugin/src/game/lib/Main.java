@@ -21,7 +21,7 @@ public class Main {
 
         GameObject gameObject = new GameObject("GameTeste");
         gameObject.setVector(new Vector2D(50, 70, 100, 150));
-        gameObject.addComponent(new Sprite(new File("image")));
+        gameObject.addComponent(new Sprite("image"));
 
         ClassFileGameObject classFile = new ClassFileGameObject(gameObject, "game.lib");
         classFile.addImport("game.project.GameProject");

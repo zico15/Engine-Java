@@ -1,6 +1,7 @@
 package game.core.components;
 
 
+import com.project.Project;
 import game.core.base.ImageBuffer;
 import game.core.transforme.Vector2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -12,7 +13,7 @@ import java.io.FileNotFoundException;
 
 public class Sprite extends ComponentBase {
 
-    private File file;
+    private String file;
     private transient ImageBuffer buffer;
 
     private transient Image image;
@@ -22,12 +23,12 @@ public class Sprite extends ComponentBase {
         image = null;
     }
 
-    public Sprite(File file) {
+    public Sprite(String file) {
         this.file = file;
         load(file);
     }
 
-    public Sprite(File file, int width, int height) {
+    public Sprite(String file, int width, int height) {
         this(file);
     }
 
@@ -39,11 +40,11 @@ public class Sprite extends ComponentBase {
         }
     }
 
-    public boolean load(File file) {
+    public boolean load(String file) {
         this.file = file;
-        if (file != null && file.exists()) {
+        if (file != null && !file.isEmpty()) {
             try {
-                image = new Image(new FileInputStream(file));
+                image = new Image(new FileInputStream(new File(Project.getProject().getDirectory(), file)));
                 return !getImage().isError();
             } catch (FileNotFoundException e) {
                 image = null;
@@ -73,7 +74,7 @@ public class Sprite extends ComponentBase {
         return image != null ? (int) image.getHeight() : 0;
     }
 
-    public File getFile() {
+    public String getFile() {
         return file;
     }
 

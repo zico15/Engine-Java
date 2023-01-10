@@ -9,6 +9,8 @@ public class Project implements Serializable {
     private static Project project = new Project();
     private File directory;
 
+    private File assets;
+
     public Project() {
 
         project = this;
@@ -45,6 +47,13 @@ public class Project implements Serializable {
     }
 
     public void setDirectory(File directory) {
+        this.assets = new File(directory, "assets");
+        if (!this.assets.exists())
+            assets.mkdirs();
         this.directory = directory;
+    }
+
+    public File getAssets() {
+        return assets;
     }
 }

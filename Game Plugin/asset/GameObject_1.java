@@ -8,7 +8,7 @@ public class GameTeste extends GameProject   {
 
 
      public  GameTeste() {
-         addComponent(new Sprite("image"));
+         addComponent(new Sprite("null"));
          setVector(new Vector2D(50,70, 100, 150));
      }
 
