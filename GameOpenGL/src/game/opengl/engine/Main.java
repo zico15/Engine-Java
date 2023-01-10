@@ -1,22 +1,16 @@
 package game.opengl.engine;
 
 
-import game.core.components.Sprite;
-import game.core.objects.GameObject;
-import game.core.objects.Scene;
-import game.core.transforme.Vector2D;
 import game.opengl.listener.events.Event;
 import game.opengl.listener.KeyListener;
 import game.opengl.renderer.Window;
-import game.project.scenes.Scene_1;
-
-import static org.lwjgl.glfw.GLFW.*;
+import game.project.scenes.Scene_2;
 
 public class Main {
     public static void main(String[] args) {
 
         Window window = new Window("Game");
-        Scene_1 scene = new Scene_1();
+        Scene_2 scene = new Scene_2();
         /*GameObject gameObject = new GameObject();
         gameObject.setVector(new Vector2D(0,0, 100, 100));
         gameObject.addComponent(new Sprite("assets/tes.png"));

@@ -86,6 +86,37 @@ public class BuildProject extends Thread {
     }
 
     /***
+     * javac -cp .\GameOpenGL.jar \game\project\scenes\Scene_1.java
+     * jar uf .\GameOpenGL.jar .\game\project\scenes\Scene_1.class
+     * **/
+    public void insertFileToJar(String jarName, String filesName[]) throws IOException, InterruptedException {
+        String args[] = new String[filesName.length + 3];
+        args[0] = "jar";
+        args[1] = "uf";
+        args[2] = jarName;
+        for (int i = 0; i < filesName.length; i++)
+            args[3 + i] = filesName[i];
+        new ProcessBuilder(args).directory(project.getDirectory()).start().waitFor();
+    }
+
+    /***
+     * javac -cp .\GameOpenGL.jar \game\project\scenes\Scene_1.java
+     * jar uf .\GameOpenGL.jar .\game\project\scenes\Scene_1.class
+     * **/
+    public void compileFileToJar(String jarName, String filesName[]) throws IOException, InterruptedException {
+        String args[] = new String[filesName.length + 3];
+        args[0] = "javac";
+        args[1] = "-cp";
+        args[2] = jarName;
+        for (int i = 0; i < filesName.length; i++)
+            args[3 + i] = filesName[i];
+        new ProcessBuilder(args).directory(project.getDirectory()).start().waitFor();
+        for (int i = 0; i < filesName.length; i++)
+            filesName[i] = filesName[i].replaceAll(".java", ".class");
+        insertFileToJar(jarName, filesName);
+    }
+
+    /***
      * javac files.java
      * * * ***/
     public void creatingClassFiles() throws IOException, InterruptedException {
