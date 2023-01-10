@@ -8,9 +8,11 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
 import java.io.*;
+import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 
 public class FileSystem {
 
@@ -169,4 +171,24 @@ public class FileSystem {
             destChannel.close();
         }
     }
+
+    public static void copy(URL url,  File dest){
+        InputStream inputStream = null;
+        try {
+            inputStream = url.openStream();
+            try (FileOutputStream outputStream = new FileOutputStream(dest, false)) {
+                int read;
+                byte[] bytes = new byte[1024];
+                while ((read = inputStream.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+     }
 }

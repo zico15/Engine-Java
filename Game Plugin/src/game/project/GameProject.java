@@ -29,9 +29,10 @@ public class GameProject extends Project {
     @Override
     public void load(File file)
     {
+        name = file.getName();
+        setDirectory(file);
         GameEngine.resourceTreeView.load(file);
         scenes.clear();
-        setDirectory(file);
         loadScenes(file);
         if (scenes.size() == 0)
             scenes.add(new Scene());

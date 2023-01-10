@@ -16,7 +16,7 @@ public class Scene extends GameObject implements IStart, IRender, IUpdate {
     private static int id = 1;
 
     public Scene() {
-        super("scene_" + id++);
+        super("Scene_" + id++);
         baseEvents = new BaseEvents();
     }
 

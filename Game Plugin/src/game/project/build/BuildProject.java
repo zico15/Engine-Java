@@ -1,10 +1,11 @@
 package game.project.build;
 
+import com.system.FileSystem;
 import game.components.tree.base.fileType;
+import game.core.objects.Scene;
 import game.core.system.FileSystemGame;
 import game.project.GameEngine;
 import game.project.GameProject;
-import game.project.build.classBuild.ClassFileGameObject;
 import game.project.build.classBuild.ClassFileScene;
 
 import java.io.File;
@@ -17,7 +18,20 @@ public class BuildProject extends Thread {
 
 
     private final GameProject project;
-    private final File file;
+    private final File fileBuild;
+
+    private File fileScenes;
+
+    private File fileGameOpenGL;
+
+    /*{
+        try {
+            fileGameOpenGL = new File(getClass().getResource("/resources/gameopengl/GameOpenGL.jar").toURI());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }*/
+
 
     private List<String> filesJava = new ArrayList<>();
 
@@ -27,30 +41,40 @@ public class BuildProject extends Thread {
     private List<File> temp = new ArrayList<>();
 
     public BuildProject(GameProject project) {
+        System.out.println(getClass().getResource("resources/gameopengl/GameOpenGL.jar"));
         this.project = project;
-        file = new File(project.getDirectory(), "Build");
-        file.mkdirs();
-        files.add("jar");
+        fileBuild = new File(project.getDirectory(), "Build");
+        fileBuild.mkdirs();
+        fileScenes = new File(fileBuild, "game/project/scenes");
+        fileScenes.mkdirs();
+        /*files.add("jar");
         files.add("cmf");
         //files.add("cvfm");
        // jar cmf Hello.mf Hello.jar Hello.class Hello.java
         files.add(".\\src\\META-INF\\MANIFEST.MF");
-        files.add(".\\Build\\" +project.getName() + ".jar");
-        // create class
-        project.getScenes().forEach(scene -> {
-            ClassFileScene classFileScene = new ClassFileScene(scene, scene.getPackageName());
-            classFileScene.save(new File(project.getDirectory(), scene.getName() + ".java"));
-            //ClassFileGameObject.createFiles(scene, project.getDirectory());
-        });
-        getFiles(project.getDirectory());
+        files.add(".\\Build\\" +project.getName() + ".jar");*/
+        fileGameOpenGL = new File(fileBuild, project.getName()+".jar");
+        System.out.println(getClass().getResource("/resources/gameopengl/GameOpenGL.jar"));
+        System.out.println( System.getProperty("user.dir"));
+
+        //getFiles(project.getDirectory());
     }
 
 
     @Override
     public void run() {
         try {
-            creatingClassFiles();
-            creatingJarFile();
+            FileSystem.copy(getClass().getResource("/resources/gameopengl/GameOpenGL.jar"), fileGameOpenGL);
+            String[] classScene = new String[project.getScenes().size()];
+            // create class
+            for (int j = 0; j < project.getScenes().size(); j++) {
+                Scene scene = project.getScenes().get(j);
+                ClassFileScene classFileScene = new ClassFileScene(scene, scene.getPackageName());
+                classFileScene.save(new File(fileScenes, scene.getName() + ".java"));
+                classScene[j++] = ("game/project/scenes/" + scene.getName() + ".java");
+            }
+            compileFileToJar(project.getName()+".jar", classScene);
+
             GameEngine.resourceTreeView.load(project.getDirectory());
         } catch (IOException | InterruptedException e) {
             System.err.println(e.getMessage());
@@ -96,7 +120,7 @@ public class BuildProject extends Thread {
         args[2] = jarName;
         for (int i = 0; i < filesName.length; i++)
             args[3 + i] = filesName[i];
-        new ProcessBuilder(args).directory(project.getDirectory()).start().waitFor();
+        new ProcessBuilder(args).directory(fileBuild).start().waitFor();
     }
 
     /***
@@ -110,7 +134,7 @@ public class BuildProject extends Thread {
         args[2] = jarName;
         for (int i = 0; i < filesName.length; i++)
             args[3 + i] = filesName[i];
-        new ProcessBuilder(args).directory(project.getDirectory()).start().waitFor();
+        new ProcessBuilder(args).directory(fileBuild).start().waitFor();
         for (int i = 0; i < filesName.length; i++)
             filesName[i] = filesName[i].replaceAll(".java", ".class");
         insertFileToJar(jarName, filesName);

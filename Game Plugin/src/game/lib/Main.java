@@ -9,6 +9,7 @@ import game.project.build.classBuild.ClassFileGameObject;
 import game.project.build.classBuild.CreateClassFile;
 
 import java.io.File;
+import java.net.URISyntaxException;
 
 public class Main {
 
@@ -19,7 +20,14 @@ public class Main {
 
     private void load(){
 
-        GameObject gameObject = new GameObject("GameTeste");
+        File file = null;
+        try {
+            file = new File(getClass().getResource("/resources/gameopengl/GameOpenGL.jar").toURI());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(file + " / " + file.exists());
+        /*GameObject gameObject = new GameObject("GameTeste");
         gameObject.setVector(new Vector2D(50, 70, 100, 150));
         gameObject.addComponent(new Sprite("image"));
 
@@ -28,7 +36,7 @@ public class Main {
         classFile.addImport("game.project.build.BuildProject");
         classFile.addImport("game.project.build.classBuild.CreateClassFile");
         classFile.setExtendsName("GameProject");
-        classFile.save(new File(System.getProperty("user.dir"), "asset/GameObject_1.java"));
+        classFile.save(new File(System.getProperty("user.dir"), "asset/GameObject_1.java"));*/
         /*GameProject gameProject = new GameProject();
         gameProject.setDirectory(new File("C:\\Users\\carlo\\Documents\\Engine-Java\\untitled"));
         BuildProject buildProject = new BuildProject(gameProject);

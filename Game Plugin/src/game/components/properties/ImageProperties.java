@@ -35,13 +35,13 @@ public class ImageProperties extends VBox {
         textFieldFile.addEventHandler(MouseEvent.MOUSE_PRESSED, evt -> {
             File file = FileSystem.openFile(GameEngine.gameProject.getDirectory());
             if (file != null) {
-                File dest = new File(GameProject.getProject().getAsset(), file.getName());
+                File dest = new File(GameProject.getProject().getAssets(), file.getName());
                 try {
                     FileSystem.copy(file, dest);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                setSprite("asset/"+ file.getName());
+                setSprite("assets/"+ file.getName());
             }
             });
         ComponentProperties.addItem(ComponentProperties.addTitle("Image"), this);

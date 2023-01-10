@@ -41,6 +41,7 @@ public class Sprite extends ComponentBase {
     }
 
     public boolean load(String file) {
+        System.out.println("File: " + file);
         this.file = file;
         if (file != null && !file.isEmpty()) {
             try {
