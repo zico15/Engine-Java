@@ -24,6 +24,7 @@ public class BuildProject extends Thread {
 
     private File fileGameOpenGL;
 
+    private String pathEnv = "/nfs/homes/edos-san/.jdks/corretto-18.0.2/bin/";
     /*{
         try {
             fileGameOpenGL = new File(getClass().getResource("/resources/gameopengl/GameOpenGL.jar").toURI());
@@ -41,6 +42,9 @@ public class BuildProject extends Thread {
     private List<File> temp = new ArrayList<>();
 
     public BuildProject(GameProject project) {
+        System.getenv().forEach((k, v) -> {
+            System.out.println(k + ":" + v);
+        });
         System.out.println(getClass().getResource("resources/gameopengl/GameOpenGL.jar"));
         this.project = project;
         fileBuild = new File(project.getDirectory(), "Build");
@@ -74,7 +78,7 @@ public class BuildProject extends Thread {
                 classScene[j++] = ("game/project/scenes/" + scene.getName() + ".java");
             }
             compileFileToJar(project.getName()+".jar", classScene);
-
+            fileScenes.delete();
             GameEngine.resourceTreeView.load(project.getDirectory());
         } catch (IOException | InterruptedException e) {
             System.err.println(e.getMessage());
@@ -115,7 +119,7 @@ public class BuildProject extends Thread {
      * **/
     public void insertFileToJar(String jarName, String filesName[]) throws IOException, InterruptedException {
         String args[] = new String[filesName.length + 3];
-        args[0] = "jar";
+        args[0] = pathEnv + "jar";
         args[1] = "uf";
         args[2] = jarName;
         for (int i = 0; i < filesName.length; i++)
@@ -129,7 +133,7 @@ public class BuildProject extends Thread {
      * **/
     public void compileFileToJar(String jarName, String filesName[]) throws IOException, InterruptedException {
         String args[] = new String[filesName.length + 3];
-        args[0] = "javac";
+        args[0] = pathEnv + "javac";
         args[1] = "-cp";
         args[2] = jarName;
         for (int i = 0; i < filesName.length; i++)

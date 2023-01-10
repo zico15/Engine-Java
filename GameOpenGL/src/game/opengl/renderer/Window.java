@@ -74,10 +74,10 @@ public class Window {
         });*/
 
         // Callbacks
-        glfwSetCursorPosCallback(window, MouseListener::mousePostCallback);
+        /*glfwSetCursorPosCallback(window, MouseListener::mousePostCallback);
         glfwSetMouseButtonCallback(window, MouseListener::mouseButtonCallback);
         glfwSetScrollCallback(window, MouseListener::mouseScrollCallback);
-        glfwSetKeyCallback(window, KeyListener::keyCallback);
+        glfwSetKeyCallback(window, KeyListener::keyCallback);*/
 
         // Get the thread stack and push a new frame
         try ( MemoryStack stack = stackPush() ) {
@@ -135,7 +135,6 @@ public class Window {
         glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
-       Image image = new Image("assets/tes.png");
         while ( !glfwWindowShouldClose(window) ) {
 
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
