@@ -7,12 +7,14 @@ import game.core.system.FileSystemGame;
 import game.project.GameEngine;
 import game.project.GameProject;
 import game.project.build.classBuild.ClassFileScene;
+import javafx.scene.control.TextInputDialog;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class BuildProject extends Thread {
 
@@ -24,7 +26,7 @@ public class BuildProject extends Thread {
 
     private File fileGameOpenGL;
 
-    private String pathEnv = "/nfs/homes/edos-san/.jdks/corretto-18.0.2/bin/";
+    private String pathEnv = null;
     /*{
         try {
             fileGameOpenGL = new File(getClass().getResource("/resources/gameopengl/GameOpenGL.jar").toURI());
@@ -42,9 +44,7 @@ public class BuildProject extends Thread {
     private List<File> temp = new ArrayList<>();
 
     public BuildProject(GameProject project) {
-        System.getenv().forEach((k, v) -> {
-            System.out.println(k + ":" + v);
-        });
+
         System.out.println(getClass().getResource("resources/gameopengl/GameOpenGL.jar"));
         this.project = project;
         fileBuild = new File(project.getDirectory(), "Build");
@@ -64,9 +64,33 @@ public class BuildProject extends Thread {
         //getFiles(project.getDirectory());
     }
 
+    public boolean get_env_java_home(){
+
+       String path =  System.getenv().get("JAVA_HOME");
+
+       if (path == null || path.isEmpty()) {
+           TextInputDialog dialog = new TextInputDialog(null);
+           dialog.setTitle("JAVA_HOME");
+           dialog.setHeaderText("Path");
+
+           Optional<String> result = dialog.showAndWait();
+           if (result.isPresent()) {
+
+               pathEnv = result.get() + " /bin/";
+           }
+           else
+               pathEnv = null;
+       }
+       else
+           pathEnv = path + "/bin/";
+       return  pathEnv != null && !pathEnv.isEmpty();
+
+    }
+
 
     @Override
     public void run() {
+        if (get_env_java_home()){
         try {
             FileSystem.copy(getClass().getResource("/resources/gameopengl/GameOpenGL.jar"), fileGameOpenGL);
             String[] classScene = new String[project.getScenes().size()];
@@ -84,7 +108,7 @@ public class BuildProject extends Thread {
             System.err.println(e.getMessage());
         }finally {
            deleteFilesTemp();
-        }
+        }}
     }
 
     private void deleteFilesTemp(){
