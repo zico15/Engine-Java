@@ -36,8 +36,9 @@
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
     "go.import.settings.migrated": "true",
-    "last_opened_file_path": "C:/Users/carlo/Documents/Engine-Java/Engine",
+    "last_opened_file_path": "/home/ezequeil/IdeaProjects/Engine-Java/Engine",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -46,6 +47,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.pluginManager",
+    "show.migrate.to.gradle.popup": "false",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -87,6 +89,7 @@
       <workItem from="1671894112830" duration="160000" />
       <workItem from="1671894352636" duration="23000" />
       <workItem from="1672337145183" duration="19000" />
+      <workItem from="1673698305306" duration="27000" />
     </task>
     <task id="LOCAL-00001" summary="Game Tester">
       <created>1672014520630</created>

@@ -6,8 +6,11 @@ import game.components.view.objects.ScenePanel;
 import game.components.view.objects.SceneTreeView;
 import game.components.view.resources.ResourceTreeView;
 import game.project.GameEngine;
+import game.project.build.BuildProject;
 import javafx.scene.control.*;
 import plugins.Plugins;
+
+import java.io.IOException;
 
 import static game.project.GameEngine.*;
 
@@ -29,8 +32,17 @@ public class InstanceLib extends Plugins {
         properties.getTabs().add(gameObjectProperties.getTabView());
         ToggleButton toggleButton = ComponentView.getComponent("enginePlayer");
         toggleButton.setOnAction(e -> {
-            System.out.println("toggleButton");
-            scene.drawing();
+            new Thread(() -> {
+                try {
+                    BuildProject.exeJar(gameProject);
+                    System.out.println("BuildProject.exeJar");
+                } catch (IOException ex) {
+                    System.err.println(ex.getMessage());
+                } catch (InterruptedException ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }).start();
+            toggleButton.setSelected(false);
         });
         creatingMenu();
     }
