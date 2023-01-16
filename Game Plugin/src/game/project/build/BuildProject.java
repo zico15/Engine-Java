@@ -26,7 +26,8 @@ public class BuildProject extends Thread {
 
     private File fileGameOpenGL;
 
-    private String pathEnv = null;
+
+    private static String pathEnv = null;
     /*{
         try {
             fileGameOpenGL = new File(getClass().getResource("/resources/gameopengl/GameOpenGL.jar").toURI());
@@ -64,27 +65,32 @@ public class BuildProject extends Thread {
         //getFiles(project.getDirectory());
     }
 
+    /****
+     * linux: update-alternatives --config java
+     * ****/
+    public static String getPathEnv() {
+
+        if (pathEnv == null || pathEnv.isEmpty()) {
+            String path = System.getenv().get("JAVA_HOME");
+            if (path == null || path.isEmpty()) {
+                TextInputDialog dialog = new TextInputDialog(null);
+                dialog.setTitle("JAVA_HOME");
+                dialog.setHeaderText("Path (Ex: java-11-openjdk-amd64/bin/)");
+
+                Optional<String> result = dialog.showAndWait();
+                if (result.isPresent()) {
+
+                    pathEnv = result.get().trim();
+                } else
+                    pathEnv = null;
+            } else
+                pathEnv = (path.trim() + "/bin/").trim();
+        }
+        return pathEnv;
+    }
+
     public boolean get_env_java_home(){
-
-       String path =  System.getenv().get("JAVA_HOME");
-
-       if (path == null || path.isEmpty()) {
-           TextInputDialog dialog = new TextInputDialog(null);
-           dialog.setTitle("JAVA_HOME");
-           dialog.setHeaderText("Path");
-
-           Optional<String> result = dialog.showAndWait();
-           if (result.isPresent()) {
-
-               pathEnv = result.get() + " /bin/";
-           }
-           else
-               pathEnv = null;
-       }
-       else
-           pathEnv = path + "/bin/";
-       return  pathEnv != null && !pathEnv.isEmpty();
-
+      return  getPathEnv() != null && !getPathEnv().isEmpty();
     }
 
 
@@ -101,7 +107,7 @@ public class BuildProject extends Thread {
                 classFileScene.save(new File(fileScenes, scene.getName() + ".java"));
                 classScene[j++] = ("game/project/scenes/" + scene.getName() + ".java");
             }
-            compileFileToJar(project.getName()+".jar", classScene);
+            compileFileToJar(fileGameOpenGL.getName(), classScene);
             fileScenes.delete();
             GameEngine.resourceTreeView.load(project.getDirectory());
         } catch (IOException | InterruptedException e) {
@@ -117,6 +123,19 @@ public class BuildProject extends Thread {
                 System.out.println(f + " " + f.delete());
             }
         });
+    }
+
+    public static void exeJar(GameProject project) throws IOException, InterruptedException {
+           File file = new File(project.getDirectory(), "Build");
+            if (file.exists()){
+                    String args[] = new String[3];
+                    args[0] = getPathEnv() + "java";
+                    args[1] = "-jar";
+                    args[2] = (project.getName().trim()+".jar");
+                    new ProcessBuilder(args).directory(file).start().waitFor();
+            }
+            else
+                System.err.println("Not Build!");
     }
     private void getFiles(File dir)
     {
@@ -143,7 +162,7 @@ public class BuildProject extends Thread {
      * **/
     public void insertFileToJar(String jarName, String filesName[]) throws IOException, InterruptedException {
         String args[] = new String[filesName.length + 3];
-        args[0] = pathEnv + "jar";
+        args[0] = getPathEnv() + "jar";
         args[1] = "uf";
         args[2] = jarName;
         for (int i = 0; i < filesName.length; i++)
@@ -157,7 +176,7 @@ public class BuildProject extends Thread {
      * **/
     public void compileFileToJar(String jarName, String filesName[]) throws IOException, InterruptedException {
         String args[] = new String[filesName.length + 3];
-        args[0] = pathEnv + "javac";
+        args[0] = getPathEnv() + "javac";
         args[1] = "-cp";
         args[2] = jarName;
         for (int i = 0; i < filesName.length; i++)
