@@ -7,6 +7,7 @@ import game.components.view.objects.ScenePanel;
 import game.components.view.objects.SceneTreeView;
 import game.components.view.resources.ResourceTreeView;
 import game.project.GameProject;
+import game.project.build.BuildProject;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -31,6 +32,10 @@ public class GameEngine {
 
     public static void creatingMenu()
     {
+        String a;
+
+        a = "adsaadas";
+        a = "sadasd".trim();
         MenuBar menuTop = ComponentView.getComponent("menuBarTop");
         menuTop.getMenus().forEach(menu -> {
             if ("Window".equalsIgnoreCase(menu.getText()))

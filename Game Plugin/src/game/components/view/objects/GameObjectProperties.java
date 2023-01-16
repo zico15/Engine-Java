@@ -2,7 +2,9 @@ package game.components.view.objects;
 
 import com.properties.components.Layouts;
 import com.tree.TreeBase;
+import game.components.properties.ComponentProperties;
 import game.components.properties.ImageProperties;
+import game.components.properties.ScriptProperties;
 import game.components.tree.base.BaseGameComponentTree;
 import game.core.components.Sprite;
 import game.core.objects.GameObject;
@@ -29,6 +31,8 @@ public class GameObjectProperties extends AnchorPane {
 
     private VBox vBox;
     private final TabPane tabPaneMain;
+
+
 
     private ArrayList<Region> componentsProperties = new ArrayList<>();
 
@@ -88,7 +92,7 @@ public class GameObjectProperties extends AnchorPane {
         if (isEditable) {
             gameObject.getComponents().forEach(c -> {
                 if (c instanceof Sprite)
-                    properties.addItem(new ImageProperties(this, (Sprite) c));
+                    properties.addItem(new ImageProperties((Sprite) c).getView());
 
             });
             createProperties();
@@ -211,18 +215,7 @@ public class GameObjectProperties extends AnchorPane {
     }
 
     public void createProperties() {
-        MenuButton menu = new MenuButton("Components");
-        menu.setAlignment(Pos.CENTER);
-        menu.setPopupSide(Side.RIGHT);
-        menu.getStyleClass().add("my-menuButton");
-        menu.getItems().add(ImageProperties.creatingProperties(this));
-        /*menu.getItems().add(newMenuItem("Scrips", e-> {
-            properties.getChildren().add(properties.getSize() - 1, new ScriptProperties(properties));
-        }));*/
-        // alignment(menu, NONE, NONE, 0, 0);
-        Layouts.alignment(menu, Layouts.ALL);
-        AnchorPane pane = new AnchorPane(menu);
-        addItem(pane);
+        addItem(ComponentProperties.createPropertiesMenu());
     }
 
     public Tab getTabView() {
@@ -236,4 +229,5 @@ public class GameObjectProperties extends AnchorPane {
     public GameObject getGameObject() {
         return gameObject;
     }
+
 }

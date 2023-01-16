@@ -35,7 +35,7 @@ public class TileMapsComponentTree extends GameObjectComponentTree {
             y_sub.set(((int) (e.getY() / 32) * 32));
             imageViewProperties.getGraphicsContext2D().strokeRect(x_sub.get(), y_sub.get(), 32, 32);
         });
-        ImageProperties imageProperties = new ImageProperties(GameObjectProperties.properties, sprite);
+        ImageProperties imageProperties = new ImageProperties(sprite);
         imageProperties.setAction(e -> {
                 imageViewProperties.setSprite(e.getSprite());
                 System.out.println("action");
@@ -79,7 +79,7 @@ public class TileMapsComponentTree extends GameObjectComponentTree {
             }
         });
 
-        GameObjectProperties.addItem(imageProperties);
+        GameObjectProperties.addItem(imageProperties.getView());
         GameObjectProperties.addItem(imageViewProperties);
     }
 

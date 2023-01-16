@@ -20,17 +20,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.function.Consumer;
 
-public class ImageProperties extends VBox {
+public class ImageProperties extends ComponentProperties<VBox>{
 
-    private final GameObjectProperties properties;
 
     private Sprite sprite = new Sprite();
     private final TextField textFieldFile;
 
     private Consumer<ImageProperties>  action;
 
-    public ImageProperties(GameObjectProperties properties) {
-        this.properties = properties;
+    public ImageProperties() {
+        super(new VBox());
         textFieldFile = new TextField();
         textFieldFile.addEventHandler(MouseEvent.MOUSE_PRESSED, evt -> {
             File file = FileSystem.openFile(GameEngine.gameProject.getDirectory());
@@ -44,8 +43,8 @@ public class ImageProperties extends VBox {
                 setSprite("assets/"+ file.getName());
             }
             });
-        ComponentProperties.addItem(ComponentProperties.addTitle("Image"), this);
-        ComponentProperties.addItem(textFieldFile, this);
+        ComponentLayouts.addItem(ComponentLayouts.addTitle("Image"), getView());
+        ComponentLayouts.addItem(textFieldFile,  getView());
     }
 
     private void setSprite(String file)
@@ -63,9 +62,10 @@ public class ImageProperties extends VBox {
         this.action = action;
     }
 
-    public ImageProperties(GameObjectProperties properties, Sprite sprite) {
-        this(properties);
+    public ImageProperties(Sprite sprite) {
+        super(new VBox());
         this.sprite = sprite;
+        textFieldFile = new TextField();
         if (sprite.getFile() != null)
             textFieldFile.setText(sprite.getFile());
         else
@@ -75,8 +75,8 @@ public class ImageProperties extends VBox {
     public static MenuItem creatingProperties(GameObjectProperties properties) {
         MenuItem item = new MenuItem("Image");
         item.setOnAction(e -> {
-            ImageProperties imageProperties = new ImageProperties(properties);
-            properties.addItemBack(imageProperties);
+            ImageProperties imageProperties = new ImageProperties();
+            properties.addItemBack(imageProperties.getView());
             properties.getGameObject().addComponent(imageProperties.getSprite());
         });
         return item;
@@ -87,4 +87,8 @@ public class ImageProperties extends VBox {
         return sprite;
     }
 
+    @Override
+    public void init() {
+
+    }
 }

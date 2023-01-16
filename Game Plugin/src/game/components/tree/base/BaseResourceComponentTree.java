@@ -2,8 +2,11 @@ package game.components.tree.base;
 
 import com.properties.components.BaseComponentTree;
 import com.tree.TreeViewController;
+import game.components.tree.resources.JavaResourceComponentTree;
 import game.components.tree.resources.ResourceComponentTree;
+import game.core.system.FileSystemGame;
 import game.project.GameEngine;
+import game.project.build.classBuild.ClassFileJavaEmpty;
 import game.project.prefabs.Prefab;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -51,7 +54,24 @@ public abstract class BaseResourceComponentTree extends BaseComponentTree {
         addFile.setOnAction(e -> {
 
         });
-        return new ContextMenu(addFolder, addFile);
+        MenuItem addScript = new MenuItem("New Script");
+        addScript.setOnAction(e -> {
+            TextInputDialog dialogoNome = new TextInputDialog();
+            dialogoNome.setTitle("Script");
+            dialogoNome.setHeaderText("Entre com o nome do script");
+            dialogoNome.setContentText("Nome:");
+            dialogoNome.showAndWait().ifPresent(v -> {
+                if (v == null || v.isEmpty())
+                    return;
+                String n =  v.contains(".java") ? v : v + ".java";
+                File f = new File(GameEngine.gameProject.getDirectory(), n);
+                new ClassFileJavaEmpty(v, null).save(f);
+                addTree(new JavaResourceComponentTree(null, getController(), f));
+                System.out.println(f + " /  " + f.exists());
+            });
+
+        });
+        return new ContextMenu(addFolder, addFile, addScript);
     }
 
     public String getSubFile() {

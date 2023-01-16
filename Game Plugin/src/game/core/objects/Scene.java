@@ -27,7 +27,7 @@ public class Scene extends GameObject implements IStart, IRender, IUpdate {
 
     @Override
     public void start() {
-
+        addGameObject(new TileMaps());
     }
 
 

@@ -46,7 +46,9 @@ public class Graphics2D {
 
         float scaleX = width / Window.width, scaleY = height  / Window.height;
         float c = 1;
-
+        /*
+        x = (x / 100) * x;
+        y = (y / 100) * y;*/
         glBegin(GL11.GL_QUADS);
         glTexCoord2f(1,1);
         glVertex2f(-scaleX + x  - c, -scaleY + y + c);
@@ -59,7 +61,6 @@ public class Graphics2D {
 
         glTexCoord2f(1,0);
         glVertex2f(-scaleX + x - c, scaleY + y + c);
-
         glEnd();
     }
     public int getWidth() {
