@@ -64,8 +64,8 @@ public abstract class BaseResourceComponentTree extends BaseComponentTree {
                 if (v == null || v.isEmpty())
                     return;
                 String n =  v.contains(".java") ? v : v + ".java";
-                File f = new File(GameEngine.gameProject.getDirectory(), n);
-                new ClassFileJavaEmpty(v, null).save(f);
+                File f = new File(getFile(), n);
+                new ClassFileJavaEmpty(v, getPackage()).save(f);
                 addTree(new JavaResourceComponentTree(null, getController(), f));
                 System.out.println(f + " /  " + f.exists());
             });
@@ -75,8 +75,18 @@ public abstract class BaseResourceComponentTree extends BaseComponentTree {
     }
 
     public String getSubFile() {
-        String project = GameEngine.gameProject.getDirectory().getPath() + "/";
+        String project = GameEngine.gameProject.getDirectory().getPath();
         return getFile().getPath().replace(project, "");
+    }
+
+    public String getPackage() {
+        String project = getSubFile();
+        if (project.isEmpty())
+            return null;
+        project = project.replaceAll("/", ".");
+        if (project.charAt(0) == '.')
+            project = project.substring(1, project.length());
+        return project;
     }
     public File getFile() {
         return file;

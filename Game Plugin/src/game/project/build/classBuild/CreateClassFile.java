@@ -10,8 +10,6 @@ import java.util.ArrayList;
 
 public  class CreateClassFile   {
 
-    private ArrayList<String> classFile = new ArrayList<>();
-
     private ArrayList<String> imports = new ArrayList<>();
 
     private ArrayList<String> implement = new ArrayList<>();
@@ -31,7 +29,7 @@ public  class CreateClassFile   {
     }
 
     public String head(){
-        String h = "package " + packageName + ";\n\n";
+        String h = packageName != null ? "package " + packageName + ";\n\n" : "";
 
         for (String importName : imports)
             h += "import " + importName + ";\n";
@@ -51,7 +49,7 @@ public  class CreateClassFile   {
         this.implement.add(implementName);
     }
     public void newLine(){
-        classFile.add("\n");
+        functionBlocks.add(new functionBlock("\n"));
     }
 
     public functionBlock createBock(String type, String returnType, String name, String parameters){
@@ -64,7 +62,7 @@ public  class CreateClassFile   {
             newLine();
     }
     public void add(String line){
-        classFile.add(line);
+        functionBlocks.add(new functionBlock(line));
     }
 
     /***
@@ -79,7 +77,7 @@ public  class CreateClassFile   {
 
     public void save(@NotNull File file)
     {
-        classFile.add(0, head());
+        functionBlocks.add(0, new functionBlock(head()));
         try {
             if (!file.exists()) {
                 file.createNewFile();
@@ -88,8 +86,6 @@ public  class CreateClassFile   {
             try {
                 BufferedWriter bw = new BufferedWriter(new PrintWriter(file));
                 try {
-                    for (String line : classFile)
-                        bw.write(line);
                     for (functionBlock block : functionBlocks)
                         bw.write(block.toString());
                     bw.write("\n}");
@@ -114,16 +110,24 @@ public  class CreateClassFile   {
         this.extendsName = extendsName;
     }
 
-    public class functionBlock {
+    public static class functionBlock {
 
         private ArrayList<String> lines = new ArrayList<>();
+        private boolean isLine;
 
 
         public functionBlock(String type, String returnType, String name, String parameters){
+            isLine = false;
             if (returnType == null)
                 returnType = "";
             lines.add("     " + type + " " + returnType + " " + name +
                     (parameters == null ? "()" : "( " + parameters +" )") +" {");
+        }
+
+        public functionBlock(String line)
+        {
+            isLine = true;
+            lines.add(line);
         }
 
         public void add(String line){
@@ -145,7 +149,8 @@ public  class CreateClassFile   {
 
             for (String line : lines)
                 text += line + "\n";
-            text += "     }\n";
+            if (!isLine)
+                text += "     }\n";
             return text;
         }
     }
