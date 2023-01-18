@@ -2,13 +2,13 @@ package game.core.objects;
 
 
 import game.core.base.IRender;
+import game.core.components.GameObjectScript;
 import game.opengl.renderer.Graphics2D;
 
 public class Teste extends GameObject implements IRender {
 
     public Teste() {
         super();
-
     }
 
     @Override

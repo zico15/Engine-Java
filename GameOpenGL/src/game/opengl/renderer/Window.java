@@ -159,5 +159,7 @@ public class Window {
 
     public void setScene(Scene scene) {
         this.scene = scene;
+        if (scene != null)
+            scene.load_system();
     }
 }

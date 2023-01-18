@@ -1,13 +1,11 @@
 package game.project.build.classBuild;
 
 import game.core.components.ComponentBase;
+import game.core.components.Script;
 import game.core.components.Sprite;
 import game.core.objects.GameObject;
 import game.core.objects.Scene;
 import game.core.objects.TileMaps;
-
-import java.io.File;
-import java.util.List;
 
 public class ClassFileScene extends CreateClassFile {
 
@@ -36,15 +34,16 @@ public class ClassFileScene extends CreateClassFile {
 
 
     private void addComponents(functionBlock block, GameObject gameObject, String thisName){
+        block.setThisName(thisName);
         block.add("     %s.setVector(new Vector2D(%s));", thisName, gameObject.getVector());
         for (ComponentBase component : gameObject.getComponents()){
-            if (component instanceof Sprite)
-                block.add("     %s.addComponent(new Sprite(\""+ ((Sprite)component).getFile()+"\"));", thisName);
+                component.addComponentToScript(this, block);
         }
     }
 
     private  void loadGameObject(functionBlock block, GameObject gameObject, String thisName, String type){
         String obName = "ob_" + (++index);
+        block.setThisName(thisName);
         block.add("{");
         block.add("     %s %s = new %s(\"%s\");", type, obName, type,  gameObject.getName());
         addComponents(block, gameObject, obName);

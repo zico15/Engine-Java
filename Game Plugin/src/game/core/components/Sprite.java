@@ -4,6 +4,7 @@ package game.core.components;
 import com.project.Project;
 import game.core.base.ImageBuffer;
 import game.core.transforme.Vector2D;
+import game.project.build.classBuild.CreateClassFile;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -82,4 +83,12 @@ public class Sprite extends ComponentBase {
     public Image getImage() {
         return image;
     }
+
+
+    @Override
+    public void addComponentToScript(CreateClassFile blockClass, CreateClassFile.functionBlock block) {
+        blockClass.addImport("game.core.components.Sprite");
+        block.add(String.format("      %s.addComponent(new Sprite(\""+ getFile()+"\"));", block.getThisName()));
+    }
+
 }

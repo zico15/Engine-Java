@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-public  class CreateClassFile   {
+public  class CreateClassFile  {
 
     private ArrayList<String> imports = new ArrayList<>();
 
@@ -42,7 +42,8 @@ public  class CreateClassFile   {
     }
 
     public void addImport(String importName){
-        imports.add(importName);
+        if (!imports.contains(importName))
+            imports.add(importName);
     }
 
     public void addImplement(String implementName){
@@ -115,6 +116,8 @@ public  class CreateClassFile   {
         private ArrayList<String> lines = new ArrayList<>();
         private boolean isLine;
 
+        private String thisName;
+
 
         public functionBlock(String type, String returnType, String name, String parameters){
             isLine = false;
@@ -152,6 +155,14 @@ public  class CreateClassFile   {
             if (!isLine)
                 text += "     }\n";
             return text;
+        }
+
+        public String getThisName() {
+            return thisName;
+        }
+
+        public void setThisName(String thisName) {
+            this.thisName = thisName;
         }
     }
 }

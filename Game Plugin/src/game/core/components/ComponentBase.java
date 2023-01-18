@@ -3,9 +3,10 @@ package game.core.components;
 
 import game.core.base.BaseStructure;
 import game.core.objects.ObjectBase;
+import game.project.build.classBuild.CreateClassFile;
 import javafx.scene.canvas.GraphicsContext;
 
-public class ComponentBase implements BaseStructure {
+public abstract class ComponentBase implements BaseStructure {
 
     private ObjectBase parent;
 
@@ -41,4 +42,6 @@ public class ComponentBase implements BaseStructure {
     public void load_system() {
 
     }
+
+    public abstract void addComponentToScript(CreateClassFile blockClass, CreateClassFile.functionBlock block);
 }

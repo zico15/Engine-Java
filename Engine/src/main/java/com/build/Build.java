@@ -5,7 +5,8 @@ import javafx.scene.control.ProgressBar;
 import java.io.File;
 
 
-public class Build extends Thread {
+public class Build  <T> extends Thread {
+
 
     private final Project project;
     private ProgressBar progressBar;
