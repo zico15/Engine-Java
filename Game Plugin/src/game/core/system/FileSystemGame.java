@@ -2,6 +2,7 @@ package game.core.system;
 
 import com.system.FileSystem;
 import game.components.tree.base.fileType;
+import game.project.GameEngine;
 import game.project.prefabs.Prefab;
 
 import java.io.*;
@@ -26,6 +27,21 @@ public class FileSystemGame {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static String getPackage(File file) {
+        String name = file.getPath().trim();
+        if (name.contains(".java"))
+            name = name.replace(".java", "").trim();
+         String project = GameEngine.gameProject.getDirectory().getPath();
+         project = name.replace(project, "");
+
+        if (project.isEmpty())
+            return null;
+        project = project.replaceAll("/", ".");
+        if (project.charAt(0) == '.')
+            project = project.substring(1, project.length());
+        return project;
     }
 
     public static final void writePrefab(File file, Prefab prefab)
