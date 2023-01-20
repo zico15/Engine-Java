@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Layouts {
 
+    protected  static int a;
     public static final int TOP = 1, BOTTOM = 2, LEFT = 3 , RIGHT = 4, LEFT_RIGHT = 6, TOP_BOTTOM = 7, ALL = 8;
 
     public static void alignment(Node node, int i)

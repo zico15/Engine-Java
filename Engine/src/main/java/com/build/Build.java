@@ -11,7 +11,7 @@ public class Build  <T> extends Thread {
     private final Project project;
     private ProgressBar progressBar;
 
-    public Build(Project project, ProgressBar progressBar) {
+    protected Build(Project project, ProgressBar progressBar) {
         this.project = project;
         this.progressBar = progressBar != null ? progressBar : new ProgressBar();
         if (project == null)

@@ -9,8 +9,10 @@ import game.project.GameProject;
 import game.project.build.classBuild.ClassFileScene;
 import javafx.scene.control.TextInputDialog;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -98,16 +100,24 @@ public class BuildProject extends Thread {
     public void run() {
         if (get_env_java_home()){
         try {
+            filesJava.clear();
             FileSystem.copy(getClass().getResource("/resources/gameopengl/GameOpenGL.jar"), fileGameOpenGL);
-            String[] classScene = new String[project.getScenes().size()];
+            copyJava(project.getDirectory());
+            String[] classJava = new String[project.getScenes().size() + filesJava.size()];
             // create class
-            for (int j = 0; j < project.getScenes().size(); j++) {
+            int j;
+            for (j = 0; j < project.getScenes().size(); j++) {
                 Scene scene = project.getScenes().get(j);
                 ClassFileScene classFileScene = new ClassFileScene(scene, scene.getPackageName());
                 classFileScene.save(new File(fileScenes, scene.getName() + ".java"));
-                classScene[j++] = ("game/project/scenes/" + scene.getName() + ".java");
+                classJava[j] = ("game/project/scenes/" + scene.getName() + ".java");
+                System.out.println("java: " + "game/project/scenes/" + scene.getName() + ".java");
             }
-            compileFileToJar(fileGameOpenGL.getName(), classScene);
+            for (String java : filesJava) {
+                System.out.println("java: " + java);
+                classJava[j++] = java;
+            }
+            compileFileToJar(fileGameOpenGL.getName(), classJava);
             fileScenes.delete();
             GameEngine.resourceTreeView.load(project.getDirectory());
         } catch (IOException | InterruptedException e) {
@@ -132,26 +142,35 @@ public class BuildProject extends Thread {
                     args[0] = getPathEnv() + "java";
                     args[1] = "-jar";
                     args[2] = (project.getName().trim()+".jar");
-                    new ProcessBuilder(args).directory(file).start().waitFor();
+                    Process p =  new ProcessBuilder(args).directory(file).start();
+                    BufferedReader output = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                    String ligne = "";
+                    while ((ligne = output.readLine()) != null) {
+                        System.out.println(ligne);
+                    }
             }
             else
                 System.err.println("Not Build!");
     }
-    private void getFiles(File dir)
+
+
+    void copyJava(File file)
     {
-        if (dir.exists()  && !"Build".equals(dir.getName()))
-        {
-            for (File f : dir.listFiles()){
-                String strFile = f.getPath().replace(project.getDirectory().getPath(), ".").trim();
+        if (file.exists()  && file.isDirectory() && !"Build".equals(file.getName())) {
+            for (File f : file.listFiles()) {
                 if (FileSystemGame.getExtensionType(f) == fileType.FILE_JAVA) {
-                    filesJava.add(strFile);
-                    temp.add(new File(f.getPath().replace(".java", ".class").trim()));
-                    filesClass.add(strFile.replace(".java", ".class").trim());
+                    try {
+                        String java = "game/project" + FileSystemGame.getSubFile(f);
+                        filesJava.add(java);
+                        File dest = new File(fileBuild, java);
+                        System.out.println("dest: " + dest);
+                        FileSystem.copy(f, dest);
+                    } catch (IOException e) {
+                        //throw new RuntimeException(e);
+                    }
+                } else if (f.isDirectory()) {
+                    copyJava(f);
                 }
-                else if (f.isDirectory())
-                    getFiles(f);
-                else if (FileSystemGame.getExtensionType(f) != fileType.FILE_CLASS)
-                    files.add(strFile);
             }
         }
     }

@@ -17,7 +17,6 @@ public class Project implements Serializable {
     }
 
     public Project(File directory) {
-
         this.setDirectory(directory);
         project = this;
     }

@@ -24,6 +24,10 @@ public class GameObject extends ObjectBase {
         getChildren().forEach(c -> c.render(graphics2D));
     }
 
+    void update(){
+            getComponents().forEach(c -> c.update());
+            getChildren().forEach(c -> c.update());
+    }
 
 
     public GameObject addGameObject(GameObject ob) {
@@ -38,5 +42,6 @@ public class GameObject extends ObjectBase {
     public final void load_system() {
         getComponents().forEach(c -> c.load_system());
         getChildren().forEach(c -> c.load_system());
+        getComponents().forEach(c -> c.start());
     }
 }

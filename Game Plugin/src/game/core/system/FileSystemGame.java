@@ -44,6 +44,11 @@ public class FileSystemGame {
         return project;
     }
 
+    public static String getSubFile(File file) {
+        String project = GameEngine.gameProject.getDirectory().getPath();
+        return file.getPath().replace(project, "");
+    }
+
     public static final void writePrefab(File file, Prefab prefab)
     {
         if (!file.exists())

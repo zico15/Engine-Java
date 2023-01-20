@@ -18,9 +18,13 @@ public class Main {
         gameObject.addComponent(new Sprite("assets/tes.png"));
         scene.addGameObject(gameObject);*/
         window.setScene(scene);
-        Event.addEventHandler(KeyListener.KEY_PRESSED, e -> {
+       /* Event.addEventHandler(KeyListener.KEY_PRESSED, e -> {
 
         } );
+
+        Event.addEventHandler(MouseListener.MOUSE_MOVE, e -> {
+            System.out.println("e: " + e.getX() + " / " + e.getY());
+        });*/
         window.run();
     }
 }

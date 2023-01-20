@@ -39,7 +39,7 @@ public class Scene extends GameObject implements IStart, IRender, IUpdate {
 
     @Override
     public void update() {
-
+        super.update();
     }
 
 

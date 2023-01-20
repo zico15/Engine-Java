@@ -20,6 +20,7 @@ public class Script extends ComponentBase {
         if (file != null)
             packageName =  "game.project." + FileSystemGame.getPackage(file);
         System.out.println("Script: " + packageName);
+        System.out.printf("");
     }
 
     @Override

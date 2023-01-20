@@ -160,6 +160,8 @@ public class FileSystem {
     }
 
     public static void copy(File source, File dest) throws IOException {
+        if (!dest.getParentFile().exists())
+            dest.getParentFile().mkdir();
         FileChannel sourceChannel = null;
         FileChannel destChannel = null;
         try {
