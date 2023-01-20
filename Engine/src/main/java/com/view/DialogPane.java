@@ -55,9 +55,11 @@ public class DialogPane
     }
 
     public void close(){
-        if(stage.getOnCloseRequest() != null)
-            stage.getOnCloseRequest().handle(null);
-        stage.close();
+        Platform.runLater(() -> {
+            if(stage.getOnCloseRequest() != null)
+                stage.getOnCloseRequest().handle(null);
+            stage.close();
+        });
     }
 
     public  void setPane(Pane pane){

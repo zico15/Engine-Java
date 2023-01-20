@@ -3,6 +3,7 @@ package game.components.tree.resources;
 import com.tree.TreeViewController;
 import game.components.tree.base.BaseResourceComponentTree;
 import game.components.tree.base.fileType;
+import game.core.system.FileSystemGame;
 import game.core.system.Icons;
 import game.project.prefabs.Prefab;
 
@@ -24,7 +25,7 @@ public class ResourceComponentTree extends BaseResourceComponentTree {
             String name = file.getName().contains(".") ? file.getName().substring(0, file.getName().lastIndexOf(".")) : file.getName();
             setFile(file);
             setValue(name);
-            fileType type = BaseResourceComponentTree.getExtensionType(file);
+            fileType type = FileSystemGame.getExtensionType(file);
             setIcon(Icons.get(type));
         }
     }

@@ -54,7 +54,7 @@ public class GameProject extends Project {
             {
                 if (f.isDirectory())
                     loadScenes(f);
-                else if (BaseResourceComponentTree.getExtensionType(f) == fileType.FILE_SCENE)
+                else if (FileSystemGame.getExtensionType(f) == fileType.FILE_SCENE)
                 {
                     try {
                         Object o = FileSystemGame.readGameObject(f);

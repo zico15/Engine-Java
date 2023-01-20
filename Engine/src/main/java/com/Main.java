@@ -28,25 +28,11 @@ public class Main  extends Application {
 
         MainViewController.stage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
-        Parent p = fxmlLoader.load();
-
-        Scene scene = new Scene(p, 800, 600);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
         scene.setOnKeyPressed(e -> System.out.println(e.getCode().getChar()));
         stage.setTitle("Game!");
         stage.setScene(scene);
         stage.show();
-        Button b = new Button("close");
-
-        var d = new  DialogPane("DialogPane");
-        DialogPane.ProgressBarPane progressBarPane = new DialogPane.ProgressBarPane(d);
-        d.setPane(progressBarPane);
-        progressBarPane.run(e -> {
-            System.out.println(e.getProgress());
-            e.setProgress(e.getProgress() + 0.0000001f);
-        });
-        d.showAndWait(e -> {
-            System.out.println("select: " + e);
-        });
 
     }
 

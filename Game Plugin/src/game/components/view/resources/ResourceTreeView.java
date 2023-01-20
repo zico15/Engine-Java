@@ -26,7 +26,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
-import static game.components.tree.base.BaseResourceComponentTree.getExtensionType;
+
 
 
 public class ResourceTreeView extends TreeViewController {
@@ -100,7 +100,7 @@ public class ResourceTreeView extends TreeViewController {
         {
             for (File f : file.listFiles())
             {
-                ResourceComponentTree tree = getResourceComponentType(getExtensionType(f), f);
+                ResourceComponentTree tree = getResourceComponentType(FileSystemGame.getExtensionType(f), f);
                 componentTree.addTree(tree);
                 if (f.isDirectory())
                     loadResources(f, tree);

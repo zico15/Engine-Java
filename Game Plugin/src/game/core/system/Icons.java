@@ -31,6 +31,9 @@ public final class Icons {
     }
 
     public static Image get(fileType type){
-        return ICONS[type.ordinal()];
+        if (type.ordinal() < ICONS.length)
+             return ICONS[type.ordinal()];
+        else
+            return ICONS[0];
     }
 }

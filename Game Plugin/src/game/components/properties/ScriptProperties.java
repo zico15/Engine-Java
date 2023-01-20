@@ -2,8 +2,10 @@ package game.components.properties;
 
 import com.properties.components.Layouts;
 import com.view.DialogPane;
+import game.components.tree.base.fileType;
 import game.components.view.objects.GameObjectProperties;
 import game.components.view.resources.ResourceTreeView;
+import game.components.view.resources.ResourceTreeViewSelect;
 import game.core.components.Script;
 import game.project.GameEngine;
 import javafx.scene.control.MenuItem;
@@ -19,7 +21,7 @@ public class ScriptProperties extends ComponentProperties<VBox> {
 
     private Script script = new Script();
 
-    private static ResourceTreeView resourceTreeView = new ResourceTreeView();
+    private static ResourceTreeViewSelect resourceTreeView = new ResourceTreeViewSelect();
     private TextField textField;
     public ScriptProperties() {
         super( new VBox());
@@ -38,16 +40,19 @@ public class ScriptProperties extends ComponentProperties<VBox> {
     @Override
     public void init() {
         textField = new TextField();
-        textField.setOnAction(e -> {
+        textField.setFocusTraversable(false);
+        textField.setOnMousePressed(e -> {
             DialogPane  dialogPane = new DialogPane("Scripts");
-            resourceTreeView.load(GameEngine.gameProject.getDirectory());
+            resourceTreeView.load(GameEngine.gameProject.getDirectory(), s  -> {
+                script.setFile(s.getFile());
+                textField.setText(s.getFile().getName());
+                System.out.printf("dialogPane: " + s.getFile());
+                dialogPane.close();
+            } ,fileType.FILE_JAVA);
             AnchorPane pane = new AnchorPane(resourceTreeView);
             Layouts.alignment(resourceTreeView, Layouts.ALL);
             dialogPane.setPane(pane);
             dialogPane.showAndWait(null);
-            /*file = textField.getText().trim();
-            script.setFile(new File(GameEngine.gameProject.getDirectory(), file));
-            System.out.printf("file: " + file);*/
         });
         ComponentLayouts.addItem(ComponentLayouts.addTitle("Script"), getView());
         ComponentLayouts.addItem(textField, getView());

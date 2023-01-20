@@ -4,7 +4,7 @@ import com.properties.components.BaseComponentTree;
 import com.tree.TreeViewController;
 import game.components.tree.resources.JavaResourceComponentTree;
 import game.components.tree.resources.ResourceComponentTree;
-import game.core.system.FileSystemGame;
+import game.core.system.Icons;
 import game.project.GameEngine;
 import game.project.build.classBuild.ClassFileJavaEmpty;
 import game.project.prefabs.Prefab;
@@ -14,6 +14,8 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 
 import java.io.File;
+
+import static game.core.system.FileSystemGame.getExtensionType;
 
 public abstract class BaseResourceComponentTree extends BaseComponentTree {
 
@@ -26,6 +28,13 @@ public abstract class BaseResourceComponentTree extends BaseComponentTree {
         this.setFile(file);
         setContextMenu(creatingMenu());
         this.prefab = prefab;
+    }
+
+    public BaseResourceComponentTree(File file, TreeViewController controller) {
+        super(controller, Icons.get(getExtensionType(file)));
+        this.setFile(file);
+        setContextMenu(null);
+        this.prefab = null;
     }
 
     @Override
@@ -95,27 +104,6 @@ public abstract class BaseResourceComponentTree extends BaseComponentTree {
     public void setFile(File file) {
         this.file = file;
     }
-
-
-    public static fileType getExtensionType(File file) {
-        if (file.isDirectory() && "Build".equals(file.getName()))
-            return fileType.FOLDER_BUILD;
-        if (file.isDirectory())
-            return fileType.FOLDER_ANY;
-        String name = file.getName();
-        String extension = name.contains(".") ? name.substring(name.lastIndexOf(".") + 1,name.length()) : name;
-        extension = extension.trim().toLowerCase();
-        System.out.println("extension: " + extension);
-        switch (extension)
-        {
-            case "java": return fileType.FILE_JAVA;
-            case "cpp": return fileType.FILE_CODE;
-            case "scene": return fileType.FILE_SCENE;
-            case "png": return fileType.FILE_IMAGE;
-        }
-        return  fileType.FILE_ANY;
-    }
-
 
     public Prefab getPrefab() {
         return prefab;
