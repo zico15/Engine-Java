@@ -42,11 +42,12 @@ public class ScriptProperties extends ComponentProperties<VBox> {
         textField = new TextField();
         textField.setFocusTraversable(false);
         textField.setOnMousePressed(e -> {
+            textField.setFocusTraversable(false);
             DialogPane  dialogPane = new DialogPane("Scripts");
             resourceTreeView.load(GameEngine.gameProject.getDirectory(), s  -> {
                 script.setFile(s.getFile());
                 textField.setText(s.getFile().getName());
-                System.out.printf("dialogPane: " + s.getFile());
+                System.out.println("dialogPane: " + s.getFile());
                 dialogPane.close();
             } ,fileType.FILE_JAVA);
             AnchorPane pane = new AnchorPane(resourceTreeView);

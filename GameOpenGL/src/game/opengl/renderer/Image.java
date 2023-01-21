@@ -13,6 +13,7 @@ import java.nio.IntBuffer;
 import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11C.glTexParameteri;
+import static org.lwjgl.opengl.GL30C.glGenerateMipmap;
 import static org.lwjgl.stb.STBImage.stbi_image_free;
 import static org.lwjgl.stb.STBImage.stbi_load;
 
@@ -24,6 +25,14 @@ public class Image {
     private int width;
     private int height;
 
+
+    private float vertices[] = {
+            // positions          // colors           // texture coords
+            0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+            0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+            -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+            -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left
+    };
 
 
     public Image(String filePath){
@@ -45,8 +54,10 @@ public class Image {
         IntBuffer height = BufferUtils.createIntBuffer(1);
         IntBuffer channels = BufferUtils.createIntBuffer(1);
         ByteBuffer image = stbi_load(filePath, width, height, channels, 0);
-        if (image != null)
+        if (image != null) {
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width.get(0), height.get(0), 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+            glGenerateMipmap(GL_TEXTURE_2D);
+        }
         else
             assert false: "Error: (Texture) Could not load image' " + filePath + "'";
         this.width = width.get(0);

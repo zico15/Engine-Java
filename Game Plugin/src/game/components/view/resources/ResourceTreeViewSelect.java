@@ -15,6 +15,8 @@ public class ResourceTreeViewSelect extends TreeViewController {
 
     private ResourceComponentTreeSelect componentTree;
 
+    protected ResourceComponentTreeSelect componentTreeSelect;
+
     private Consumer<ResourceComponentTreeSelect> selectConsumer;
 
     private   List<fileType> types;
@@ -29,6 +31,18 @@ public class ResourceTreeViewSelect extends TreeViewController {
             loadResources(file, componentTree, this.getTypes());
         setRoot(componentTree);
         setFocused(false);
+        setOnMouseReleased( e -> {
+            if (componentTreeSelect != null) {
+                System.out.println("MOUSE_RELEASED");
+                if (componentTreeSelect.count > 2) {
+                    System.out.println("select: " + componentTreeSelect.getFile());
+                    componentTreeSelect.count = 0;
+                    if (getSelectConsumer() != null)
+                        getSelectConsumer().accept(componentTreeSelect);
+                } else
+                    componentTreeSelect.count++;
+            }
+        });
     }
 
 
@@ -63,29 +77,21 @@ public class ResourceTreeViewSelect extends TreeViewController {
 
         private final fileType type;
         public int count;
+        private ResourceTreeViewSelect controller;
         public ResourceComponentTreeSelect(File file, ResourceTreeViewSelect controller) {
             super( file, controller);
             setValue(file.getName());
+            this.controller = controller;
             count = 0;
             type = FileSystemGame.getExtensionType(file);
-            if (controller.getTypes().contains(type)) {
-                System.out.println("addevent");
-                setOnMouseReleased( e -> {
-                    System.out.println("MOUSE_RELEASED");
-                    if (count > 2) {
-                        System.out.println("select: " + getFile());
-                        count = 0;
-                        if (controller.getSelectConsumer() != null)
-                            controller.getSelectConsumer().accept(this);
-                    } else
-                        count++;
-                });
-            }
         }
 
         @Override
         public void preview() {
+            if (controller.componentTreeSelect != null)
+                controller.componentTreeSelect.count = 0;
             count = 0;
+            controller.componentTreeSelect = this;
             System.out.println("preview: " + count);
         }
 

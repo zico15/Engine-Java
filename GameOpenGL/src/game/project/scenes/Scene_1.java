@@ -1,5 +1,6 @@
 package game.project.scenes;
 
+import game.core.components.Sprite;
 import game.core.transforme.*;
 import game.core.objects.*;
 
@@ -15,7 +16,8 @@ public class Scene_1 extends Scene   {
     private void init_game_objects() {
         {
             GameObject ob_1 = new GameObject("gameObject_1");
-            ob_1.setVector(new Vector2D(0,0, 0, 0));
+            ob_1.addComponent(new Sprite("assets/tes.png"));
+            ob_1.setVector(new Vector2D(0,0, 100, 100));
             this.addGameObject(ob_1);
         }
         {
