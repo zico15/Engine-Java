@@ -38,12 +38,13 @@
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
     "go.import.settings.migrated": "true",
+    "jdk.selected.JAVA_MODULE": "openjdk-19",
     "last_opened_file_path": "/home/ezequeil/IdeaProjects/Engine-Java/Engine",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Artifacts",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.pluginManager",
@@ -90,6 +91,7 @@
       <workItem from="1671894352636" duration="23000" />
       <workItem from="1672337145183" duration="19000" />
       <workItem from="1673698305306" duration="27000" />
+      <workItem from="1680252667926" duration="39000" />
     </task>
     <task id="LOCAL-00001" summary="Game Tester">
       <created>1672014520630</created>
