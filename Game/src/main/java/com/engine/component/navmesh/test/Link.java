@@ -1,4 +1,4 @@
-package com.engine.component.navmesh;
+package com.engine.component.navmesh.test;
 
 
 public class Link {

@@ -4,7 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09f792da-2e4e-4c23-9bc6-298f97a6e142" name="Changes" comment="" />
+    <list default="true" id="09f792da-2e4e-4c23-9bc6-298f97a6e142" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/event/EventAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/event/EventController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/event/EventObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/Node.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/engine/objects/rock/Rock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/Link.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/Link.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/graphics/animation/Animation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/graphics/animation/Animation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/objects/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/objects/map/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/objects/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/objects/player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/system/Run.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/system/Run.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,11 +29,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaFXApplication" />
+        <option value="Record" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="Record" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -31,6 +49,9 @@
     </option>
   </component>
   <component name="ProjectId" id="2NvSxjyP9DygiPbIS4tLjZPgZPu" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -40,6 +61,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/ezequiel/IdeaProjects/Engine-Java/Game&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -106,6 +128,8 @@
       <workItem from="1680543313935" duration="13142000" />
       <workItem from="1680599202527" duration="444000" />
       <workItem from="1680599650977" duration="28451000" />
+      <workItem from="1680640668241" duration="6680000" />
+      <workItem from="1680711017880" duration="9686000" />
     </task>
     <servers />
   </component>
@@ -116,109 +140,109 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>40</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>54</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>69</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>63</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>76</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>89</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>96</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>98</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>70</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>71</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>72</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>74</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>78</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>80</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>82</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>84</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>165</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>97</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>164</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>163</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java</url>
           <line>162</line>
-          <properties class="com.engine.component.navmesh.NavMesh" method="isEmpty">
+          <properties class="com.engine.component.navmesh.test.NavMesh" method="isEmpty">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>

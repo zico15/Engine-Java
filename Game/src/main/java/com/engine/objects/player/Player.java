@@ -1,12 +1,14 @@
 package com.engine.objects.player;
 
 import com.assets.image.Images;
-import com.engine.component.navmesh.Link;
+import com.engine.component.navmesh.Node;
+import com.engine.component.navmesh.test.Link;
 import com.engine.component.navmesh.NavMesh;
 import com.engine.graphics.Graphics;
 import com.engine.graphics.animation.Animation;
 import com.engine.graphics.animation.Animator;
 import com.engine.objects.interfaces.IObject;
+import com.engine.objects.map.Map;
 import com.engine.system.GameLoop;
 import com.engine.system.events.EventKeys;
 import com.engine.system.events.EventMouse;
@@ -16,25 +18,22 @@ import javafx.scene.shape.Rectangle;
 
 public class Player implements IObject {
 
+    public final Animation animation;
 
-    private final Animation animation;
-
-    private Rectangle rectangle;
+    public Rectangle rectangle;
 
     private double speed;
 
     private boolean isSelect;
 
+    public NavMesh navMesh;
 
-    /**
-     * Teste
-     * */
-    public static Rectangle p;
+    private int direction;
+
 
     public Player(){
+        navMesh = new NavMesh();
         rectangle = new Rectangle(0, 0, 32, 64);
-        // teste
-        p = rectangle;
         speed = 10;
         isSelect = false;
         animation = new Animation();
@@ -50,7 +49,13 @@ public class Player implements IObject {
                 move(3, e.charValue());
         });
         EventMouse.addEventMouseClicked(e -> {
-            isSelect = rectangle.contains(e.getX(), e.getY());
+            if ( rectangle.contains(e.getX(), e.getY()))
+                isSelect = true;
+            else{
+                int x = ((int) e.getX() ) / 32, y = ((int) e.getY() ) / 32;
+                if (e.getButton().ordinal() == 1)
+                    navMesh.setDistinction(rectangle.getX(), rectangle.getY(), e.getX(), e.getY(), direction);
+            }
         });
     }
 
@@ -62,51 +67,47 @@ public class Player implements IObject {
     }
 
     private void initAnimation(Image image, double speed){
+        Animator up = new Animator(image, speed, false);
+        up.addFrames(0, 243, 3, 54, 81, 1);
+        animation.addAnimator(up, Node.TOP);
         Animator down = new Animator(image, speed, false);
         int y = 1;
         down.addFrames(0, 0, 3, 54, 81, 1);
-        animation.addAnimator(down);
+        animation.addAnimator(down, Node.DOWN);
         Animator left = new Animator(image, speed, false);
         left.addFrames(0, 81, 3, 54, 81, 1);
-        animation.addAnimator(left);
+        animation.addAnimator(left, Node.LEFT);
         Animator right = new Animator(image, speed, false);
         right.addFrames(0, 162, 3, 54, 81, 1);
-        animation.addAnimator(right);
-        Animator up = new Animator(image, speed, false);
-        up.addFrames(0, 243, 3, 54, 81, 1);
-        animation.addAnimator(up);
-        animation.play(0);
+        animation.addAnimator(right, Node.RIGHT);
+        animation.play(Node.TOP);
     }
     @Override
     public void onRender(Graphics gc) {
 
-        if (!NavMesh.path.isEmpty())
+        if (!navMesh.getPath().isEmpty())
         {
             gc.getContext().setFill(Color.PAPAYAWHIP)  ;
-            for (Link l : NavMesh.path){
+            for (Node l : NavMesh.path){
                 gc.getContext().fillOval((l.x * 32) + 13,  (l.y * 32) +  13, 6, 6);
             }
         }
-        if (isSelect && false){
+        if (isSelect){
             gc.getContext().setFill(Color.GREEN);
-            gc.getContext().fillOval(rectangle.getX(),  rectangle.getY() + (rectangle.getHeight() / 2) + 10, rectangle.getWidth(), (rectangle.getHeight() / 2));
+            gc.getContext().fillOval(rectangle.getX() - 2,  rectangle.getY()  + 10, rectangle.getWidth(), (rectangle.getHeight() / 2));
         }
-        gc.getContext().setFill(Color.GREEN);
-        gc.getContext().fillOval(rectangle.getX()  ,  rectangle.getY() , 32, 32);
-        //animation.draw(gc, rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
+        animation.draw(gc, rectangle.getX() - 2 , rectangle.getY() - rectangle.getHeight() / 2, rectangle.getWidth(), rectangle.getHeight());
     }
 
     int count;
     @Override
     public void onUpdate(double tpf) {
-        if (NavMesh.path.size() > 0 && count++ > 20)
-        {
-            Link link = NavMesh.path.get(0);
-            NavMesh.path.remove(link);
-            rectangle.setX(link.x * 32);
-            rectangle.setY(link.y * 32);
-            count = 0;
-        }
+        navMesh.onUpdate(tpf, this);
+    }
+
+
+    public void TestUpdate(double tpf) {
+        System.out.println("TPF: " + tpf);
     }
 
     @Override

@@ -1,90 +1,88 @@
 package com.engine.component.navmesh;
 
-import com.engine.graphics.Graphics;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
+
+import com.engine.objects.interfaces.IObject;
+import com.engine.objects.map.Map;
+import com.engine.objects.player.Player;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class NavMesh {
 
-    private Link mesh[][];
+    private final ArrayList<Node> open = new ArrayList<>();
 
-    private Image img;
+    private final ArrayList<Node> close = new ArrayList<>();
 
-    private int dx, dy;
+    public static final ArrayList<Node> path = new ArrayList<>();
 
-    private final ArrayList<Link> open = new ArrayList<>();
-
-    private final ArrayList<Link> close = new ArrayList<>();
-
-    public static final ArrayList<Link> path = new ArrayList<>();
+    private Consumer<IObject> onCompleted;
 
     public NavMesh(){
-        mesh = null;
-        img = null;
-        dx = -1;
-        dy = -1;
+        this.onCompleted = null;
     }
 
-    public void setDistinction(int dx, int dy)
-    {
-        this.dx = dx;
-        this.dy = dy;
+    public boolean setDistinction(double x, double y, double dx, double dy, Consumer<IObject> onCompleted){
+        if (setDistinction(x, y, dx, dy, 0)) {
+            this.onCompleted = onCompleted;
+            return true;
+        }
+        return false;
     }
 
-    public void setDistinction(char map[][], int x, int y, int dx, int dy)
+    public boolean setDistinction(double x, double y, double dx, double dy, int direction)
     {
         open.clear();
         close.clear();
         path.clear();
-        if (isEmpty(map, dx, dy))
+        x /= Map.SIZE;
+        y /= Map.SIZE;
+        dx /= Map.SIZE;
+        dy /= Map.SIZE;
+        if (isEmpty(Map.map, (int) dx, (int) dy))
         {
-            this.dx = dx;
-            this.dy = dy;
-            createNodes(map, new Link(x, y, 0, null), dx, dy);
+            createNodes(Map.map, new Node(x , y , 0, null, direction), (int) dx, (int) dy);
             open.clear();
             close.clear();
         }
+        return  !path.isEmpty();
     }
 
-    private void createNodes(char map[][], Link link, int dx, int dy)
+    private void createPath(Node node){
+        while (node != null && node.preview != null)
+        {
+            path.add(0, node);
+            node = node.preview;
+        }
+    }
+    private void createNodes(char map[][], Node node, int dx, int dy)
     {
-        if (link != null) {
-            close.add(link);
-            open.remove(link);
-            if (link.x == dx && link.y == dy)
-            {
-                System.out.println("PATH OK");
-
-                while (link != null)
-                {
-                      path.add(0, link);
-                      link = link.preview;
-                }
-                System.out.println(path);
-            }
+        if (node != null) {
+            close.add(node);
+            open.remove(node);
+            if (node.x == dx && node.y == dy)
+                createPath(node);
             else {
                 //LEFT
-                addNode(link, map, link.x - 1, link.y, dx, dy);
+                addNode(node, map, -1, 0, dx, dy, Node.LEFT);
                 //RIGHT
-                addNode(link, map, link.x + 1, link.y, dx, dy);
+                addNode(node, map, 1, 0, dx, dy, Node.RIGHT);
                 //TOP
-                addNode(link, map, link.x, link.y - 1, dx, dy);
+                addNode(node, map, 0, -1, dx, dy, Node.TOP);
                 //DOWN
-                addNode(link, map, link.x, link.y + 1, dx, dy);
+                addNode(node, map, 0, 1, dx, dy, Node.DOWN);
+
                 //LEFT TOP
-                addNode(link, map, link.x - 1, link.y - 1, dx, dy);
+                addNode(node, map, -1, -1, dx, dy, Node.LEFT_TOP);
                 //RIGHT TOP
-                addNode(link, map, link.x + 1, link.y - 1, dx, dy);
+                addNode(node, map, 1, -1, dx, dy, Node.RIGHT_TOP);
                 //LEFT DOWN
-                addNode(link, map, link.x - 1, link.y + 1, dx, dy);
+                addNode(node, map, -1, 1, dx, dy, Node.LEFT_DOWN);
                 //RIGHT DOWN
-                addNode(link, map, link.x + 1, link.y + 1, dx, dy);
-                Link lowerCost = null;
-                for (Link l : open) {
+                addNode(node, map, 1, 1, dx, dy, Node.RIGHT_DOWN);
+
+                Node lowerCost = null;
+                for (Node l : open) {
                     if (lowerCost == null || lowerCost.g > l.g)
                         lowerCost = l;
                 }
@@ -93,71 +91,24 @@ public class NavMesh {
         }
     }
 
-    private void addNode(Link preview, char map[][], int x, int y, int dx, int dy){
+    private void addNode(Node preview, char map[][], int x, int y, int dx, int dy, int direction){
+        x += preview.x;
+        y += preview.y;
         if (isPossible(map, x, y)) {
-            if (!(x != preview.x && y != preview.y) || (isEmpty(map,  preview.x, y) && isEmpty(map,  x, preview.y)))
-                open.add(new Link(x, y, getG(x, y, dx, dy), preview));
+            if (!(x != preview.x && y != preview.y) || (isEmpty(map,  (int) preview.x, y) && isEmpty(map,  x, (int) preview.y)))
+                open.add(new Node(x, y, getG(x, y, dx, dy), preview, direction));
         }
     }
 
     private int getG( int x, int y, int dx, int dy)
     {
-        int c = ((x != dx) && (y != dy)) ? 10 : 10;
+        int cx = x != dx ? 14 : 10;
+        int cy = y != dy ? 14 : 10;
         x = (x - dx);
         x = x < 0 ? -x : x;
         y = (y - dy);
         y = y < 0 ? -y : y;
-        return (x + y) * c;
-    }
-
-    public void generateLinks(char map[][], Image image){
-        img = null;
-        this.mesh = new Link[map.length][map[0].length];
-        Canvas canvas = new Canvas(map.length * 32, map[0].length * 32);
-        canvas.getGraphicsContext2D().setFill(Color.TRANSPARENT);
-        canvas.getGraphicsContext2D().fillRect(0, 0 , map.length * 32, map[0].length * 32);
-        canvas.getGraphicsContext2D().drawImage(image, 0, 0);
-        for (int x = 0; x < mesh.length; x++)
-        {
-            for (int y = 0; y < mesh[0].length; y++)
-            {
-                mesh[x][y] = new Link(x, y, 0, null);
-                createLink(mesh[x][y], map,  x, y - 1, Link.Dir.TOP);
-                createLink(mesh[x][y], map,  x, y + 1, Link.Dir.DOWN);
-                createLink(mesh[x][y], map,  x + 1, y, Link.Dir.RIGHT);
-                createLink(mesh[x][y], map,  x - 1, y, Link.Dir.LEFT);
-                if (map[x][y] == 'A')
-                    printLink(mesh[x][y], canvas.getGraphicsContext2D(), x * 32, y * 32);
-                else
-                {
-                    canvas.getGraphicsContext2D().setFill(Color.BLACK);
-                    canvas.getGraphicsContext2D().fillRect(x * 32, y * 32, 32, 32);
-                }
-            }
-        }
-        img = canvas.snapshot(null, null);
-       // Graphics.gc.drawImage(img, 0, 0);
-    }
-
-    private void printLink(Link link, GraphicsContext gc, double x, double y){
-
-        double cx = x + 16, cy = y + 16;
-        gc.setStroke(Color.RED);
-        gc.strokeRect(x, y, 32, 32 );
-        gc.setStroke(Color.YELLOW);
-        gc.setLineWidth(1);
-        if (link.isTop())
-            gc.strokeLine(cx, cy, cx, y);
-        if (link.isDown())
-            gc.strokeLine(cx, cy, cx, y +  32);
-        if (link.isLeft())
-            gc.strokeLine(cx, cy, x, cy);
-        if (link.isRight())
-            gc.strokeLine(cx, cy, x + 32, cy);
-        cx -= 3;
-        cy -= 3;
-        gc.setFill((dx == ((int)x / 32) && dy == ((int)y / 32)) ? Color.BLUE : Color.GREEN);
-        gc.fillOval(cx,  cy, 6, 6);
+        return ((cx * x) + (cy * y));
     }
 
     private boolean isEmpty(char map[][], int x, int y)
@@ -168,7 +119,7 @@ public class NavMesh {
     private boolean isPossible(char map[][], int x, int y)
     {
         if  (isEmpty(map, x, y)){
-            for (Link e : close) {
+            for (Node e : close) {
                 if (x == e.x && y == e.y)
                     return false;
             }
@@ -176,25 +127,26 @@ public class NavMesh {
         }
         return false;
     }
-    private void createLink(Link link, char map[][], int x, int y, Link.Dir dir)
-    {
-        if (link != null && (x >= 0 && x < map.length) && (y >= 0 && y < map.length) && map[y][x] == 'A') {
-            link.setLink((map[y][x] == 'A'), dir);
+
+    public final ArrayList<Node> getPath(){
+        return path;
+    }
+
+    private int count;
+
+    public void onUpdate(double tpf, Player player) {
+        if (path.size() > 0 && count++ > 10)
+        {
+            Node link = path.get(0);
+            path.remove(link);
+            player.rectangle.setX(link.x * 32);
+            player.rectangle.setY(link.y * 32);
+            int dir = link.getDirection();
+            player.animation.play(dir > 3 ? 0 : dir);
+            count = 0;
+            if (onCompleted != null && path.isEmpty())
+                onCompleted.accept(player);
         }
     }
 
-    public boolean isEqual(int x, int y)
-    {
-          for (Link l : path)
-          {
-              if (l.x == x && l.y == y)
-                  return true;
-          }
-          return false;
-    }
-    public void draw(Graphics gc)
-    {
-        if (img != null)
-            gc.drawImage(img, 0, 0);
-    }
 }

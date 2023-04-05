@@ -15,6 +15,10 @@ public class Animation {
         this.animators.add(animator);
     }
 
+    public void addAnimator(Animator animator, int index){
+        this.animators.add(index, animator);
+    }
+
     public void play(int index)
     {
         if (index >= 0 && index < animators.size()) {

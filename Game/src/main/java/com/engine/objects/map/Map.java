@@ -1,7 +1,7 @@
 package com.engine.objects.map;
 
 import com.assets.image.Images;
-import com.engine.component.navmesh.NavMesh;
+import com.engine.component.navmesh.test.NavMesh;
 import com.engine.graphics.Graphics;
 import com.engine.objects.interfaces.IObject;
 import com.engine.objects.player.Player;
@@ -9,7 +9,9 @@ import com.engine.system.events.EventKeys;
 import com.engine.system.events.EventMouse;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
-import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
 
 public class Map implements IObject {
 
@@ -17,25 +19,25 @@ public class Map implements IObject {
 
     public static  Image IMG;
 
-    private  final int size = 32;
-    private char map[][];
-
-    private NavMesh navMesh;
+    public  static final int SIZE = 32;
+    public static char map[][];
 
     private boolean isTest;
+
+    private ArrayList<int[]> test = new ArrayList<>();
 
 
     public Map(){
         Image rock = Images.load("4694c01608d227c560304858e5bedfa2.png");
         map = new char [64][64];
 
-        Canvas canvas = new Canvas(size * 64, size * 64);
+        Canvas canvas = new Canvas(SIZE * 64, SIZE * 64);
         for (int y = 0; y < 64; y++)
         {
             for (int x = 0; x < 64; x++){
                  map[x][y] = 'A';
                  canvas.getGraphicsContext2D().
-                 drawImage(rock, 192, 32, 32, 32, x * size, y * size, size, size);
+                 drawImage(rock, 192, 32, 32, 32, x * SIZE, y * SIZE, SIZE, SIZE);
             }
         }
         map[1][2] = 'B';
@@ -47,8 +49,7 @@ public class Map implements IObject {
         initTest();
     }
     private void initTest(){
-        navMesh = new NavMesh();
-        navMesh.generateLinks(map, image);
+
         EventKeys.addEventKeyPressed(e -> {
             if (e.charValue() == 'P')
                 System.out.println("P");
@@ -61,21 +62,21 @@ public class Map implements IObject {
         });
         EventMouse.addEventMouseClicked(e -> {
             int x = ((int) e.getX() ) / 32, y = ((int) e.getY() ) / 32;
-            //System.out.println("Mouse: " + x  + " / " + y);
-            if (e.getButton().ordinal() == 3)
-                map[x][y] = map[x][y] == 'A' ? 'B' : 'A';
-            else  if (e.getButton().ordinal() == 1)
-                navMesh.setDistinction(map, (int) Player.p.getX() / 32, (int) Player.p.getY() / 32, x, y);
-            navMesh.generateLinks(map, image);
+            if (e.getButton().ordinal() == 3) {
+                map[x][y] =  'B';
+                test.add(new int[]{x, y});
+            }
+
         });
     }
     @Override
     public void onRender(Graphics gc) {
-
-        if (isTest)
-            navMesh.draw(gc);
-        else
-            gc.drawImage(image, 0, 0);
+        gc.drawImage(image, 0, 0);
+        gc.getContext().setFill(Color.BLACK);
+        for (int a[] : test)
+        {
+            gc.getContext().fillRect(a[0] * 32, a[1] * 32, 32, 32);
+        }
     }
 
     @Override

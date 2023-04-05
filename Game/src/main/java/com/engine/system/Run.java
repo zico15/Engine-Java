@@ -2,9 +2,12 @@ package com.engine.system;
 
 import com.assets.image.Images;
 
+import com.engine.component.event.EventAction;
+import com.engine.component.event.EventController;
 import com.engine.graphics.Graphics;
 import com.engine.objects.map.Map;
 import com.engine.objects.player.Player;
+import com.engine.objects.rock.Rock;
 import com.engine.system.events.EventKeys;
 import com.engine.system.events.EventMouse;
 import javafx.application.Application;
@@ -60,10 +63,19 @@ public class Run extends Application {
     }
 
 
+
     public void initGame(){
         com.engine.objects.scene.Scene scene = new com.engine.objects.scene.Scene();
         scene.add(new Map());
-        scene.add(new Player());
+        Player player = new Player();
+        scene.add(player);
+        scene.add(new Rock());
+        EventAction action = EventController.getEvent();
+        if (action != null)
+            action.execute(player);
+            else
+        System.out.println("Not action");
+
         gameLoop = new GameLoop(scene, graphics);
         Task<Void> task = new Task<Void>() {
             @Override
