@@ -3,6 +3,7 @@ package com.engine.objects.map;
 import com.assets.image.Images;
 import com.engine.component.navmesh.test.NavMesh;
 import com.engine.graphics.Graphics;
+import com.engine.objects.base.GameObject;
 import com.engine.objects.interfaces.IObject;
 import com.engine.objects.player.Player;
 import com.engine.system.events.EventKeys;
@@ -13,7 +14,7 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
-public class Map implements IObject {
+public class Map extends GameObject {
 
     private Image image;
 
@@ -40,10 +41,6 @@ public class Map implements IObject {
                  drawImage(rock, 192, 32, 32, 32, x * SIZE, y * SIZE, SIZE, SIZE);
             }
         }
-        map[1][2] = 'B';
-        map[2][2] = 'B';
-        map[3][2] = 'B';
-        map[4][2] = 'B';
         image = canvas.snapshot(null, null);
         Map.IMG = image;
         initTest();

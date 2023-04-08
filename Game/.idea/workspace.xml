@@ -5,19 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09f792da-2e4e-4c23-9bc6-298f97a6e142" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/event/EventAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/event/EventController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/event/EventObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/Node.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/engine/objects/rock/Rock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/engine/objects/base/GameObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/Link.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/Link.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/component/event/EventAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/event/EventAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/component/event/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/event/EventController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/component/event/EventObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/event/EventObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/NavMesh2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/component/navmesh/test/NavMesh2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/graphics/animation/Animation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/graphics/animation/Animation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/graphics/Graphics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/graphics/Graphics.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/objects/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/objects/map/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/objects/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/objects/player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/objects/rock/Rock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/objects/rock/Rock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/objects/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/objects/scene/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/system/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/system/GameLoop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/engine/system/Run.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/engine/system/Run.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,20 +55,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/ezequiel/IdeaProjects/Engine-Java/Game&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/ezequiel/IdeaProjects/Engine-Java/Game",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/com/assets/image" />
@@ -129,7 +129,8 @@
       <workItem from="1680599202527" duration="444000" />
       <workItem from="1680599650977" duration="28451000" />
       <workItem from="1680640668241" duration="6680000" />
-      <workItem from="1680711017880" duration="9686000" />
+      <workItem from="1680711017880" duration="10398000" />
+      <workItem from="1680933890167" duration="6630000" />
     </task>
     <servers />
   </component>

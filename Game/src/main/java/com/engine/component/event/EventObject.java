@@ -6,13 +6,12 @@ import com.engine.objects.rock.Rock;
 public class EventObject {
 
     private final EventAction action;
-    private int index;
 
     private EventController.typeEvent status;
 
+
     public EventObject(EventAction action) {
         this.action = action;
-        this.index = 0;
         this.status = EventController.typeEvent.AVAILABLE;
         this.rock = action.rock;
         this.player = action.player;
@@ -22,10 +21,20 @@ public class EventObject {
 
     public Rock rock;
 
+    public final void completed(){
+        status = EventController.typeEvent.COMPLETED;
+        action.status =  EventController.typeEvent.COMPLETED;
+        EventController.remove(action);
+        System.out.println("EventAction: COMPLETED -> next event -> " + EventController.getEvent());
+    }
+
     public final void next(){
-        index++;
-        if (index >= action.getSize())
-            status = EventController.typeEvent.COMPLETED;
-        action.run(index);
+        if (action.status != EventController.typeEvent.COMPLETED){
+            action.index++;
+            if (action.index >= action.getSize())
+                completed();
+            else
+                action.run();
+        }
     }
 }

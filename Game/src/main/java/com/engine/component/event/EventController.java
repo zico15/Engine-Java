@@ -2,6 +2,8 @@ package com.engine.component.event;
 
 import java.util.ArrayList;
 
+import static com.engine.component.event.EventController.typeEvent.AVAILABLE;
+
 public class EventController {
 
     public enum typeEvent{
@@ -14,6 +16,7 @@ public class EventController {
     private static ArrayList<EventAction> events = new ArrayList();
 
 
+
     public static final void addE(EventAction event){
         events.add(event);
     }
@@ -24,9 +27,10 @@ public class EventController {
     }
 
     public static EventAction getEvent(){
+
         for (EventAction e : events)
         {
-            if (!e.isAction())
+            if (e.status == AVAILABLE)
                 return (e);
         }
         return  null;

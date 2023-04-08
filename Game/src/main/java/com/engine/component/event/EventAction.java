@@ -11,7 +11,10 @@ public class EventAction {
 
     private int x;
     private int y;
-    private boolean isAction;
+
+    protected int  index;
+
+    public EventController.typeEvent status;
 
     private final ArrayList<Consumer<EventObject>> events = new ArrayList<>();
 
@@ -24,6 +27,8 @@ public class EventAction {
         this.x = x;
         this.y = y;
         this.rock = rock;
+        this.index = 0;
+        this.status =  EventController.typeEvent.AVAILABLE;
     }
 
     public void add(Consumer<EventObject> event){
@@ -46,21 +51,14 @@ public class EventAction {
         this.y = y;
     }
 
-    public boolean isAction() {
-        return isAction;
-    }
-
-    public void setAction(boolean action) {
-        isAction = action;
-    }
-
     public final void execute(Player player)
     {
+        this.status =  EventController.typeEvent.ACTIVE;
         this.player = player;
-        this.run(0);
+        this.run();
     }
 
-    protected final void run(int index)
+    protected final void run()
     {
        events.get(index).accept(new EventObject(this));
     }

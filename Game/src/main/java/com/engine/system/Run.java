@@ -54,9 +54,11 @@ public class Run extends Application {
         EventKeys.initEvent(scene);
         EventMouse.initEvent(scene);
          scene.widthProperty().addListener((observableValue, oldWidth, newWidth) -> {
+             Graphics.canvas.setWidth(newWidth.doubleValue());
              canvas.setWidth(newWidth.doubleValue());
          });
          scene.heightProperty().addListener((observableValue, oldHeight, newHeight) -> {
+             Graphics.canvas.setHeight(newHeight.doubleValue());
              canvas.setHeight(newHeight.doubleValue());
          });
          return  scene;
@@ -69,13 +71,10 @@ public class Run extends Application {
         scene.add(new Map());
         Player player = new Player();
         scene.add(player);
-        scene.add(new Rock());
-        EventAction action = EventController.getEvent();
-        if (action != null)
-            action.execute(player);
-            else
-        System.out.println("Not action");
+        scene.add(new Rock(480, 416));
 
+        scene.add(new Rock(480, 480));
+        scene.add(new Rock(64, 64));
         gameLoop = new GameLoop(scene, graphics);
         Task<Void> task = new Task<Void>() {
             @Override

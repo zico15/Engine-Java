@@ -1,14 +1,15 @@
 package com.engine.objects.player;
 
 import com.assets.image.Images;
+import com.engine.component.event.EventAction;
+import com.engine.component.event.EventController;
 import com.engine.component.navmesh.Node;
-import com.engine.component.navmesh.test.Link;
 import com.engine.component.navmesh.NavMesh;
 import com.engine.graphics.Graphics;
 import com.engine.graphics.animation.Animation;
 import com.engine.graphics.animation.Animator;
+import com.engine.objects.base.GameObject;
 import com.engine.objects.interfaces.IObject;
-import com.engine.objects.map.Map;
 import com.engine.system.GameLoop;
 import com.engine.system.events.EventKeys;
 import com.engine.system.events.EventMouse;
@@ -16,11 +17,11 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class Player implements IObject {
+public class Player extends GameObject {
 
-    public final Animation animation;
 
-    public Rectangle rectangle;
+
+
 
     private double speed;
 
@@ -28,15 +29,17 @@ public class Player implements IObject {
 
     public NavMesh navMesh;
 
-    private int direction;
+    public EventAction action;
+
+
 
 
     public Player(){
+        action = null;
         navMesh = new NavMesh();
         rectangle = new Rectangle(0, 0, 32, 64);
         speed = 10;
         isSelect = false;
-        animation = new Animation();
         initAnimation(Images.load("199570-1eec6aa4de82198b4a03cee532c63972.jpg"), 5);
         EventKeys.addEventKeyPressed(e -> {
             if (e.charValue() == 'S')
@@ -54,7 +57,7 @@ public class Player implements IObject {
             else{
                 int x = ((int) e.getX() ) / 32, y = ((int) e.getY() ) / 32;
                 if (e.getButton().ordinal() == 1)
-                    navMesh.setDistinction(rectangle.getX(), rectangle.getY(), e.getX(), e.getY(), direction);
+                    navMesh.setDistinction(rectangle.getX(), rectangle.getY(), e.getX(), e.getY(), getDirection());
             }
         });
     }
@@ -103,6 +106,11 @@ public class Player implements IObject {
     @Override
     public void onUpdate(double tpf) {
         navMesh.onUpdate(tpf, this);
+        if (action == null || action.status == EventController.typeEvent.COMPLETED){
+            action = EventController.getEvent();
+            if (action != null)
+                action.execute(this);
+        }
     }
 
 
@@ -119,4 +127,6 @@ public class Player implements IObject {
     public void onDestroy() {
 
     }
+
+
 }

@@ -43,6 +43,9 @@ public class GameLoop {
             if (scene != null){
                 update(TPF);
                 render();
+                //graphics.drawImage(Graphics.gc.getCanvas().snapshot(null, null), 0, 0);
+
+
             }
             // Count FPS and print every second 
             fpsCounter++;

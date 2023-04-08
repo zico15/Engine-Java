@@ -22,6 +22,10 @@ public class NavMesh {
         this.onCompleted = null;
     }
 
+
+    /**
+     * the event onCompleted is executed only once, when the object reaches the destination
+     */
     public boolean setDistinction(double x, double y, double dx, double dy, Consumer<IObject> onCompleted){
         if (setDistinction(x, y, dx, dy, 0)) {
             this.onCompleted = onCompleted;
@@ -144,8 +148,10 @@ public class NavMesh {
             int dir = link.getDirection();
             player.animation.play(dir > 3 ? 0 : dir);
             count = 0;
-            if (onCompleted != null && path.isEmpty())
+            if (onCompleted != null && path.isEmpty()) {
                 onCompleted.accept(player);
+                onCompleted = null;
+            }
         }
     }
 

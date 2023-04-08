@@ -2,6 +2,7 @@ package com.engine.graphics;
 
 import com.engine.system.Windows;
 
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
@@ -9,10 +10,12 @@ import javafx.scene.shape.Rectangle;
 public class Graphics {
 
     public static GraphicsContext gc;
+    public static Canvas canvas = new Canvas();
 
     public Graphics(GraphicsContext context)
     {
         Graphics.gc = context;
+        //Graphics.gc =  canvas.getGraphicsContext2D();
     }
 
 
